@@ -8,6 +8,5 @@ const axiosCustomSet = axios.create({
     username: "5zo",
     masterKey: true
   },
-
 })
 export default axiosCustomSet

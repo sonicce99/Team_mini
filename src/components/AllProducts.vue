@@ -4,18 +4,25 @@
   </div>
   <div class="controller">
     <button>제품 추가 하기</button>
-    <button>전체 상품 보기</button>
+    <button @click="getAllProduts">전체 제품 보기</button>
     <!-- <div>가능하면 카테고리별로 보기 기능</div> -->
-    <!-- allProducts에 tag 목록을 set으로.. getter -->
+    <template v-for="tag in tags" :key="tag">
+      <label :for="tag">
+        <input type="checkbox" :id="tag" @click="select">
+        {{ tag }}
+      </label>
+    </template>
+    <button @click="getTaggedProducts">선택한 제품 보기</button>
   </div>
   <div class="contents-box">
-    <div v-if="!isLoading">
+    <div v-if="!allProducts.length">전체 제품 관리 페이지 입니다</div>
+    <div v-if="isLoading">Loading...</div>
+    <div v-else>
       <AllProductsList 
         v-for="product in allProducts" 
         :key="product.id"
         :product="product" />
     </div>
-    <div v-else>Loading...</div>
   </div>
 </template>
 
@@ -28,18 +35,35 @@ export default {
   },
   data() {
     return {
-      isLoading: false
+      isLoading: false,
+      seletedTags: []
     }
   },
   computed: {
     allProducts () {
       return this.$store.state.user.allProducts
+    },
+    tags () {
+      return this.$store.getters["user/tagSet"]
     }
   },
   methods: {
-
+    getAllProduts() {
+      this.$store.dispatch("user/getAllProducts")
+    },
+    select(e) {
+      if (e.target.checked) {
+        this.seletedTags.push(e.target.id)
+      } else {
+        this.seletedTags = this.seletedTags.filter( tag => tag !== e.target.id)
+      }
+    },
+    taggedProducts(e) {
+      console.log(e)
+    }
   },
-  mounted(){
+  mounted() {
+    // console.log(this.tags)
   }
 }
 </script>

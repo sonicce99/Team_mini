@@ -3,7 +3,6 @@ import axios from '~/utils/adminApiConfig'
 export default {
   namespaced: true,
   state: () => ({
-    message: 'HEROPY Store Message..',
     allProducts: [
       {
         "id": "cFmeC7aY5KjZbBAdJE9y",
@@ -34,15 +33,25 @@ export default {
     ]
   }),
   getters:{
-
+    tagSet(state) {
+      const tagsRaw = []
+      state.allProducts.forEach(data => {
+        tagsRaw.push(...data.tags)
+      })
+      return [... new Set(tagsRaw)]
+    }
   },
   mutaions: {
+    assignState(state,payload) {
+      Object.keys(payload).forEach(key => {
+        state[key] = payload[key]
+      })
+    }
   },
   actions: {
-    async getAllProducts() {
-      const { data } = await axios.get()
-      // commit 등 해서 allProducts 에 받은 정보 올려주기
-      // 일단 제공받은 예시를 사용
+    async getAllProducts({commit}) {
+      const { data : allProducts } = await axios.get()
+      commit('assignState', { allProducts })
     }
   }
 }
