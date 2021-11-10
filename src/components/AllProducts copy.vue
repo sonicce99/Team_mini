@@ -9,13 +9,10 @@
     <!-- allProducts에 tag 목록을 set으로.. getter -->
   </div>
   <div class="contents-box">
-    <div v-if="!isLoading">
-      <AllProductsList 
-        v-for="product in allProducts" 
-        :key="product.id"
-        :product="product" />
-    </div>
-    <div v-else>Loading...</div>
+    <!-- <div v-if="!isLoading"> -->
+      <AllProductsList v-for="product in allProducts" :key="product.id" />
+    <!-- </div> -->
+    <!-- <div v-else>Loading...</div> -->
   </div>
 </template>
 
@@ -25,11 +22,6 @@ import AllProductsList from '~/components/AllProductsList'
 export default {
   components: {
     AllProductsList
-  },
-  data() {
-    return {
-      isLoading: false
-    }
   },
   computed: {
     allProducts () {
