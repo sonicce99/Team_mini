@@ -1,14 +1,15 @@
 <template>
-  <h1>Home page..</h1>
-  <h2>{{ heropyMessage }}</h2>
+  <TheHeader />
 </template>
 
 <script>
+import TheHeader from '~/components/TheHeader'
+
 export default {
+  components: {
+    TheHeader
+  },
   computed: {
-    heropyMessage() {
-      return this.$store.state.heropy.message
-    }
   }
 }
 </script>

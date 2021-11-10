@@ -1,14 +1,11 @@
 <template>
-  <TheHeader />
-  <RouterView />
+  <div class="viewport">
+    <RouterView />
+  </div>
 </template>
 
-<script>
-import TheHeader from '~/components/TheHeader'
-
-export default {
-  components: {
-    TheHeader
-  }
+<style lang="scss" scoped>
+.viewport {
+  height: 100vh;
 }
-</script>
+</style>

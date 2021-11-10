@@ -1,8 +1,8 @@
 import { createStore } from 'vuex'
-import heropy from './heropy'
+import uesr from './user'
 
 export default createStore({
   modules: {
-    heropy
+    uesr
   }
 })
