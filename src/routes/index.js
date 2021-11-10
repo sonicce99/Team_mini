@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from './Home'
 import About from './About'
+import DomainAdmin from './DomainAdmin'
+import AllProducts from '~/components/AllProducts'
+import SalesDetails from '~/components/SalesDetails'
 
 export default createRouter({
   history: createWebHistory(),
@@ -13,6 +16,22 @@ export default createRouter({
     {
       path: '/about',
       component: About
+    },
+    {
+      path: '/admin',
+      component: DomainAdmin,
+      children: [
+        {
+          name: 'AllProducts',
+          path: 'allproducts',
+          component: AllProducts
+        },
+        {
+          name: 'SalesDetails',
+          path: 'salesdetails',
+          component: SalesDetails
+        },
+      ]
     }
   ]
 })

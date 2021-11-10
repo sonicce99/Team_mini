@@ -1,17 +1,15 @@
 <template>
-  <h1>Home page..</h1>
-  <h2>{{ heropyMessage }}</h2>
-  <EditProduct/>
+  <TheHeader />
 </template>
 
 <script>
-import EditProduct from '~/components/EditProduct.vue'
+import TheHeader from '~/components/TheHeader'
+
 export default {
-  components: { EditProduct },
+  components: {
+    TheHeader
+  },
   computed: {
-    heropyMessage() {
-      return this.$store.state.heropy.message
-    }
   }
 }
 </script>
