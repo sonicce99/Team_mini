@@ -1,4 +1,5 @@
 <template>
+<!-- 최상위 RouterLink로 변경 가능 -->
   <div>
     <div>{{ product.id }}</div>
     <div>{{ product.title }}</div>
@@ -19,9 +20,5 @@ export default {
       default: () => ({})
     }
   },
-  mounted() {
-    console.log(this.product)
-  }
-
 }
 </script>
