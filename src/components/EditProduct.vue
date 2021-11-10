@@ -11,7 +11,8 @@ import axios from 'axios'
 
 export default {
     data() {
-      return{
+      return {
+        data: [],
         title : '',
         price : '',
         description: '',
@@ -39,7 +40,7 @@ export default {
         }
       })
       console.log(data)
-      return data
+      this.data = data
       }, 
 
       //서버에 수정한거 올리는 함수
