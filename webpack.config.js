@@ -1,7 +1,9 @@
 const path = require('path')
+const webpack = require('webpack')
 const HtmlPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
+const DotenvWebpack = require('dotenv-webpack')
 
 module.exports = (env, options) => {
   console.log(env, options)
@@ -62,7 +64,12 @@ module.exports = (env, options) => {
           { from: 'static' }
         ]
       }),
-      new VueLoaderPlugin()
+      new VueLoaderPlugin(),
+      new DotenvWebpack(),
+      new webpack.DefinePlugin({
+        __VUE_OPTIONS_API__: true,
+        __VUE_PROD_DEVTOOLS__: false,
+      })
     ],
     devServer: {
       historyApiFallback: true

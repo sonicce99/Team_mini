@@ -41,7 +41,7 @@ export default {
       return [... new Set(tagsRaw)]
     }
   },
-  mutaions: {
+  mutations: {
     assignState(state,payload) {
       Object.keys(payload).forEach(key => {
         state[key] = payload[key]
@@ -49,9 +49,14 @@ export default {
     }
   },
   actions: {
-    async getAllProducts({commit}) {
-      const { data : allProducts } = await axios.get()
-      commit('assignState', { allProducts })
+    async getAllProducts({ commit }, tags = []) {
+      const { data } = await axios.get()
+      if (tags.length) {
+        const allProducts = data.filter(item => item.tags.filter(tag => tags.includes(tag)).length)
+        commit('assignState', { allProducts })
+      } else {
+        commit('assignState', { allProducts: data })
+      }
     }
   }
 }

@@ -5,7 +5,6 @@
   <div class="controller">
     <button>제품 추가 하기</button>
     <button @click="getAllProduts">전체 제품 보기</button>
-    <!-- <div>가능하면 카테고리별로 보기 기능</div> -->
     <template v-for="tag in tags" :key="tag">
       <label :for="tag">
         <input type="checkbox" :id="tag" @click="select">
@@ -52,14 +51,12 @@ export default {
       this.$store.dispatch("user/getAllProducts")
     },
     select(e) {
-      if (e.target.checked) {
-        this.seletedTags.push(e.target.id)
-      } else {
-        this.seletedTags = this.seletedTags.filter( tag => tag !== e.target.id)
-      }
+      e.target.checked ? 
+      this.seletedTags.push(e.target.id) :
+      this.seletedTags = this.seletedTags.filter( tag => tag !== e.target.id)
     },
-    taggedProducts(e) {
-      console.log(e)
+    getTaggedProducts() {
+      this.$store.dispatch("user/getAllProducts",this.seletedTags)
     }
   }
 }
