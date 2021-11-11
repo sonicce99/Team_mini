@@ -71,12 +71,12 @@ export default createRouter({
           path: 'salesdetails',
           component: SalesDetails
         },
+        {
+          path: 'editproduct/:id',
+          name: 'EditProduct',
+          component: EditProduct
+        }
       ]
     },
-    {
-      path: '/editproduct/:id',
-      name: 'EditProduct',
-      component: EditProduct
-    }
   ]
 })
