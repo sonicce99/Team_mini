@@ -1,6 +1,17 @@
+import axios from "axios"
+
 export default {
   namespaced: true,
   state: () => ({
-    message: 'HEROPY Store Message..'
-  })
+
+  }),
+  getters: {
+
+  },
+  mutations: {
+
+  },
+  actions: {
+
+  }  
 }
