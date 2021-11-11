@@ -102,13 +102,11 @@ export default {
       },
       
       selectFile(event) {
-        console.log('이벤트.타겟.아이디: ',event.target.id)
-      const { files } = event.target 
-      for (const file of files) {
-        console.log(file)
-        const reader = new FileReader()
-        reader.readAsDataURL(file) 
-        reader.addEventListener('load', () => {          
+        const { files } = event.target 
+        for (const file of files) {
+          const reader = new FileReader()
+          reader.readAsDataURL(file) 
+          reader.addEventListener('load', () => {          
           if (event.target.id === 'thumbnail') {            
             this.thumbnailBase64 = reader.result
           } else {
