@@ -107,12 +107,13 @@ export default {
           const reader = new FileReader()
           reader.readAsDataURL(file) 
           reader.addEventListener('load', () => {          
-          if (event.target.id === 'thumbnail') {            
-            this.thumbnailBase64 = reader.result
-          } else {
-            this.photoBase64 = reader.result
+            if (event.target.id === 'thumbnail') {            
+              this.thumbnailBase64 = reader.result
+            } else {
+              this.photoBase64 = reader.result
+            }
           }
-        })
+        )
       }
     }
   }    
