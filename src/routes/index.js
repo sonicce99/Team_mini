@@ -4,6 +4,7 @@ import About from './About'
 import DomainAdmin from './DomainAdmin'
 import AllProducts from '~/components/AllProducts'
 import SalesDetails from '~/components/SalesDetails'
+import EditProduct from '~/routes/EditProduct'
 
 export default createRouter({
   history: createWebHistory(),
@@ -32,6 +33,11 @@ export default createRouter({
           component: SalesDetails
         },
       ]
+    },
+    {
+      path: '/editproduct/:id',
+      name: 'editproduct',
+      component: EditProduct
     }
   ]
 })

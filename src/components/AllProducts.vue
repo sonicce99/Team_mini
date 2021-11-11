@@ -61,9 +61,6 @@ export default {
     taggedProducts(e) {
       console.log(e)
     }
-  },
-  mounted() {
-    // console.log(this.tags)
   }
 }
 </script>

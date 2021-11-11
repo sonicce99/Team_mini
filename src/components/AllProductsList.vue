@@ -9,6 +9,7 @@
     <!-- 필수로 들어오는게 아닌 요소  -->
     <div>{{ product.tags.join(",") }}</div>
     <img :src="product.thumbnail" alt="">
+    <RouterLink :to="{ name: 'editproduct', params: { id: `${product.id}` }}">수정하기</RouterLink>
   </div>
 </template>
 
@@ -19,6 +20,6 @@ export default {
       type: Object,
       default: () => ({})
     }
-  },
+  }
 }
 </script>
