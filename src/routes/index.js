@@ -75,7 +75,7 @@ export default createRouter({
     },
     {
       path: '/editproduct/:id',
-      name: 'editproduct',
+      name: 'EditProduct',
       component: EditProduct
     }
   ]
