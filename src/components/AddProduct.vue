@@ -1,4 +1,3 @@
-//AddProduct.vue
 <template>
   <form @submit="addProduct" name="input">
   <input 
