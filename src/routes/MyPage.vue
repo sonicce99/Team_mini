@@ -9,6 +9,9 @@
     <RouterLink :to="{ name: 'ChangeUserInfo'}">
       내 정보 수정
     </RouterLink>
+    <RouterLink to="/">
+      홈으로
+    </RouterLink>
   </div>
   <RouterView/>
 </template>
