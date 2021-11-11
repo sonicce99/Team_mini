@@ -50,13 +50,12 @@ export default {
   },
   actions: {
     async getAllProducts({ commit }, tags = []) {
+      const { data } = await axios.get()
       if (tags.length) {
-        const { data : datas } = await axios.get()
-        const allProducts = datas.filter(data => data.tags.filter(tag => tags.includes(tag)).length)
+        const allProducts = data.filter(item => item.tags.filter(tag => tags.includes(tag)).length)
         commit('assignState', { allProducts })
       } else {
-        const { data : allProducts } = await axios.get()
-        commit('assignState', { allProducts })
+        commit('assignState', { allProducts: data })
       }
     }
   }
