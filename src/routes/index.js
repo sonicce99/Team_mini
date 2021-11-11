@@ -7,6 +7,7 @@ import SignIn from '~/components/SignIn'
 import SignUp from '~/components/SignUp'
 import AllProducts from '~/components/AllProducts'
 import SalesDetails from '~/components/SalesDetails'
+import EditProduct from '~/routes/EditProduct'
 import PurchaseList from '~/components/PurchaseList'
 import MyAccount from '~/components/MyAccount'
 import ChangeUserInfo from '~/components/ChangeUserInfo'
@@ -71,6 +72,11 @@ export default createRouter({
           component: SalesDetails
         },
       ]
+    },
+    {
+      path: '/editproduct/:id',
+      name: 'editproduct',
+      component: EditProduct
     }
   ]
 })

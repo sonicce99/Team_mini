@@ -58,7 +58,7 @@ export default {
     getTaggedProducts() {
       this.$store.dispatch("user/getAllProducts",this.seletedTags)
     }
-  },
+  }
 }
 </script>
 
