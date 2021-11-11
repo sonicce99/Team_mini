@@ -41,7 +41,7 @@ export default {
       return [... new Set(tagsRaw)]
     }
   },
-  mutaions: {
+  mutations: {
     assignState(state,payload) {
       Object.keys(payload).forEach(key => {
         state[key] = payload[key]
