@@ -1,5 +1,5 @@
 import axiosAdmin from '~/utils/adminApiConfig'
-import axiosUser from '~/utils/userApiConfig'
+import { logOut } from '~/utils/userApiConfig'
 
 export default {
   namespaced: true,
@@ -60,7 +60,7 @@ export default {
       }
     },
     async logOut() {
-      await axiosUser.post()
+      await logOut.post()
     }
   }
 }
