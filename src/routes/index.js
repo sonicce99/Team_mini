@@ -71,6 +71,6 @@ export default createRouter({
           component: SalesDetails
         },
       ]
-    }
+    },
   ]
 })

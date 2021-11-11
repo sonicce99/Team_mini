@@ -1,4 +1,5 @@
-import axios from '~/utils/adminApiConfig'
+import axiosAdmin from '~/utils/adminApiConfig'
+import axiosUser from '~/utils/userApiConfig'
 
 export default {
   namespaced: true,
@@ -50,13 +51,16 @@ export default {
   },
   actions: {
     async getAllProducts({ commit }, tags = []) {
-      const { data } = await axios.get()
+      const { data } = await axiosAdmin.get()
       if (tags.length) {
         const allProducts = data.filter(item => item.tags.filter(tag => tags.includes(tag)).length)
         commit('assignState', { allProducts })
       } else {
         commit('assignState', { allProducts: data })
       }
+    },
+    async logOut() {
+      await axiosUser.post()
     }
   }
 }
