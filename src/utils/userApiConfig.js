@@ -13,7 +13,7 @@ export const logOut = axios.create({
 })
 
 export const purchaseDetail = axios.create({
-  baseURL: 'ttps://asia-northeast3-heropy-api.cloudfunctions.net/api/products/ok',
+  baseURL: 'ttps://asia-northeast3-heropy-api.cloudfunctions.net/api/products/transactions/details',
   headers: {
     'content-type': 'application/json',
     apikey: 'FcKdtJs202110',
