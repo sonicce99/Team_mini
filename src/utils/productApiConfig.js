@@ -86,7 +86,7 @@ export const axiosPublicProduct = axios.create({
   headers: {
     'content-type': 'application/json',
     apikey: 'FcKdtJs202110',
-    username: "5zo",
+    username: "5zo"
   },
 })
 
