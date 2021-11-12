@@ -23,8 +23,7 @@
 </template>
 
 <script>
-import { cancelPurchase, confirmPurchase } from '../utils/userApiConfig.js'
-
+import { mapActions } from 'vuex'
 export default {
   props: {
     purchase: {
@@ -33,13 +32,13 @@ export default {
     }
   },
   methods: {
-    cancle(id) {
-      cancelPurchase.post('',{detailId : id}).then(() => this.fetch())
+    async cancle(id) {
+      this.$store.dispatch('user/CANCEL_PURCHASE', id)
+      await this.fetch()
     },
-    confirmed(id) {
-      confirmPurchase.post('',{detailId : id}).then(() => {
-        this.fetch()
-      })
+    async confirmed(id) {
+      this.$store.dispatch('user/CONFIRM_PURCHASE', id)
+      await this.fetch()
     },
     fetch() {
       console.log('구매 내역 불러오기')

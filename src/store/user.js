@@ -1,5 +1,6 @@
 import axiosAdmin from '~/utils/adminApiConfig'
 import { logOut, purchaseDetail } from '~/utils/userApiConfig'
+import axiosUser from '~/utils/userApiConfig'
 
 export default {
   namespaced: true,
@@ -32,6 +33,14 @@ export default {
       return await axiosAdmin.get('/transactions/all').then(data => {
         commit('SET_SALESDETAILS')
       })
+    },
+    async CONFIRM_PURCHASE({commit}, payload){
+      const { detailId } = payload
+      return await axiosUser.post('/products/ok',{ detailId })
+    },
+    async CANCEL_PURCHASE({commit}, payload){
+      const { detailId } = payload
+      return await axiosUser.post('/products/cancel',{ detailId })
     },
     async getAllProducts({ commit }, tags = []) {
       const { data } = await axiosAdmin.get()
