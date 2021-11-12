@@ -22,8 +22,8 @@ export const purchaseDetail = axios.create({
   }
 })
 
-export const cancelPurchase = axios.create({
-  baseURL: 'https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/cancel',
+const axiosCustomSet = axios.create({
+  baseURL: 'https://asia-northeast3-heropy-api.cloudfunctions.net/api',
   headers: {
     'content-type': 'application/json',
     apikey: 'FcKdtJs202110',
@@ -32,12 +32,4 @@ export const cancelPurchase = axios.create({
   }
 })
 
-export const confirmPurchase = axios.create({
-  baseURL: 'https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/ok',
-  headers: {
-    'content-type': 'application/json',
-    apikey: 'FcKdtJs202110',
-    username: "5zo",
-    authorization: `Bearer ${token}`
-  }
-})
+export default axiosCustomSet
