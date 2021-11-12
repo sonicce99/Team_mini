@@ -3,6 +3,7 @@ import Home from './Home'
 import Certification from './Certification'
 import DomainAdmin from './DomainAdmin'
 import MyPage from './MyPage'
+import AddAccount from './AddAccount'
 import SignIn from '~/components/SignIn'
 import SignUp from '~/components/SignUp'
 import AllProducts from '~/components/AllProducts'
@@ -11,6 +12,7 @@ import EditProduct from '~/routes/EditProduct'
 import PurchaseList from '~/components/PurchaseList'
 import MyAccount from '~/components/MyAccount'
 import ChangeUserInfo from '~/components/ChangeUserInfo'
+
 
 export default createRouter({
   history: createWebHistory(),
@@ -58,6 +60,11 @@ export default createRouter({
       ]
     },
     {
+      name: 'AddAccount',
+      path: '/addaccount',
+      component: AddAccount
+    },
+    {
       path: '/admin',
       component: DomainAdmin,
       children: [
@@ -71,12 +78,12 @@ export default createRouter({
           path: 'salesdetails',
           component: SalesDetails
         },
+        {
+          path: 'editproduct/:id',
+          name: 'EditProduct',
+          component: EditProduct
+        }
       ]
     },
-    {
-      path: '/editproduct/:id',
-      name: 'editproduct',
-      component: EditProduct
-    }
   ]
 })
