@@ -7,6 +7,7 @@
   <RouterLink to="/mypage/purchaselist">
     마이페이지
   </RouterLink>
+  <button @click="logOut">로그아웃</button>
   <input type="text" placeholder="상품을 검색하세요">
   <div class="items">
     <!-- <아이템들 v-for/> -->
@@ -21,6 +22,13 @@ export default {
     TheHeader
   },
   computed: {
+  },
+  methods: {
+    logOut() {
+      sessionStorage.removeItem('accessToken')
+      this.$store.dispatch('user/logOut')
+      this.$router.push('/')
+    }
   }
 }
 </script>
