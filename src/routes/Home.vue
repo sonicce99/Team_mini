@@ -27,6 +27,7 @@ export default {
     logOut() {
       sessionStorage.removeItem('accessToken')
       this.$store.dispatch('user/logOut')
+      this.$router.push('/')
     }
   }
 }
