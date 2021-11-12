@@ -1,4 +1,5 @@
-import { logOut } from '~/utils/userApiConfig'
+import { axiosAuthInit, axiosAuth } from '~/utils/authenticationApiConfig'
+import { axiosAccount } from '~/utils/accountApiConfig'
 import { axiosUserProduct, axiosAdminProduct, axiosPublicProduct } from '~/utils/productApiConfig'
 
 
@@ -61,7 +62,7 @@ export default {
       }
     },
     async logOut() {
-      await logOut.post()
+      await axiosAuthInit.post('logout')
     },
     async getPurchaseList({ commit }) {
       const { data : purchaseList } = await axiosUserProduct.get('transactions/details')
