@@ -1,5 +1,5 @@
-import axiosAdmin from '~/utils/adminApiConfig'
-import { logOut, purchaseDetail } from '~/utils/userApiConfig'
+import { logOut } from '~/utils/userApiConfig'
+import { axiosUserProduct, axiosAdminProduct, axiosPublicProduct } from '~/utils/productApiConfig'
 
 export default {
   namespaced: true,
@@ -38,12 +38,12 @@ export default {
   },
   actions: {
     async SHOW_SALESDETAILS({commit}){
-      return await axiosAdmin.get('/transactions/all').then(data => {
+      return await axiosAdminProduct.get('transactions/all').then(data => {
         commit('SET_SALESDETAILS')
       })
     },
     async getAllProducts({ commit }, tags = []) {
-      const { data } = await axiosAdmin.get()
+      const { data } = await axiosAdminProduct.get()
       if (tags.length) {
         const allProducts = data.filter(item => item.tags.filter(tag => tags.includes(tag)).length)
         commit('assignState', { allProducts })
@@ -55,7 +55,7 @@ export default {
       await logOut.post()
     },
     async getPurchaseList({ commit }) {
-      const { data : purchaseList } = await purchaseDetail.get()
+      const { data : purchaseList } = await axiosUserProduct.get('transactions/details')
       commit('assignState',{ purchaseList })
     }
   }
