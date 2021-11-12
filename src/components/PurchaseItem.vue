@@ -3,12 +3,14 @@
 <div>
   <div>{{ purchase.detailId }}</div>
   <div>{{ purchase.timePaid }}</div>
-  <!-- 취소 여부 -->
+  <button @click="cancle(purchase.detailId)" :disabled="purchase.done">
+        구매취소
+  </button>
   <div>{{ purchase.isCanceled }}</div>
-  <!-- 확정 여부 -->
+  <button @click="confirmed(purchase.detailId)">구매확인</button>
   <div>{{ purchase.done }}</div>
 
-
+  <hr/>
   <!-- 단일 제품 상세 구매 내역 이동시 필요 -->
   <div>{{ purchase.product.productId }}</div>
 
@@ -21,11 +23,26 @@
 </template>
 
 <script>
+import { cancelPurchase, confirmPurchase } from '../utils/userApiConfig.js'
+
 export default {
   props: {
     purchase: {
       type: Object,
       default: () => ({})
+    }
+  },
+  methods: {
+    cancle(id) {
+      cancelPurchase.post('',{detailId : id}).then(() => this.fetch())
+    },
+    confirmed(id) {
+      confirmPurchase.post('',{detailId : id}).then(() => {
+        this.fetch()
+      })
+    },
+    fetch() {
+      console.log('구매 내역 불러오기')
     }
   }
 }
