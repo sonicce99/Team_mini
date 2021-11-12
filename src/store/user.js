@@ -1,3 +1,4 @@
+import axios from 'axios'
 import axiosAdmin from '~/utils/adminApiConfig'
 import { logOut, purchaseDetail } from '~/utils/userApiConfig'
 
@@ -5,16 +6,25 @@ export default {
   namespaced: true,
   state: () => ({
     purchaseList: [],
-    allProducts: []
+    allProducts: [],
   }),
   getters:{
+    // (관리자) 전 제품의 테그 set 
     tagSet(state) {
       const tagsRaw = []
       state.allProducts.forEach(data => {
         tagsRaw.push(...data.tags)
       })
       return [... new Set(tagsRaw)]
-    }
+    },
+    // 구매 신청 내역 취소한 내용만 보기
+    purchaseOnlyCanceled(state) {
+      return state.purchaseList.filter( purchase => purchase.isCanceled)
+    },
+    // 구매 완결난 내역만 보기
+    purchaseOnlyDone(state) {
+      return state.purchaseList.filter( purchase => purchase.done)
+    },
   },
   mutations: {
     assignState(state,payload) {
