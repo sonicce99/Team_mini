@@ -1,6 +1,7 @@
 import { logOut } from '~/utils/userApiConfig'
 import { axiosUserProduct, axiosAdminProduct, axiosPublicProduct } from '~/utils/productApiConfig'
 
+
 export default {
   namespaced: true,
   state: () => ({
@@ -41,6 +42,14 @@ export default {
       return await axiosAdminProduct.get('transactions/all').then(data => {
         commit('SET_SALESDETAILS')
       })
+    },
+    async CONFIRM_PURCHASE({commit}, payload){
+      const { detailId } = payload
+      return await axiosUserProduct.post('ok',{ detailId })
+    },
+    async CANCEL_PURCHASE({commit}, payload){
+      const { detailId } = payload
+      return await axiosUserProduct.post('cancel',{ detailId })
     },
     async getAllProducts({ commit }, tags = []) {
       const { data } = await axiosAdminProduct.get()
