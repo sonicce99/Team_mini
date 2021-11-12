@@ -10,15 +10,33 @@
     <div>{{ product.tags.join(",") }}</div>
     <img :src="product.thumbnail" alt="">
     <RouterLink :to="{ name: 'editproduct', params: { id: `${product.id}` }}">수정하기</RouterLink>
-  </div>
+    <!-- 구매신청은 상세페이지 안에 있어야함. 지금은 그냥 테스트용으로 여기에 만듦. -->
+    <button @click="toggleShow">구매하기</button>
+    <RequestPurchase v-if="show" :product="product"/>
+  </div>  
+
 </template>
 
 <script>
+import RequestPurchase from './RequestPurchase'
 export default {
-  props: {
+   components: {
+      RequestPurchase
+  },
+  props: {   
     product: {
       type: Object,
       default: () => ({})
+    }
+  },
+  data() {
+    return {
+      show: false,
+    }
+  },
+  methods: {
+    toggleShow() {
+      this.show = !this.show
     }
   }
 }

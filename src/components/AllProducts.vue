@@ -20,13 +20,14 @@
       <AllProductsList 
         v-for="product in allProducts" 
         :key="product.id"
-        :product="product" />
+        :product="product" />           
     </div>
   </div>
 </template>
 
 <script>
 import AllProductsList from '~/components/AllProductsList'
+
 
 export default {
   components: {
