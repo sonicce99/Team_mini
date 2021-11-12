@@ -1,4 +1,3 @@
-import axios from 'axios'
 import axiosAdmin from '~/utils/adminApiConfig'
 import { logOut, purchaseDetail } from '~/utils/userApiConfig'
 
@@ -7,6 +6,7 @@ export default {
   state: () => ({
     purchaseList: [],
     allProducts: [],
+    salesDetails: []
   }),
   getters:{
     // (관리자) 전 제품의 테그 set 
@@ -27,6 +27,9 @@ export default {
     },
   },
   mutations: {
+    SET_SALESDETAILS(state, salesDetails){
+      state.salesDetails = salesDetails
+    },
     assignState(state,payload) {
       Object.keys(payload).forEach(key => {
         state[key] = payload[key]
@@ -34,6 +37,11 @@ export default {
     }
   },
   actions: {
+    async SHOW_SALESDETAILS({commit}){
+      return await axiosAdmin.get('/transactions/all').then(data => {
+        commit('SET_SALESDETAILS')
+      })
+    },
     async getAllProducts({ commit }, tags = []) {
       const { data } = await axiosAdmin.get()
       if (tags.length) {
