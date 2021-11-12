@@ -10,6 +10,8 @@ import SalesDetails from '~/components/SalesDetails'
 import PurchaseList from '~/components/PurchaseList'
 import MyAccount from '~/components/MyAccount'
 import ChangeUserInfo from '~/components/ChangeUserInfo'
+import AccountListChangeCheck from '~/components/AccountListChangeCheck'
+import SingleProductDetails from '~/components/SingleProductDetails'
 
 export default createRouter({
   history: createWebHistory(),
@@ -47,7 +49,14 @@ export default createRouter({
         {
           name: 'MyAccount',
           path: 'myaccount',
-          component: MyAccount
+          component: MyAccount,
+          children: [
+            {
+              name: 'AccountListChangeCheck',
+              path: 'accountListChangeCheck',
+              component: AccountListChangeCheck              
+            }
+          ]
         },
         {
           name: 'ChangeUserInfo',
@@ -70,6 +79,16 @@ export default createRouter({
           path: 'salesdetails',
           component: SalesDetails
         },
+      ]
+    },
+    {
+      name: 'SingleProductDetails',
+      path: "/singleProductDetails",
+      component: SingleProductDetails,
+      children: [
+        {
+          path: ':id'
+        }
       ]
     }
   ]
