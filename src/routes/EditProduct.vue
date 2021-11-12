@@ -77,7 +77,6 @@ export default {
       //서버에 수정한거 올리는 함수
       //* API주소에 프로덕트 아이디 나중에 수정해야함! 지금은 그냥 특정해놓음. */
       async editProduct(){
-        console.log('수정완료버튼 누름.')
       const { data } = await axios({
         url: `https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/a0e3Nec3Wz8IChlKmFH5`,
         method: 'PUT',
