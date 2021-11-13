@@ -78,7 +78,7 @@ export const axiosAdminProduct = axios.create({
 //   photoBase64,
 //   isSoldOut
 // }
-// axiosAdminProduct.put(`${detailId}`, obj)
+// axiosAdminProduct.put(`${productId}`, obj)
 
 // 공용
 export const axiosPublicProduct = axios.create({
