@@ -8,7 +8,7 @@
     type="password" 
     placeholder="비빌번호를 입력하세요 "/><br>
   <input
-    v-model="displayName"
+ ㅎ   v-model="displayName"
     type="text" 
     placeholder="닉네임을 입력하세요 "/><br>  
   <input type="file" @change="selectfile" /><br>  
@@ -55,6 +55,7 @@ export default {
       }
       const data = await axiosAuthInit.post('signup', obj)
       console.log(data.data)
+      this.$router.push("/") //router로 메인페이지로 이동됨
     }
   }
 }
