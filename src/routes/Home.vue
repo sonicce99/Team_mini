@@ -1,13 +1,17 @@
 <template>
   <HomeHeader/>
-  <input class="search" type="text" placeholder="상품을 검색하세요">
-  <div class="items">
-    검색된 상품이 표시됩니다
-  </div>
+  <input
+    class="search"
+    type="text"
+    placeholder="상품을 검색하세요"
+  >
+    <div class="items">
+      검색된 상품이 표시됩니다
+    </div>
 </template>
 
 <script>
-import HomeHeader from '~/components/HomeHeader'
+import HomeHeader from "~/components/HomeHeader"
 
 export default {
   components: {
@@ -15,9 +19,9 @@ export default {
   },
   methods: {
     logOut() {
-      sessionStorage.removeItem('accessToken')
-      this.$store.dispatch('user/logOut')
-      this.$router.push('/')
+      sessionStorage.removeItem("token")
+      this.$store.dispatch("user/logOut")
+      this.$router.push("/")
     }
   }
 }
@@ -34,5 +38,9 @@ export default {
   max-width: 700px;
   margin: 0 auto;
   border: 1px solid red;
+}
+
+input {
+  border: 1px solid #000;
 }
 </style>

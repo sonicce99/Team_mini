@@ -1,29 +1,45 @@
 <template>
   <RouterLink to="/">
-      Home
-    </RouterLink>
-  <RouterLink to="/admin">
-      Admin
-    </RouterLink>
-  <RouterLink to="/certification/signin">
+    Home
+  </RouterLink>
+  <RouterLink
+    v-if="!currentUser"
+    to="/certification/signin"
+  >
     로그인
-  </RouterLink>
-  <RouterLink to="/mypage/purchaselist">
-    마이페이지
-  </RouterLink>
-  <RouterLink to="/certification/newuser">
-    회원가입
-  </RouterLink>  
-  <button @click="logOut">로그아웃</button>
+    </RouterLink>
+    <RouterLink
+      v-if="currentUser"
+      to="/admin"
+    >
+      Admin
+     </RouterLink>
+     <div v-if="currentUser">
+       <RouterLink to="/mypage/purchaselist">
+         마이페이지
+       </RouterLink>
+       <button @click="logOut">로그아웃</button>
+       <h3>{{ currentUser.displayName }}</h3>
+     </div>
 </template>
 
 <script>
+import { axiosAuth } from "~/utils/authenticationApiConfig"
+
 export default {
+  computed: {
+    currentUser() {
+      return this.$store.state.user.currentUser
+    }
+  },
+  mounted() {
+    console.log(this.$route.path)
+  },
   methods: {
     logOut() {
-      sessionStorage.removeItem('accessToken')
-      this.$store.dispatch('user/logOut')
-      this.$router.push('/')
+      sessionStorage.removeItem("token")
+      this.$store.dispatch("user/logOut")
+      this.$router.push("/")
     }
   }
 }
