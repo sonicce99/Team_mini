@@ -1,6 +1,6 @@
 <template>
   <div class="product-searcher">
-    <div class="">
+    <div>
       모든 제품 조회
     </div>
     <div class="controller">
@@ -18,11 +18,10 @@
       <div v-if="!allProducts.length">전체 제품 관리 페이지 입니다</div>
       <div v-else-if="isLoading">Loading...</div>
       <div v-else>
-        <AllProductsList
-          v-for="product in allProducts"
+        <AllProductsList 
+          v-for="product in allProducts" 
           :key="product.id"
-          :product="product" />
-          <SingleProductDetails />
+          :product="product" />           
       </div>
     </div>
   </div>
