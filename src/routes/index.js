@@ -92,18 +92,13 @@ export default createRouter({
           path: 'editproduct/:id',
           name: 'EditProduct',
           component: EditProduct
+        },
+        {
+          name: 'SingleProductDetails',
+          path: 'singleProductDetails/:id',
+          component: SingleProductDetails,
         }
       ]
     },
-    {
-      name: 'SingleProductDetails',
-      path: "/singleProductDetails",
-      component: SingleProductDetails,
-      children: [
-        {
-          path: ':id'
-        }
-      ]
-    }
   ]
 })
