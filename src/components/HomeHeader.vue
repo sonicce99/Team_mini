@@ -11,6 +11,9 @@
   <RouterLink to="/mypage/purchaselist">
     마이페이지
   </RouterLink>
+  <RouterLink to="/certification/newuser">
+    회원가입
+  </RouterLink>  
   <button @click="logOut">로그아웃</button>
 </template>
 
