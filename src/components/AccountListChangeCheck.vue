@@ -1,56 +1,49 @@
 <template>
-  <h1>계좌 목록 잔액 조회가 보여지고 있다고 함.</h1>
-    <li v-for="accountInfo in this.accountInfos" :key="accountInfo"> {{ accountInfo }} </li>
-    <AccountRemove />
+  <h1>나의 계좌 리스트가 보여지고 있습니다!</h1>
+  <AccountList 
+  v-for="accountInfo in accountInfos" 
+  :key="accountInfo.id"
+  :accountInfo="accountInfo" />
 </template>
 
 <script>
-import axios from 'axios'
-import AccountRemove from './AccountRemove.vue'
+import { axiosAccount } from '~/utils/accountApiConfig'
+import AccountList from '~/components/AccountList'
 
 export default {
+  components: {
+    AccountList,
+  },
   mounted() {
     this.AccountListChangeCheck()
   },
   data() {
     return {
-      accountInfos: [    {
-      "id": "jQMfKla8vOIFELA3mAXv",
-      "bankName": "NH농협은행",
-      "bankCode": "011",
-      "accountNumber": "356-XXXX-XXXX-XX",
-      "balance": 2999900
-    },
-    {
-      "id": "wiPgsXvMAmcLw8AuRHIi",
-      "bankName": "KB국민은행",
-      "bankCode": "004",
-      "accountNumber": "123-XX-XXXX-XXX",
-      "balance": 3000000
+      accountInfos: [{
+        "id": "jQMfKla8vOIFELA3mAXv",
+        "bankName": "NH농협은행",
+        "bankCode": "011",
+        "accountNumber": "356-XXXX-XXXX-XX",
+        "balance": 2999900
+      },
+      {
+        "id": "wiPgsXvMAmcLw8AuRHIi",
+        "bankName": "KB국민은행",
+        "bankCode": "004",
+        "accountNumber": "123-XX-XXXX-XXX",
+        "balance": 3000000
+      }]
     }
-]
-    }
-  },
-  components: {
-    AccountRemove
   },
   methods: {
     async AccountListChangeCheck() {
       try {
         // 추후에 Login Page에서 sessionStorage set 시켜야함. 현재 로그인 페이지가 없어서 작성을 못했음.
         const token = sessionStorage.getItem("accessToken")
-        const res = await axios({
-          url:"https://asia-northeast3-heropy-api.cloudfunctions.net/api/account",
-          method: "GET",
-          headers: {
-            "content-type": "application/json",
-            "apikey": "FcKdtJs202110",
-            "username": "5zo",
-            authorization: `Bearer ${token}`            
-          }
-        })
-        console.log(res.accounts)
-        this.accountInfos = res.accounts
+        const { data } = await axiosAccount.get()
+        console.log(data.accounts)
+        this.accountInfos = data.accounts
+
       } catch (error) {
         console.log(error.response.data)
       } 
@@ -58,7 +51,6 @@ export default {
   }  
 }
 </script>
-
 
 
 
