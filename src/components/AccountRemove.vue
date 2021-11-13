@@ -1,7 +1,5 @@
 <template>
-  <form @submit="AccountRemove" name="input">
-    <button type="submit">해당 계좌 해지하기</button>
-  </form>
+  <button @click="AccountRemove">해당 계좌 해지하기</button>
 
   <div class="black-bg" v-if="removed === true">
     <div class="white-bg">
@@ -34,7 +32,7 @@ export default {
         const { data } = await axiosAccount.delete('', obj)
         console.log(data)        
         this.removed = true
-        
+
       } catch (error) {
         console.log(error.response.data)
       } 
