@@ -12,6 +12,8 @@ import EditProduct from '~/routes/EditProduct'
 import PurchaseList from '~/components/PurchaseList'
 import MyAccount from '~/components/MyAccount'
 import ChangeUserInfo from '~/components/ChangeUserInfo'
+import AccountListChangeCheck from '~/components/AccountListChangeCheck'
+import SingleProductDetails from '~/components/SingleProductDetails'
 
 
 export default createRouter({
@@ -50,7 +52,14 @@ export default createRouter({
         {
           name: 'MyAccount',
           path: 'myaccount',
-          component: MyAccount
+          component: MyAccount,
+          children: [
+            {
+              name: 'AccountListChangeCheck',
+              path: 'accountListChangeCheck',
+              component: AccountListChangeCheck              
+            }
+          ]
         },
         {
           name: 'ChangeUserInfo',
@@ -82,6 +91,11 @@ export default createRouter({
           path: 'editproduct/:id',
           name: 'EditProduct',
           component: EditProduct
+        },
+        {
+          name: 'SingleProductDetails',
+          path: 'singleProductDetails/:id',
+          component: SingleProductDetails,
         }
       ]
     },

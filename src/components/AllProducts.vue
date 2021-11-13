@@ -15,7 +15,7 @@
   </div>
   <div class="contents-box">
     <div v-if="!allProducts.length">전체 제품 관리 페이지 입니다</div>
-    <div v-if="isLoading">Loading...</div>
+    <div v-else-if="isLoading">Loading...</div>
     <div v-else>
       <AllProductsList 
         v-for="product in allProducts" 
@@ -30,7 +30,7 @@ import AllProductsList from '~/components/AllProductsList'
 
 export default {
   components: {
-    AllProductsList
+    AllProductsList,
   },
   data() {
     return {
