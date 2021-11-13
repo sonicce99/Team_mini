@@ -13,14 +13,14 @@
       to="/admin"
     >
       Admin
-      </RouterLink>
-      <div v-if="currentUser">
-        <RouterLink to="/mypage/purchaselist">
-          마이페이지
-        </RouterLink>
-        <button @click="logOut">로그아웃</button>
-        <h3>{{ currentUser.displayName }}</h3>
-      </div>
+     </RouterLink>
+     <div v-if="currentUser">
+       <RouterLink to="/mypage/purchaselist">
+         마이페이지
+       </RouterLink>
+       <button @click="logOut">로그아웃</button>
+       <h3>{{ currentUser.displayName }}</h3>
+     </div>
 </template>
 
 <script>
