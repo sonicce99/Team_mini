@@ -5,7 +5,7 @@ const token = sessionStorage.getItem('token')
 export const axiosAuthInit = axios.create({
   baseURL: 'https://asia-northeast3-heropy-api.cloudfunctions.net/api/auth/',
   headers: {
-    'content-type': 'application/json',
+    'content-type': "application/json",
     apikey: 'FcKdtJs202110',
     username: "5zo"
   }
