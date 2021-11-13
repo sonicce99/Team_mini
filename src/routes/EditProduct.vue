@@ -1,5 +1,6 @@
 <template>
   <div class="product-edit">
+    <form>
       <h1>상품 수정</h1>
         <label for="title">상품 이름: </label>
         <input type="text" id="title" name="title" v-model="title">
@@ -27,13 +28,15 @@
         <input type="file" id="photo" @change="selectFile">
         <br>
         <label for="tags">상품 태그: </label>
-        <input type="text" id="tags" name="tags" v-model="tags">
+        <input type="text" id="tags" name="tags" v-model="tags" placeholder="태그가 여러 개일 경우 띄어쓰기로 구분해주세요.">
+    </form>
         <button @click="editProduct">수정완료</button>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import { axiosAdminProduct, axiosPublicProduct } from '~/utils/productApiConfig'
 
 export default {
   data(){
@@ -51,53 +54,34 @@ export default {
     } 
   },
     mounted(){
-    this.getProduct()
-      // console.log(this.$route.params.id)
+    this.getCurProduct()
     },
     methods: {
-      async getProduct(){
-      const { data } = await axios({
-        url: `https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/a0e3Nec3Wz8IChlKmFH5`,
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'apikey': 'FcKdtJs202110',
-          'username': 'KangHaEun'
-        }
-      })
-      this.title = data.title
-      this.price = data.price
-      this.description = data.description
-      this.tags = data.tags
-      this.thumbnail = data.thumbnail
-      this.photo = data.photo
-      this.isSoldOut = data.isSoldOut
+      // 서버에서 수정할 제품 정보 GET
+      async getCurProduct(){ 
+        const { data } = await axiosPublicProduct.get(this.$route.params.id)
+        this.title = data.title
+        this.price = data.price
+        this.description = data.description
+        this.tags = data.tags
+        this.thumbnail = data.thumbnail
+        this.photo = data.photo
+        this.isSoldOut = data.isSoldOut
       },
-
-      //서버에 수정한거 올리는 함수
-      //* API주소에 프로덕트 아이디 나중에 수정해야함! 지금은 그냥 특정해놓음. */
+      //서버에 수정사항 PUT
       async editProduct(){
-      const { data } = await axios({
-        url: `https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/a0e3Nec3Wz8IChlKmFH5`,
-        method: 'PUT',
-        headers: {
-          'content-type': 'application/json',
-          'apikey': 'FcKdtJs202110',
-          'username': 'KangHaEun',
-          'masterKey': true
-        },
-        data: {
+        const tagArray = this.tags.split(' ')
+        const obj = {
           title : this.title,
           price : this.price,
           description: this.description,
-          tags: this.tags,
+          tags: tagArray,
           thumbnailBase64: this.thumbnailBase64,
           photoBase64: this.photoBase64,
           isSoldOut: this.isSoldOut
         }
-      })
-      console.log(data)
-      this.getProduct()
+        await axiosAdminProduct.put(this.$route.params.id, obj)
+        this.getCurProduct() // 실제 동작때는 수정완료 후에 화면이 닫혀야함.
       },
       
       selectFile(event) {
