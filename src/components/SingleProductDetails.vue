@@ -1,6 +1,4 @@
 <template>
-  <button @click="SingleProductDetails">제품 상세 보기!</button>
-
   <div class="black-bg" v-if="ModalOpened === true">
     <div class="white-bg">
       <h4>단일 제품 상세 조회 내역</h4>
@@ -12,9 +10,12 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { axiosPublicProduct } from '~/utils/productApiConfig'
 
 export default {
+  mounted() {
+    this.SingleProductDetails()
+  },
   data() {
     return {
       SingleProductDetail:{},
@@ -24,18 +25,20 @@ export default {
   methods: {
     async SingleProductDetails() {
       try {
-        const res = await axios({
-          url:`https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/${this.$route.params.id}`,
-          method: "GET",
-          headers: {
-            "content-type": "application/json",
-            "apikey": "FcKdtJs202110",
-            "username": "5zo"
-          }
-        })
-        console.log(res)
-        this.SingleProductDetail = res
+        const { data } = await axiosPublicProduct.get(`${this.$route.params.id}`)
+        // const res = await axios({
+        //   url:`https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/${this.$route.params.id}`,
+        //   method: "GET",
+        //   headers: {
+        //     "content-type": "application/json",
+        //     "apikey": "FcKdtJs202110",
+        //     "username": "5zo"
+        //   }
+        // })
+        console.log(data)
+        this.SingleProductDetail = data
         this.ModalOpened = true
+        
       } catch (error) {
         console.log(error.response.data)
       } 

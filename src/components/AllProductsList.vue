@@ -9,11 +9,13 @@
     <!-- 필수로 들어오는게 아닌 요소  -->
     <div>{{ product.tags.join(",") }}</div>
     <img :src="product.thumbnail" alt="" />
+    <RouterLink :to="{ name: 'SingleProductDetails', params: { id: `${product.id}` }}">단일 제품 상세 정보</RouterLink>
     <RouterLink :to="{ name: 'EditProduct', params: { id: `${product.id}` }}">수정하기</RouterLink>
   </div>
 </template>
 
 <script>
+
 export default {
   props: {
     product: {
