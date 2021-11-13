@@ -4,6 +4,7 @@ import Certification from './Certification'
 import DomainAdmin from './DomainAdmin'
 import MyPage from './MyPage'
 import AddAccount from './AddAccount'
+import RequestPurchase from './RequestPurchase'
 import SignIn from '~/components/SignIn'
 import SignUp from '~/components/SignUp'
 import AllProducts from '~/components/AllProducts'
@@ -23,6 +24,12 @@ export default createRouter({
     {
       path: '/',
       component: Home
+    },
+    { 
+      name: 'RequestPurchase',
+      path: '/requestpurchase/:id',
+      component: RequestPurchase,
+      props: true
     },
     {
       path: '/certification',
