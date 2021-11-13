@@ -21,16 +21,19 @@
         v-for="product in allProducts" 
         :key="product.id"
         :product="product" />
+        <SingleProductDetails />
     </div>
   </div>
 </template>
 
 <script>
 import AllProductsList from '~/components/AllProductsList'
+import SingleProductDetails from '~/components/SingleProductDetails'
 
 export default {
   components: {
-    AllProductsList
+    AllProductsList,
+    SingleProductDetails
   },
   data() {
     return {
