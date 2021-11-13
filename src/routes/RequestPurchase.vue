@@ -3,7 +3,6 @@
     <h1>상품 구매</h1>
     <div class="product-info">
       <h2>상품 정보</h2>
-      <!-- 밑에 정보 새로고침하면 사라짐 -->
       <div><span>구매할 상품은 </span>{{ $route.query.title }}<span> 입니다.</span></div>
       <div><span>가격 : </span>{{ $route.query.price }}</div>
     </div>
