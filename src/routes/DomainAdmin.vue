@@ -1,5 +1,8 @@
 <template>
-  <div>관리자 정보</div>
+  <div class="admin-info">
+    <img src="profileImgBase64" alt="url 데이터 넣어줄 예정임">
+    <p></p>
+  </div>
   <AdminHeader />
   <RouterView />
 </template>
@@ -14,3 +17,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.admin-info {
+  
+}
+</style>

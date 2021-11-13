@@ -1,4 +1,5 @@
 import { axiosAuthInit, axiosAuth } from '~/utils/authenticationApiConfig'
+import router from '../routes'
 import { axiosAccount } from '~/utils/accountApiConfig'
 import { axiosUserProduct, axiosAdminProduct, axiosPublicProduct } from '~/utils/productApiConfig'
 
@@ -8,7 +9,8 @@ export default {
   state: () => ({
     purchaseList: [],
     allProducts: [],
-    salesDetails: []
+    salesDetails: [],
+    currentUser: null
   }),
   getters:{
     // (관리자) 전 제품의 테그 set 
@@ -28,26 +30,39 @@ export default {
       return state.purchaseList.filter( purchase => purchase.done)
     },
   },
+  // state에 있는 salesDetails에 data를 받아서 넣어줌
   mutations: {
     SET_SALESDETAILS(state, salesDetails){
       state.salesDetails = salesDetails
     },
-    assignState(state,payload) {
+    assignState(state, payload) {
       Object.keys(payload).forEach(key => {
         state[key] = payload[key]
       })
     }
   },
   actions: {
-    async SHOW_SALESDETAILS({commit}){
-      return await axiosAdminProduct.get('transactions/all').then(data => {
-        commit('SET_SALESDETAILS')
-      })
+    // 로그인 
+    async LOGIN({ commit }, payload) {
+      const { email, password } = payload
+      const { data } = await axiosAuthInit.post('login', { email, password })
+      // access token 유지
+      sessionStorage.setItem('token', data.accessToken)
+      router.push('/')
+      return data
     },
+    // 받아온 salesDetails를 활용하여 판매 내역 보기
+    async SHOW_SALESDETAILS({commit}){
+      const { data } =  await axiosAdminProduct.get('transactions/all')
+      await  commit('SET_SALESDETAILS')
+      return data
+    },
+    // 구매 확정
     async CONFIRM_PURCHASE({commit}, payload){
       const { detailId } = payload
       return await axiosUserProduct.post('ok',{ detailId })
     },
+    // 구매 취소
     async CANCEL_PURCHASE({commit}, payload){
       const { detailId } = payload
       return await axiosUserProduct.post('cancel',{ detailId })
@@ -62,7 +77,7 @@ export default {
       }
     },
     async logOut() {
-      await axiosAuthInit.post('logout')
+      return await axiosAuthInit.post('logout')
     },
     async getPurchaseList({ commit }) {
       const { data : purchaseList } = await axiosUserProduct.get('transactions/details')

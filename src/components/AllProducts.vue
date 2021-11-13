@@ -31,7 +31,7 @@ import AllProductsList from '~/components/AllProductsList'
 
 export default {
   components: {
-    AllProductsList
+    AllProductsList,
   },
   data() {
     return {
