@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const token = sessionStorage.getItem('accessToken')
+const token = sessionStorage.getItem('token')
 
 export const axiosAuthInit = axios.create({
   baseURL: 'https://asia-northeast3-heropy-api.cloudfunctions.net/api/auth/',
@@ -33,7 +33,7 @@ export const axiosAuth = axios.create({
     'content-type': 'application/json',
     apikey: 'FcKdtJs202110',
     username: "5zo",
-    authorization: `Bearer ${token}`
+    Authorization: `Bearer ${token}`
   }
 })
 
