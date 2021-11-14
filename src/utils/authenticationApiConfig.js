@@ -42,7 +42,7 @@ export const axiosAuth = axios.create({
 // axiosAuth.post('me')
 
 // 로그아웃
-// axiosAuthInit.post('logout')
+// axiosAuth.post('logout')
 
 // 사용자 정보 수정
 // const obj = {
@@ -51,4 +51,4 @@ export const axiosAuth = axios.create({
 //   oldPassword : 함께선택,
 //   newPassword : 함께선택
 // }
-// axiosAuthInit.put('user', obj)
+// axiosAuth.put('user', obj)
