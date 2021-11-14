@@ -25,11 +25,6 @@ export default {
       default: () => ({})
     },
   },
-  data() {
-    return {
-      content: 'bankcode'
-    }
-  },
   computed: {
     //accountlength확인
     digitLength() {

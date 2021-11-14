@@ -4,11 +4,8 @@ import Certification from './Certification'
 import DomainAdmin from './DomainAdmin'
 import MyPage from './MyPage'
 import AddAccount from './AddAccount'
-<<<<<<< HEAD
 import RegisterAccount from './RegisterAccount'
-=======
 import RequestPurchase from './RequestPurchase'
->>>>>>> upstream/main
 import SignIn from '~/components/SignIn'
 import SignUp from '~/components/SignUp'
 import AllProducts from '~/components/AllProducts'

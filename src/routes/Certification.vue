@@ -1,19 +1,11 @@
 <template>
   <!-- 생각이 바뀌었다면 홈으로 -->
-<<<<<<< HEAD
-  <RouterView/>
-  <RouterLink to="/">
-    홈으로
-  </RouterLink>
-
-=======
   <RouterLink
     class="move-home"
     to="/"
   >
     HOME
     </RouterLink>
->>>>>>> upstream/main
 </template>
 
 <script>

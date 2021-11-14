@@ -1,7 +1,6 @@
 <template>
 
   <div>연결 가능한 은행 목록</div>
-  <br>
 
   <BanklistItem  
     v-for="bank in banklist"
@@ -65,9 +64,6 @@ export default {
   }
 ]
     }
-  },
-  computed: {
-    
   },
   async created() {
     // await this.getBanklist()
