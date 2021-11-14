@@ -53,7 +53,7 @@ export default {
     this.$store.dispatch("admin/getAllProducts")
   },
   methods: {
-    getAllProduts() {
+    getAllProducts() {
       this.$store.dispatch("admin/getAllProducts")
     },
     select(e) {
