@@ -15,6 +15,7 @@ export const axiosAccount = axios.create({
 // 선택 가능한 은행 목록 조회
 // axiosAccount.get('banks')
 
+
 // 계좌 목록 및 잔액 조회
 // axiosAccount.get()
 
