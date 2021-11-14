@@ -6,13 +6,14 @@
     <div class="controller">
       <button class="add-product">제품 추가 하기</button>
       <button class="all-product" @click="getAllProduts">전체 제품 보기</button>
-      <button class="select-product" @click="getTaggedProducts">선택한 제품 보기</button>
-      <template v-for="tag in tags" :key="tag">
-        <label :for="tag">
-          <input type="checkbox" :id="tag" @click="select">
-          {{ tag }}
-        </label>
-      </template>
+      <div class="tags">
+        <template v-for="tag in tags" :key="tag">
+          <label class="tag" :for="tag">
+            {{ tag }}
+            <input type="checkbox" :id="tag" @click="select">
+          </label>
+        </template>
+      </div>
     </div>
     <div class="contents-box">
       <div v-if="!allProducts.length">전체 제품 관리 페이지 입니다</div>
@@ -42,27 +43,27 @@ export default {
   },
   computed: {
     allProducts () {
-      return this.$store.state.user.allProducts
+      return this.$store.state.admin.allProducts
     },
     tags () {
-      return this.$store.getters["user/tagSet"]
+      return this.$store.getters["admin/tagSet"]
     }
   },
   created() {
-    this.$store.dispatch("user/getAllProducts")
+    this.$store.dispatch("admin/getAllProducts")
   },
   methods: {
     getAllProduts() {
-      this.$store.dispatch("user/getAllProducts")
+      this.$store.dispatch("admin/getAllProducts")
     },
     select(e) {
       e.target.checked ? 
       this.seletedTags.push(e.target.id) :
       this.seletedTags = this.seletedTags.filter( tag => tag !== e.target.id)
     },
-    getTaggedProducts() {
-      this.$store.dispatch("user/getAllProducts",this.seletedTags)
-    }
+    // getTaggedProducts() {
+    //   this.$store.dispatch("user/getAllProducts",this.seletedTags)
+    // }
   }
 }
 </script>
@@ -73,16 +74,29 @@ export default {
   width: 100%;
   border: 1px solid greenyellow;
   height: 50rem;
+  h1 {
+    width: 100%;
+  }
   .controller {
     border: 1px solid darkgoldenrod;
     .add-product{
       display: block;
+      border: 2px solid green;
     }
     .all-product {
       display: block;
     }
     .select-product {
       display: block;
+    }
+    .tags {
+      display: flex;
+      .tag {
+        width: 30px;
+        input {
+          display: none;
+        }
+      }
     }
   }
   .contents-box{
