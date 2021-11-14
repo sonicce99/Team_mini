@@ -2,7 +2,6 @@
 <!-- 최상위 RouterLink로 변경 가능 -->
   <ul class="purchased-item">
     <!-- 단일 제품 상세 구매 내역 이동시 필요 -->
-    <!-- <li>{{ purchase.detailId }}</li> -->
     <li>{{ purchase.timePaid }}</li>
     <li>{{ purchase.product.title }}</li>
     <li>{{ purchase.product.price }}</li>
@@ -12,23 +11,27 @@
     </button>
     <li>{{ purchase.done }}</li>
     <li>{{ purchase.isCanceled }}</li>
-    <button @click="showPurchaseDetail">상세보기</button>
-    <!-- <li>{{ purchase.product.productId }}</li> -->
-    <!-- <li>{{ purchase.product.description }}</li>
-    <li>{{ purchase.product.tags }}</li> -->
-    <!-- <img :src="purchase.product.thumbnail" alt="" /> -->    
+
+    <PurchaseDetailModal v-model="isModalShow" persistent >
+      <template #activator>
+        <button @click="isModalShow = true">상세보기</button>
+      </template>
+      <template #default>
+        <button class="close-modal" @click="isModalShow = false">닫기 X</button>
+        <SingleProductDetailPurchaseList v-if="isModalShow" :detailId="purchase.detailId" />
+      </template>
+    </PurchaseDetailModal>     
   </ul>
-  <SingleProductDetailPurchaseList v-if="isShow" :detailId="purchase.detailId" />
-  <!-- 나중에 버튼으로 모달안에 상세구매내역 나타나게 할 것. -->
 </template>
 
 <script>
 import SingleProductDetailPurchaseList from '~/components/SingleProductDetailPurchaseList'
+import PurchaseDetailModal from '~/components/PurchaseDetailModal'
 
 export default {
   data() {
     return {
-      isShow: false,
+      isModalShow: false,
     }
   },
   props: {
@@ -38,7 +41,8 @@ export default {
     }
   },
   components: {
-    SingleProductDetailPurchaseList
+    SingleProductDetailPurchaseList,
+    PurchaseDetailModal
   },
   methods: {
     async cancle(id) {
@@ -51,10 +55,7 @@ export default {
     },
     fetch() {
       console.log('구매 내역 불러오기')
-    },
-    showPurchaseDetail(){
-    this.isShow = !this.isShow
-    },
+    }
   }
 }
 </script>
@@ -66,4 +67,7 @@ export default {
    display: flex;
    justify-content: space-around;
  }
+  .close-modal{
+    float:right;
+  }
 </style>
