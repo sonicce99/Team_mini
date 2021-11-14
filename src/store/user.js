@@ -1,4 +1,4 @@
-import { axiosAuthInit, axiosAuth } from '~/utils/authenticationApiConfig'
+import { axiosAuthInit } from '~/utils/authenticationApiConfig'
 import router from '../routes'
 import { axiosAccount } from '~/utils/accountApiConfig'
 import { axiosUserProduct, axiosAdminProduct, axiosPublicProduct } from '~/utils/productApiConfig'

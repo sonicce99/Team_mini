@@ -1,5 +1,6 @@
 <template>
   <!-- 생각이 바뀌었다면 홈으로 -->
+  <RouterView/>
   <RouterLink
     class="move-home"
     to="/"

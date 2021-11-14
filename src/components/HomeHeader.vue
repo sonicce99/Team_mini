@@ -24,8 +24,6 @@
 </template>
 
 <script>
-import { axiosAuth } from "~/utils/authenticationApiConfig"
-
 export default {
   computed: {
     currentUser() {
