@@ -1,9 +1,13 @@
 <template>
   <div class="form-group">
-    <form @submit.prevent="signUp">
+    <form
+      class="input-group"
+      @submit.prevent="signUp"
+    >
       <h1>회원 가입</h1>
       <label for="user-email">이메일</label>
       <input
+        class="form-input"
         v-model="email"
         type="email"
         id="user-email"
@@ -12,6 +16,7 @@
       />
       <label for="user-password">비밀번호</label>
       <input
+        class="form-input"
         v-model="pw"
         type="password"
         id="user-password"
@@ -20,6 +25,7 @@
       />
       <label for="user-name">이름</label>
       <input
+        class="form-input"
         v-model="displayName"
         type="text"
         id="user-name"
@@ -27,19 +33,24 @@
       />
       <label for="user-profile-picture">프로필 사진</label>
       <input
+        class="form-input"
         type="file"
         id="user-profile-picture"
         accept=".png, .jpg"
         @change="selectfile"
       >
         <input
+          class="btn-primary btn-16"
           type="submit"
-          value="회원가입!"
+          value="회원가입"
         />
-    </form>
-    <RouterLink :to="{ name: 'SignIn' }">
-      로그인
-    </RouterLink>
+        </form>
+        <RouterLink
+          class="btn-anchor btn-16"
+          :to="{ name: 'SignIn' }"
+        >
+          로그인
+          </RouterLink>
   </div>
 </template>
 
@@ -89,107 +100,52 @@ export default {
 }
 </script>
 
-<style lang="scss">
-* {
-  margin: 0;
-  box-sizing: border-box;
-  font-family: "Spoqa Han Sans", sans-serif;
-  font-size: 16px;
-  font-family: "Spoqa Han Sans", sans-serif;
-  letter-spacing: -0.03em;
-  color: #212529;
-}
-
+<style lang="scss" scoped>
 .form-group {
+  @include column-flexbox();
   width: 100%;
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
+
+  h1 {
+    @include text-style(32, $dark);
+    width: 360px;
+    font-weight: 300;
+    margin-bottom: 1em;
+  }
+
+  .input-group {
+    label {
+      @include text-style(12, $primary);
+      display: block;
+      width: 100%;
+    }
+
+    input {
+      display: block;
+      width: 360px;
+      padding-left: 12px;
+      margin-bottom: 12px;
+    }
+
+    input[type="file"] {
+      padding-top: 10px;
+      margin-bottom: 20px;
+      line-height: 1.1em;
+    }
+
+    input[type="submit"] {
+      width: 360px;
+      margin-right: 20px;
+    }
+  }
 
   a {
+    @include flexbox();
     position: absolute;
     top: 40px;
     left: 140px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: 80px;
-    height: 44px;
-    padding: 0 12px;
-    border-radius: 6px;
     margin-bottom: 12px;
-    font-size: 16px;
-    border: 1px solid #d3dce6;
-    transition: color 200ms ease-in-out;
-    text-decoration: none;
-
-    &:focus,
-    &:hover,
-    &:active {
-      outline: none;
-      box-shadow: none;
-      color: #3da5f5;
-    }
-  }
-}
-
-h1 {
-  width: 360px;
-  font-weight: 300;
-  font-size: 32px;
-  line-height: 1.5;
-  margin-bottom: 1em;
-  color: #101010;
-  letter-spacing: -0.05em;
-}
-
-label {
-  display: block;
-  width: 100%;
-  font-size: 12px;
-  line-height: 16px;
-}
-
-input {
-  display: block;
-  width: 360px;
-  height: 44px;
-  padding: 0 12px;
-  border-radius: 6px;
-  margin-bottom: 12px;
-  font-size: 16px;
-  border: 1px solid #d3dce6;
-  transition: border-color 200ms ease-in-out;
-
-  &:focus,
-  &:hover,
-  &:active {
-    outline: none;
-    box-shadow: none;
-    border-color: #3da5f5;
-  }
-}
-
-input[type="file"] {
-  padding-top: 10px;
-  margin-bottom: 20px;
-}
-
-input[type="submit"] {
-  width: 360px;
-  color: #fff;
-  margin-right: 20px;
-  background-color: #3da5f5;
-
-  &:focus,
-  &:hover,
-  &:active {
-    outline: none;
-    box-shadow: none;
-    background-color: #3186c4;
   }
 }
 </style>
