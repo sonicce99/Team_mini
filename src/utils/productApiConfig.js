@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const token = sessionStorage.getItem('accessToken')
+const token = sessionStorage.getItem('token')
 
 // 사용자 전용
 export const axiosUserProduct = axios.create({
@@ -78,7 +78,7 @@ export const axiosAdminProduct = axios.create({
 //   photoBase64,
 //   isSoldOut
 // }
-// axiosAdminProduct.put(`${detailId}`, obj)
+// axiosAdminProduct.put(`${productId}`, obj)
 
 // 공용
 export const axiosPublicProduct = axios.create({

@@ -1,19 +1,16 @@
 <template>
-  <RouterView/>
   <!-- 생각이 바뀌었다면 홈으로 -->
+  <RouterView/>
   <RouterLink
     class="btn-anchor btn-16"
     to="/"
   >
     HOME
-    </RouterLink>
+  </RouterLink>
 </template>
 
 <script>
 export default {
-  mounted() {
-    console.log(this.$route.path)
-  }
 }
 </script>
 

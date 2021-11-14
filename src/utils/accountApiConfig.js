@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const token = sessionStorage.getItem('accessToken')
+const token = sessionStorage.getItem('token')
 
 export const axiosAccount = axios.create({
   baseURL: 'https://asia-northeast3-heropy-api.cloudfunctions.net/api/account/',
@@ -14,6 +14,7 @@ export const axiosAccount = axios.create({
 
 // 선택 가능한 은행 목록 조회
 // axiosAccount.get('banks')
+
 
 // 계좌 목록 및 잔액 조회
 // axiosAccount.get()
