@@ -80,7 +80,7 @@ export default {
         }
         const data = await axiosAuthInit.post("signup", obj)
         console.log(data.data)
-        // this.$router.push("/") //router로 메인페이지로 이동됨
+        this.$router.push("/") //router로 메인페이지로 이동됨
       } catch (error) {
         console.log(error.response.data)
       }

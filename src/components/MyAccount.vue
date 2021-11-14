@@ -1,6 +1,6 @@
 <template>
   <AccountListChangeCheck />
-  <RouterLink :to="{ name: 'AddAccount' }">계좌 추가 연결</RouterLink>
+  <RouterLink :to="{ name: 'AddAccount' }">계좌 연결하기</RouterLink>
 
 </template>
 
