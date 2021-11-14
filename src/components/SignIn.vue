@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     async login(email, password) {
-      this.$store.dispatch("user/LOGIN", { email, password })
+      await this.$store.dispatch("user/LOGIN", { email, password })
     }
   }
 }

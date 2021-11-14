@@ -36,9 +36,5 @@ export default {
         commit('assignState', { allProducts: data })
       }
     },
-    async getPurchaseList({ commit }) {
-      const { data : purchaseList } = await axiosUserProduct.get('transactions/details')
-      commit('assignState',{ purchaseList })
-    }
   }
 }
