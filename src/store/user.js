@@ -38,8 +38,9 @@ export default {
       const { email, password } = payload
       const { data } = await axiosAuthInit.post('login', { email, password })
       // access token 유지
-      sessionStorage.setItem('token', data.accessToken)
-      router.go(-1)
+      await sessionStorage.setItem('token', data.accessToken)
+      await router.push('/')
+      router.go()
       return data
     },
     // 받아온 salesDetails를 활용하여 판매 내역 보기
