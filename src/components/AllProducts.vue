@@ -5,7 +5,7 @@
     </h1>
     <div class="controller">
       <button class="add-product">제품 추가 하기</button>
-      <button class="all-product" @click="getAllProduts">전체 제품 보기</button>
+      <button class="all-product" @click="getAllProducts">전체 제품 보기</button>
       <div class="tags">
         <template v-for="tag in tags" :key="tag">
           <label class="tag" :for="tag">
