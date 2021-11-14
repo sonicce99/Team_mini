@@ -6,7 +6,7 @@
     to="/"
   >
     HOME
-    </RouterLink>
+  </RouterLink>
 </template>
 
 <script>

@@ -5,6 +5,6 @@ import admin from './admin'
 export default createStore({
   modules: {
     user,
-    // admin
+    admin
   }
 })

@@ -88,6 +88,7 @@ export default createRouter({
     {
       path: '/admin',
       component: DomainAdmin,
+      redirect: { name : 'AllProducts' },
       children: [
         {
           name: 'AllProducts',
