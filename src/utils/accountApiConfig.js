@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const token = sessionStorage.getItem('accessToken')
+const token = sessionStorage.getItem('token')
 
 export const axiosAccount = axios.create({
   baseURL: 'https://asia-northeast3-heropy-api.cloudfunctions.net/api/account/',
