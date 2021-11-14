@@ -29,24 +29,8 @@ import { axiosUserProduct } from '~/utils/productApiConfig'
 export default {
   data() {
     return {
-      //테스트 계좌 데이터
-      accounts: [
-    {
-      "id": "jQMfKla8vOIFELA3mAXv",
-      "bankName": "NH농협은행",
-      "bankCode": "011",
-      "accountNumber": "356-XXXX-XXXX-XX",
-      "balance": 2999900
-    },
-    {
-      "id": "wiPgsXvMAmcLw8AuRHIi",
-      "bankName": "KB국민은행",
-      "bankCode": "004",
-      "accountNumber": "123-XX-XXXX-XXX",
-      "balance": 3000000
-    }
-  ],
-    selectedAccount: ''
+      accounts: [],
+      selectedAccount: ''
     }
   },
   async mounted() {
@@ -67,8 +51,12 @@ export default {
         productId : this.$route.params.id,
         accountId : this.selectedAccount
       }
-      const { data } = await axiosUserProduct.post('buy', obj)
-      return data
+      try{
+        const { data } = await axiosUserProduct.post('buy', obj)
+        return data
+      } catch(error){
+        alert(error.response.data)
+      }
     }
   }
 }
