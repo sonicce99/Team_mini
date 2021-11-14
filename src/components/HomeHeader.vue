@@ -24,22 +24,16 @@
 </template>
 
 <script>
-import { axiosAuth } from "~/utils/authenticationApiConfig"
-
 export default {
   computed: {
     currentUser() {
       return this.$store.state.user.currentUser
     }
   },
-  mounted() {
-    console.log(this.$route.path)
-  },
   methods: {
     logOut() {
       sessionStorage.removeItem("token")
       this.$store.dispatch("user/logOut")
-      this.$router.push("/")
     }
   }
 }

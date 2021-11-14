@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, routerKey } from 'vue-router'
 import Home from './Home'
 import Certification from './Certification'
 import DomainAdmin from './DomainAdmin'
@@ -22,6 +22,7 @@ export default createRouter({
   scrollBehavior: () => ({ top: 0 }),
   routes: [
     {
+      name: 'Home',
       path: '/',
       component: Home
     },
