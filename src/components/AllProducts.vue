@@ -1,18 +1,18 @@
 <template>
   <div class="product-searcher">
-    <div>
-      모든 제품 조회
-    </div>
+    <h1>
+      Product Management Console
+    </h1>
     <div class="controller">
-      <button>제품 추가 하기</button>
-      <button @click="getAllProduts">전체 제품 보기</button>
+      <button class="add-product">제품 추가 하기</button>
+      <button class="all-product" @click="getAllProduts">전체 제품 보기</button>
+      <button class="select-product" @click="getTaggedProducts">선택한 제품 보기</button>
       <template v-for="tag in tags" :key="tag">
         <label :for="tag">
           <input type="checkbox" :id="tag" @click="select">
           {{ tag }}
         </label>
       </template>
-      <button @click="getTaggedProducts">선택한 제품 보기</button>
     </div>
     <div class="contents-box">
       <div v-if="!allProducts.length">전체 제품 관리 페이지 입니다</div>
@@ -71,6 +71,24 @@ export default {
 .product-searcher {
   padding-left: 3.2rem;
   width: 100%;
-
+  border: 1px solid greenyellow;
+  height: 50rem;
+  .controller {
+    border: 1px solid darkgoldenrod;
+    .add-product{
+      display: block;
+    }
+    .all-product {
+      display: block;
+    }
+    .select-product {
+      display: block;
+    }
+  }
+  .contents-box{
+    overflow: auto;
+    height: 41rem;
+    border: 1px solid darkgoldenrod;
+  }
 }
 </style>
