@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const token = sessionStorage.getItem('accessToken')
+const token = sessionStorage.getItem('token')
 
 // 사용자 전용
 export const axiosUserProduct = axios.create({
