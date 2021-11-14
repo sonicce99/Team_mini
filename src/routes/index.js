@@ -4,7 +4,11 @@ import Certification from './Certification'
 import DomainAdmin from './DomainAdmin'
 import MyPage from './MyPage'
 import AddAccount from './AddAccount'
+<<<<<<< HEAD
 import RegisterAccount from './RegisterAccount'
+=======
+import RequestPurchase from './RequestPurchase'
+>>>>>>> upstream/main
 import SignIn from '~/components/SignIn'
 import SignUp from '~/components/SignUp'
 import AllProducts from '~/components/AllProducts'
@@ -16,7 +20,6 @@ import ChangeUserInfo from '~/components/ChangeUserInfo'
 import AccountListChangeCheck from '~/components/AccountListChangeCheck'
 import SingleProductDetails from '~/components/SingleProductDetails'
 
-
 export default createRouter({
   history: createWebHistory(),
   scrollBehavior: () => ({ top: 0 }),
@@ -24,6 +27,12 @@ export default createRouter({
     {
       path: '/',
       component: Home
+    },
+    { 
+      name: 'RequestPurchase',
+      path: '/requestpurchase/:id',
+      component: RequestPurchase,
+      props: true
     },
     {
       path: '/certification',
