@@ -1,5 +1,4 @@
 <template>
-  <RouterView/>
   <!-- 생각이 바뀌었다면 홈으로 -->
   <RouterLink
     class="move-home"
