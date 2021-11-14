@@ -5,16 +5,22 @@
   height: 44px;
   padding: 0 12px;
   border-radius: 6px;
-  border: 1px soild $border;
+  border: 1px solid $border;
   transition: background-color 200ms ease-in-out;
+  transition: border-color 200ms ease-in-out;
   appearance: none;
 
   &::placeholder {
     color: $tertiary;
   }
 
+  &:focus,
+  &:active,
   &:not(:disabled):hover {
     background-color: $background;
+    border-color: $blue;
+    outline: none;
+    box-shadow: none;
   }
 
   &:disabled {
