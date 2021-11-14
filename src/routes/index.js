@@ -4,6 +4,7 @@ import Certification from './Certification'
 import DomainAdmin from './DomainAdmin'
 import MyPage from './MyPage'
 import AddAccount from './AddAccount'
+import RegisterAccount from './RegisterAccount'
 import RequestPurchase from './RequestPurchase'
 import SignIn from '~/components/SignIn'
 import SignUp from '~/components/SignUp'
@@ -78,6 +79,11 @@ export default createRouter({
       name: 'AddAccount',
       path: '/addaccount',
       component: AddAccount
+    },
+    {
+      name: 'RegisterAccount',
+      path: '/registeraccount',
+      component: RegisterAccount
     },
     {
       path: '/admin',
