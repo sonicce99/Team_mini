@@ -16,7 +16,6 @@ import ChangeUserInfo from '~/components/ChangeUserInfo'
 import AccountListChangeCheck from '~/components/AccountListChangeCheck'
 import SingleProductDetails from '~/components/SingleProductDetails'
 
-
 export default createRouter({
   history: createWebHistory(),
   scrollBehavior: () => ({ top: 0 }),
