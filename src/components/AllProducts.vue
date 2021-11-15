@@ -3,8 +3,8 @@
     <h1>
       Product Management Console
     </h1>
+    <RouterLink :to="{ name: 'AddProduct' }" class="add-product">제품 추가 하기</RouterLink>
     <div class="controller">
-      <RouterLink :to="{ name: 'AddProduct' }" class="add-product">제품 추가 하기</RouterLink>
       <button class="all-product" @click="getAllProducts">전체 제품 보기</button>
       <div class="tags">
         <template v-for="tag in tags" :key="tag">
@@ -21,10 +21,18 @@
       <div v-if="!allProducts.length">전체 제품 관리 페이지 입니다</div>
       <div v-else-if="isLoading">Loading...</div>
       <div v-else>
-        <AllProductsList 
-          v-for="product in allProducts" 
-          :key="product.id"
-          :product="product" />           
+        <template v-if="isAll">
+          <AllProductsList
+            v-for="product in allProducts"
+            :key="product.id"
+            :product="product" />
+        </template>
+        <template v-else>
+          <AllProductsList
+            v-for="product in SelectedProducts"
+            :key="product.id"
+            :product="product" />
+        </template>         
       </div>
     </div>
   </div>
@@ -40,12 +48,16 @@ export default {
   data() {
     return {
       isLoading: false,
+      isAll: true,
       seletedTags: []
     }
   },
   computed: {
     allProducts () {
       return this.$store.state.admin.allProducts
+    },
+    SelectedProducts () {
+      return this.$store.state.admin.seletedProducts
     },
     tags () {
       return this.$store.getters["admin/tagSet"]
@@ -57,15 +69,19 @@ export default {
   methods: {
     getAllProducts() {
       this.$store.dispatch("admin/getAllProducts")
+      this.isAll = true
     },
     select(e) {
       e.target.checked ? 
       this.seletedTags.push(e.target.id) :
       this.seletedTags = this.seletedTags.filter( tag => tag !== e.target.id)
+      if (this.seletedTags.length) {
+        this.$store.dispatch("admin/getSelectedProducts",this.seletedTags)
+        this.isAll = false
+      } else {
+        this.isAll = true
+      }
     },
-    // getTaggedProducts() {
-    //   this.$store.dispatch("user/getAllProducts",this.seletedTags)
-    // }
   }
 }
 </script>
@@ -78,23 +94,30 @@ export default {
   height: 90vh;
   display: flex;
   flex-direction: column;
+  position: relative;
   h1 {
     width: 100%;
   }
+  .add-product{
+    display: block;
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    border: 2px solid green;
+  }
   .controller {
     border: 1px solid darkgoldenrod;
-    .add-product{
-      display: block;
-      border: 2px solid green;
-    }
     .all-product {
       display: block;
+      border: 2px solid olivedrab;
+      padding: 0.4rem
     }
     .select-product {
       display: block;
     }
     .tags {
       display: flex;
+      overflow-x: auto;
       input {
         display: none;
         &:checked + .tag-box {
@@ -102,7 +125,7 @@ export default {
         }
       } 
       .tag-box {
-        width: 3rem;
+        padding: 0 1rem;
         text-align: center;
         border-radius: 1rem;
         margin: 0.5rem 0.5rem;

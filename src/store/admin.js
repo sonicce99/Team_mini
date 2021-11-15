@@ -8,6 +8,7 @@ export default {
   namespaced: true,
   state: () => ({
     allProducts: [],
+    seletedProducts: []
   }),
   getters:{
     // 제품의 전체 태그 보여주기
@@ -30,14 +31,14 @@ export default {
     }
   },
   actions: {
-    async getAllProducts({ commit }, tags = []) {
+    async getAllProducts({ commit }) {
       const { data } = await axiosAdminProduct.get()
-      if (tags.length) {
-        const allProducts = data.filter(item => item.tags.filter(tag => tags.includes(tag)).length)
-        commit('assignState', { allProducts })
-      } else {
-        commit('assignState', { allProducts: data })
-      }
+      commit('assignState', { allProducts: data })
+    },
+    async getSelectedProducts({ commit }, tags = []) {
+      const { data } = await axiosAdminProduct.get()
+      const seletedProducts = data.filter(item => item.tags.filter(tag => tags.includes(tag)).length)
+      commit('assignState', { seletedProducts })
     },
     async addProduct({commit}, obj) {
       const { data } = await axiosAdminProduct.post('', obj)
