@@ -15,9 +15,9 @@
         <br>
         <label>재고 여부: </label>
         <label for="soldout">매진</label>
-        <input type="radio" id="soldout" v-model="isSoldOut" value= true>
+        <input type="radio" id="soldout" v-model="isSoldOut" :value="true">
         <label for="instock">재고 있음</label>
-        <input type="radio" id="instock" v-model="isSoldOut" value= false>
+        <input type="radio" id="instock" v-model="isSoldOut" :value="false">
         <br>
         <label for="thumbnail">상품 썸네일: </label>
         <div> <img class="thumb-view" :src="thumbnail" alt="thumbnail"></div>
@@ -35,7 +35,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { axiosAdminProduct, axiosPublicProduct } from '~/utils/productApiConfig'
 
 export default {
@@ -63,25 +62,25 @@ export default {
         this.title = data.title
         this.price = data.price
         this.description = data.description
-        this.tags = data.tags
+        this.tags = data.tags.join(',')
         this.thumbnail = data.thumbnail
         this.photo = data.photo
         this.isSoldOut = data.isSoldOut
       },
       //서버에 수정사항 PUT
       async editProduct(){
-        const tagArray = this.tags.split(' ')
         const obj = {
           title : this.title,
           price : this.price,
           description: this.description,
-          tags: tagArray,
+          tags: this.tags.split(','),
           thumbnailBase64: this.thumbnailBase64,
           photoBase64: this.photoBase64,
           isSoldOut: this.isSoldOut
         }
         await axiosAdminProduct.put(this.$route.params.id, obj)
         this.getCurProduct() // 실제 동작때는 수정완료 후에 화면이 닫혀야함.
+        this.$router.go(-1)
       },
       selectFile(event) {
         const { files } = event.target 

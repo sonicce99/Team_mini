@@ -52,6 +52,9 @@ export default {
     purchaseOnlyDone(state) {
       return state.purchaseList.filter((purchase) => purchase.done)
     },
+    purchaseOnlyRequested(state) {
+      return state.purchaseList.filter((purchase) => !purchase.done && !purchase.isCanceled)
+    },
   },
   // state에 있는 salesDetails에 data를 받아서 넣어줌
   mutations: {
@@ -107,13 +110,11 @@ export default {
     },
     // 구매 확정
     async CONFIRM_PURCHASE({ commit }, payload) {
-      const { detailId } = payload
-      return await axiosUserProduct.post('ok', { detailId })
+      await axiosUserProduct.post('ok', payload)
     },
     // 구매 취소
     async CANCEL_PURCHASE({ commit }, payload) {
-      const { detailId } = payload
-      return await axiosUserProduct.post('cancel', { detailId })
+      await axiosUserProduct.post('cancel', payload)
     },
     async logOut() {
       await axiosAuth.post('logout')
