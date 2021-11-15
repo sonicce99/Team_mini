@@ -21,29 +21,13 @@ export default {
   },
   data() {
     return {
-      accountInfos: [{
-        "id": "jQMfKla8vOIFELA3mAXv",
-        "bankName": "NH농협은행",
-        "bankCode": "011",
-        "accountNumber": "356-XXXX-XXXX-XX",
-        "balance": 2999900
-      },
-      {
-        "id": "wiPgsXvMAmcLw8AuRHIi",
-        "bankName": "KB국민은행",
-        "bankCode": "004",
-        "accountNumber": "123-XX-XXXX-XXX",
-        "balance": 3000000
-      }]
+      accountInfos: []
     }
   },
   methods: {
     async AccountListChangeCheck() {
       try {
-        // 추후에 Login Page에서 sessionStorage set 시켜야함. 현재 로그인 페이지가 없어서 작성을 못했음.
-        const token = sessionStorage.getItem("accessToken")
         const { data } = await axiosAccount.get()
-        console.log(data.accounts)
         this.accountInfos = data.accounts
 
       } catch (error) {
