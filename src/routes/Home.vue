@@ -19,37 +19,34 @@
     </button>
   </div>
 
+  <div v-if="!isResult">
+    <KeywordList @onClickKeyword="onKeyup" />
+  </div>
+
   <div v-if="isResult" class="items">
-    <ul>
-      <li v-for="searchResult in searchResults" :key="searchResult.id">
-        <h3>{{ searchResult.title }}</h3>
-        <strong>{{ searchResult.price }} </strong>
-        <p>{{ searchResult.description }}</p>
-        <span v-for="tag in searchResult.tags"> {{ tag }}</span>
-        <div>
-          <img
-            :src="`${searchResult.thumbnail}`"
-            :alt="`${searchResult.title}`"
-          />
-        </div>
-      </li>
-    </ul>
+    <div v-show="!data.legnth">검색 결과가 없습니다.</div>
+    <SearchResults :searchResults="searchResults" />
   </div>
 </template>
 
 <script>
 import HomeHeader from '~/components/HomeHeader'
+import SearchResults from '~/components/SearchResults'
+import KeywordList from '~/components/KeywordList'
 
 export default {
   components: {
     HomeHeader,
+    SearchResults,
+    KeywordList,
   },
   data() {
     return {
       isSearchInput: false,
       searchText: '',
-      tags: [],
+      searchTags: [],
       isResult: false,
+      data: [],
     }
   },
   computed: {
@@ -66,7 +63,10 @@ export default {
     async onKeyup(searchText) {
       this.isSearchInput = true
       this.isResult = true
-      await this.$store.dispatch('user/SHOW_SEARCHRESULTS', { searchText })
+      this.searchText = searchText
+      this.data = await this.$store.dispatch('user/SHOW_SEARCHRESULTS', {
+        searchText,
+      })
     },
     resetQuery() {
       this.searchText = ''
@@ -103,14 +103,5 @@ export default {
   max-width: 700px;
   margin: 0 auto;
   border: 1px solid red;
-}
-
-ul {
-  padding: 40px;
-
-  li {
-    border: 1px solid $border;
-    margin-bottom: 40px;
-  }
 }
 </style>
