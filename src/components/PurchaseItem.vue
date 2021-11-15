@@ -1,16 +1,16 @@
 <template>
 <!-- 최상위 RouterLink로 변경 가능 -->
-  <ul class="purchased-item">
+  <div class="purchased-item">
     <!-- 단일 제품 상세 구매 내역 이동시 필요 -->
-    <li>{{ purchase.timePaid }}</li>
-    <li>{{ purchase.product.title }}</li>
-    <li>{{ purchase.product.price }}</li>
+    <div>{{ purchase.timePaid }}</div>
+    <div>{{ purchase.product.title }}</div>
+    <div>{{ purchase.product.price }}</div>
     <button @click="confirmed">구매확인</button>
     <button @click="cancle" :disabled="purchase.done">
           구매취소
     </button>
-    <li>{{ purchase.done? '구매확정 됨': '구매확정 전' }}</li>
-    <li>{{ purchase.isCanceled? '취소 됨': '취소 전' }}</li>
+    <!-- <div>{{ purchase.done? '구매확정 됨': '구매확정 전' }}</div> -->
+    <!-- <div>{{ purchase.isCanceled? '취소 됨': '취소 전' }}</div> -->
 
     <PurchaseDetailModal v-model="isModalShow" persistent >
       <template #activator>
@@ -18,10 +18,10 @@
       </template>
       <template #default>
         <button class="close-modal" @click="isModalShow = false">닫기 X</button>
-        <SingleProductDetailPurchaseList v-if="isModalShow" :detailId="purchase.detailId" />
+        <SingleProductDetailPurchaseList :detailId="purchase.detailId" />
       </template>
     </PurchaseDetailModal>     
-  </ul>
+  </div>
 </template>
 
 <script>
