@@ -29,7 +29,6 @@ import { axiosUserProduct } from '~/utils/productApiConfig'
 export default {
   data() {
     return {
-      //테스트 계좌 데이터
       accounts: [],
       selectedAccount: ''
     }
@@ -52,8 +51,12 @@ export default {
         productId : this.$route.params.id,
         accountId : this.selectedAccount
       }
-      const { data } = await axiosUserProduct.post('buy', obj)
-      return data
+      try{
+        const { data } = await axiosUserProduct.post('buy', obj)
+        return data
+      } catch(error){
+        alert(error.response.data)
+      }
     }
   }
 }
