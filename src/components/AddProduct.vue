@@ -20,13 +20,9 @@
         type="text"
         v-model="tags" />
       <p>썸네일</p>
-      <input
-        type="text"
-        v-model="thumbnailBase64" />
+      <input type="file" id="thumbnail" @change="selectFile">
       <p>상세 이미지</p>
-      <input
-        type="text"
-        v-model="photoBase64" />
+      <input type="file" id="photo" @change="selectFile">
     <button type="submit" class="add">추가하기</button>
     </form>
   </div>
@@ -59,6 +55,20 @@ export default {
     },
     back() {
       this.$router.go(-1)
+    },
+    selectFile(event) {
+      const { files } = event.target 
+      for (const file of files) {
+        const reader = new FileReader()
+        reader.readAsDataURL(file) 
+        reader.addEventListener('load', () => {          
+          if (event.target.id === 'thumbnail') {            
+            this.thumbnailBase64 = reader.result
+          } else {
+            this.photoBase64 = reader.result
+          }
+        })
+      }
     }
   }
 }

@@ -83,7 +83,6 @@ export default {
         await axiosAdminProduct.put(this.$route.params.id, obj)
         this.getCurProduct() // 실제 동작때는 수정완료 후에 화면이 닫혀야함.
       },
-      
       selectFile(event) {
         const { files } = event.target 
         for (const file of files) {
