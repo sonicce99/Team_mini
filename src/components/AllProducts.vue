@@ -76,6 +76,8 @@ export default {
   width: 100%;
   border: 1px solid greenyellow;
   height: 90vh;
+  display: flex;
+  flex-direction: column;
   h1 {
     width: 100%;
   }
@@ -110,7 +112,6 @@ export default {
   }
   .contents-box{
     overflow: auto;
-    height: 69vh;
     border: 1px solid darkgoldenrod;
   }
 }
