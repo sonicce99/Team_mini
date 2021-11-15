@@ -1,24 +1,33 @@
 <template>
-  <li>
-    <h3>{{ searchResult.title }}</h3>
-    <strong>{{ searchResult.price }} </strong>
-    <p>{{ searchResult.description }}</p>
-    <span v-for="tag in searchResult.tags"> {{ tag }}</span>
-    <div>
-      <img :src="`${searchResult.thumbnail}`" :alt="`${searchResult.title}`" />
-    </div>
-  </li>
+  <ul class="search-results">
+    <li v-for="searchResult in searchResults" :key="searchResult.id">
+      <h3>{{ searchResult.title }}</h3>
+      <strong>{{ searchResult.price }} </strong>
+      <p>{{ searchResult.description }}</p>
+      <span v-for="tag in searchResult.tags" :key="tag"> {{ tag }}</span>
+      <div>
+        <img
+          :src="`${searchResult.thumbnail}`"
+          :alt="`${searchResult.title}`"
+        />
+      </div>
+    </li>
+  </ul>
 </template>
 
 <script>
 export default {
-  props: ['searchResult'],
+  props: ['searchResults'],
 }
 </script>
 
 <style lang="scss" scoped>
-li {
-  border: 1px solid $border;
-  margin-bottom: 40px;
+.search-results {
+  padding: 40px;
+
+  li {
+    border: 1px solid $border;
+    margin-bottom: 40px;
+  }
 }
 </style>

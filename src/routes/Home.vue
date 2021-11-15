@@ -19,26 +19,26 @@
     </button>
   </div>
 
+  <div v-if="!isResult">
+    <KeywordList @onClickKeyword="onKeyup" />
+  </div>
+
   <div v-if="isResult" class="items">
-    <ul>
-      <SearchResults
-        v-for="searchResult in searchResults"
-        :key="searchResult.id"
-        :searchResult="searchResult"
-      >
-      </SearchResults>
-    </ul>
+    <div v-show="!data.legnth">검색 결과가 없습니다.</div>
+    <SearchResults :searchResults="searchResults" />
   </div>
 </template>
 
 <script>
 import HomeHeader from '~/components/HomeHeader'
 import SearchResults from '~/components/SearchResults'
+import KeywordList from '~/components/KeywordList'
 
 export default {
   components: {
     HomeHeader,
     SearchResults,
+    KeywordList,
   },
   data() {
     return {
@@ -46,6 +46,7 @@ export default {
       searchText: '',
       searchTags: [],
       isResult: false,
+      data: [],
     }
   },
   computed: {
@@ -62,7 +63,10 @@ export default {
     async onKeyup(searchText) {
       this.isSearchInput = true
       this.isResult = true
-      await this.$store.dispatch('user/SHOW_SEARCHRESULTS', { searchText })
+      this.searchText = searchText
+      this.data = await this.$store.dispatch('user/SHOW_SEARCHRESULTS', {
+        searchText,
+      })
     },
     resetQuery() {
       this.searchText = ''
@@ -99,9 +103,5 @@ export default {
   max-width: 700px;
   margin: 0 auto;
   border: 1px solid red;
-}
-
-ul {
-  padding: 40px;
 }
 </style>
