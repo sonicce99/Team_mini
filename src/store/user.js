@@ -96,13 +96,11 @@ export default {
     },
     // 구매 확정
     async CONFIRM_PURCHASE({ commit }, payload) {
-      const { detailId } = payload
-      return await axiosUserProduct.post('ok', { detailId })
+      await axiosUserProduct.post('ok', payload)
     },
     // 구매 취소
     async CANCEL_PURCHASE({ commit }, payload) {
-      const { detailId } = payload
-      return await axiosUserProduct.post('cancel', { detailId })
+      await axiosUserProduct.post('cancel', payload)
     },
     async logOut() {
       await axiosAuth.post('logout')
