@@ -5,12 +5,12 @@
     <li>{{ purchase.timePaid }}</li>
     <li>{{ purchase.product.title }}</li>
     <li>{{ purchase.product.price }}</li>
-    <button @click="confirmed(purchase.detailId)">구매확인</button>
-    <button @click="cancle(purchase.detailId)" :disabled="purchase.done">
+    <button @click="confirmed">구매확인</button>
+    <button @click="cancle" :disabled="purchase.done">
           구매취소
     </button>
-    <li>{{ purchase.done }}</li>
-    <li>{{ purchase.isCanceled }}</li>
+    <li>{{ purchase.done? '구매확정 됨': '구매확정 전' }}</li>
+    <li>{{ purchase.isCanceled? '취소 됨': '취소 전' }}</li>
 
     <PurchaseDetailModal v-model="isModalShow" persistent >
       <template #activator>
@@ -45,17 +45,12 @@ export default {
     PurchaseDetailModal
   },
   methods: {
-    async cancle(id) {
-      this.$store.dispatch('user/CANCEL_PURCHASE', id)
-      await this.fetch()
+    async cancle() {
+      this.$store.dispatch('user/CANCEL_PURCHASE', { detailId: this.purchase.detailId})
     },
-    async confirmed(id) {
-      this.$store.dispatch('user/CONFIRM_PURCHASE', id)
-      await this.fetch()
+    async confirmed() {
+      this.$store.dispatch('user/CONFIRM_PURCHASE', { detailId: this.purchase.detailId})
     },
-    fetch() {
-      console.log('구매 내역 불러오기')
-    }
   }
 }
 </script>
