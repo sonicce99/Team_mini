@@ -3,7 +3,7 @@
 
   <div class="black-bg" v-if="removed === true">
     <div class="white-bg">
-      <button @click="closed" class="exit">닫기</button>
+      <button @click="closed">닫기</button>
       <h4>해지되었습니다!</h4>
     </div>
   </div>
@@ -61,8 +61,5 @@ export default {
     padding: 20px;
     background: white;
     border-radius: 8px;      
-  }
-  .exit {
-
   }
 </style>
