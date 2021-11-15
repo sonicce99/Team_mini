@@ -20,18 +20,21 @@
     <!-- 썸네일 사진 있는지 없는지 판별 -->
     <div v-if="dataObject.thumbnail === null">썸네일 없음</div>
     <div v-else>
-      <img class= "thumbnail" :src="dataObject.thumbnail" alt="제품 썸네일" />
       <p>제품 썸네일</p>
+      <img class= "thumbnail" :src="dataObject.thumbnail" alt="제품 썸네일" />
     </div>
 
     <!-- 제품사진 있는지 없는지 판별 -->
     <div v-if="dataObject.photo === null">제품 사진 없음</div>
     <div v-else>
-      <img class= "detail" :src="dataObject.photo" alt="제품 사진" /> 
       <p>제품 사진</p>
+      <img class= "detail" :src="dataObject.photo" alt="제품 사진" />
+      <div >      
+        <RouterLink  :to="{ name: 'RequestPurchase', params: { id: dataObject.id }, query: {title: dataObject.title, price: dataObject.price}}">
+          <span class="purchase-btn"> 구매하기 </span>
+        </RouterLink>      
+      </div>      
     </div>
-     <!-- 구매신청은 상세페이지 안에 있어야함. 지금은 그냥 테스트용으로 여기에 만듦. -->
-      <RouterLink :to="{ name: 'RequestPurchase', params: { id: dataObject.id }, query: {title: dataObject.title, price: dataObject.price}}">구매하기</RouterLink>
   </div>
 
 </template>
@@ -61,6 +64,25 @@ export default {
         console.log(error.response.data)
       } 
     }
-  }  
+  },  
 }
 </script>
+<style lang="scss" scoped>
+  .product-info{
+    .thumbnail {
+    width: 100px;
+    height: 100px;
+  }
+    .detail {
+      width: 200px;
+      height: 200px;
+    }
+    .purchase-btn{
+      padding: 10px;
+      border: 2px solid black;
+      border-radius: 5px;
+      background-color: #ddd;
+    }
+  }
+  
+</style>
