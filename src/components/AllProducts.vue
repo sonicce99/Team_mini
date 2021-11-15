@@ -4,14 +4,16 @@
       Product Management Console
     </h1>
     <div class="controller">
-      <button class="add-product">제품 추가 하기</button>
+      <RouterLink :to="{ name: 'AddProduct' }" class="add-product">제품 추가 하기</RouterLink>
       <button class="all-product" @click="getAllProducts">전체 제품 보기</button>
       <div class="tags">
         <template v-for="tag in tags" :key="tag">
-          <label class="tag" :for="tag">
-            {{ tag }}
-            <input type="checkbox" :id="tag" @click="select">
-          </label>
+          <input type="checkbox" :id="tag" @click="select">
+          <div class="tag-box">
+            <label class="tag" :for="tag">
+              {{ tag }}
+            </label>
+          </div>
         </template>
       </div>
     </div>
@@ -73,7 +75,7 @@ export default {
   padding-left: 3.2rem;
   width: 100%;
   border: 1px solid greenyellow;
-  height: 50rem;
+  height: 90vh;
   h1 {
     width: 100%;
   }
@@ -91,17 +93,24 @@ export default {
     }
     .tags {
       display: flex;
-      .tag {
-        width: 30px;
-        input {
-          display: none;
+      input {
+        display: none;
+        &:checked + .tag-box {
+          background: chocolate;
         }
+      } 
+      .tag-box {
+        width: 3rem;
+        text-align: center;
+        border-radius: 1rem;
+        margin: 0.5rem 0.5rem;
+        border: 2px solid red;
       }
     }
   }
   .contents-box{
     overflow: auto;
-    height: 41rem;
+    height: 69vh;
     border: 1px solid darkgoldenrod;
   }
 }
