@@ -11,7 +11,6 @@
 
 <script>
 import { axiosAccount } from '~/utils/accountApiConfig'
-import router from '~/routes'
 
 export default {
   data() {
@@ -40,7 +39,7 @@ export default {
     // 닫기 버튼 클릭시 모달창 닫기
     closed() {
       this.removed = false
-      router.go()
+      this.$router.go()
     }
   }  
 }
