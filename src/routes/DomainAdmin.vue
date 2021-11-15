@@ -30,7 +30,7 @@ export default {
   display: flex;
   .admin-tab {
     width: 220px;
-    height: 50rem;
+    height: 90vh;
     margin-bottom: 1rem;
     border: 1px solid orange;
     .admin-info {

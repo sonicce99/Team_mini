@@ -9,6 +9,7 @@ import RequestPurchase from './RequestPurchase'
 import SignIn from '~/components/SignIn'
 import SignUp from '~/components/SignUp'
 import AllProducts from '~/components/AllProducts'
+import AddProduct from '~/components/AddProduct'
 import SalesDetails from '~/components/SalesDetails'
 import EditProduct from '~/routes/EditProduct'
 import PurchaseList from '~/components/PurchaseList'
@@ -95,6 +96,11 @@ export default createRouter({
           name: 'AllProducts',
           path: 'allproducts',
           component: AllProducts
+        },
+        {
+          name: 'AddProduct',
+          path: 'addproduct',
+          component: AddProduct
         },
         {
           name: 'SalesDetails',
