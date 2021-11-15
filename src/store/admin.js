@@ -24,6 +24,9 @@ export default {
       Object.keys(payload).forEach(key => {
         state[key] = payload[key]
       })
+    },
+    addState(state, payload) {
+      state.allProducts.push(payload)
     }
   },
   actions: {
@@ -36,5 +39,9 @@ export default {
         commit('assignState', { allProducts: data })
       }
     },
+    async addProduct({commit}, obj) {
+      const { data } = await axiosAdminProduct.post('', obj)
+      commit('addState', data)
+    }
   }
 }
