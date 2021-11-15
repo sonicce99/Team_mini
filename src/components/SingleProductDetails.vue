@@ -28,12 +28,10 @@
     <div v-if="dataObject.photo === null">제품 사진 없음</div>
     <div v-else>
       <p>제품 사진</p>
-      <img class= "detail" :src="dataObject.photo" alt="제품 사진" />
-      <div >      
+      <img class= "detail" :src="dataObject.photo" alt="제품 사진" />   
         <RouterLink  :to="{ name: 'RequestPurchase', params: { id: dataObject.id }, query: {title: dataObject.title, price: dataObject.price}}">
           <span class="purchase-btn"> 구매하기 </span>
-        </RouterLink>      
-      </div>      
+        </RouterLink>    
     </div>
   </div>
 
