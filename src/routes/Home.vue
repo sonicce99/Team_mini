@@ -61,6 +61,7 @@ export default {
       this.$router.push('/')
     },
     async onKeyup(searchText) {
+      if (!searchText) return
       this.isSearchInput = true
       this.isResult = true
       this.searchText = searchText
