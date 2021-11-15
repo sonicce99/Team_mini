@@ -3,6 +3,7 @@
 
   <div class="black-bg" v-if="removed === true">
     <div class="white-bg">
+      <button @click="closed" class="exit">닫기</button>
       <h4>해지되었습니다!</h4>
     </div>
   </div>
@@ -10,6 +11,7 @@
 
 <script>
 import { axiosAccount } from '~/utils/accountApiConfig'
+import router from '~/routes'
 
 export default {
   data() {
@@ -23,20 +25,23 @@ export default {
   methods: {
     async AccountRemove() {
       try {
-        // 추후에 Login Page에서 sessionStorage set 시켜야함. 현재 로그인 페이지가 없어서 작성을 못했음.
-        const token = sessionStorage.getItem("accessToken")
         const obj = {
           accountId: this.id,
           signature: true
         }
-        const { data } = await axiosAccount.delete('', obj)
-        console.log(data)        
+        const deleteApi = await axiosAccount.delete('',{data: obj})
+        console.log(deleteApi)
         this.removed = true
 
       } catch (error) {
         console.log(error.response.data)
-      } 
+      }
     },
+    // 닫기 버튼 클릭시 모달창 닫기
+    closed() {
+      this.removed = false
+      router.go()
+    }
   }  
 }
 </script>
@@ -57,5 +62,8 @@ export default {
     padding: 20px;
     background: white;
     border-radius: 8px;      
+  }
+  .exit {
+
   }
 </style>
