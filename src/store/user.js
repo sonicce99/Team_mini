@@ -52,6 +52,9 @@ export default {
     purchaseOnlyDone(state) {
       return state.purchaseList.filter((purchase) => purchase.done)
     },
+    purchaseOnlyRequested(state) {
+      return state.purchaseList.filter((purchase) => !purchase.done && !purchase.isCanceled)
+    },
   },
   // state에 있는 salesDetails에 data를 받아서 넣어줌
   mutations: {
