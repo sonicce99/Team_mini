@@ -21,18 +21,18 @@
       <div v-if="!allProducts.length">전체 제품 관리 페이지 입니다</div>
       <div v-else-if="isLoading">Loading...</div>
       <div v-else>
-        <template v-if="isAll">
+        <div v-show="isAll">
           <AllProductsList
             v-for="product in allProducts"
             :key="product.id"
             :product="product" />
-        </template>
-        <template v-else>
+        </div>
+        <div v-show="!isAll">
           <AllProductsList
             v-for="product in SelectedProducts"
             :key="product.id"
             :product="product" />
-        </template>         
+        </div>         
       </div>
     </div>
   </div>
