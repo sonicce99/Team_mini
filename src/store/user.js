@@ -7,11 +7,39 @@ import {
   axiosPublicProduct,
 } from '~/utils/productApiConfig'
 
+import { gucciImage } from '../utils/gucciImage'
+import { valentinoImage } from '../utils/valentinoImage'
+import { louboutinImage } from '../utils/louboutinImage'
+import { votegaImage } from '../utils/votegaImage'
+import { theRowImage } from '../utils/theRowImage'
+
 export default {
   namespaced: true,
   state: () => ({
     purchaseList: [],
     salesDetails: [],
+    keywordList: [
+      {
+        name: 'GUCCI',
+        image: gucciImage,
+      },
+      {
+        name: 'THE ROW',
+        image: theRowImage,
+      },
+      {
+        name: 'CHRISTIAN LOUBOUTIN',
+        image: louboutinImage,
+      },
+      {
+        name: 'Bottega Veneta',
+        image: votegaImage,
+      },
+      {
+        name: 'Valentino Garavani',
+        image: valentinoImage,
+      },
+    ],
     searchResults: [],
     currentUser: null,
   }),
