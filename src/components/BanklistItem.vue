@@ -2,8 +2,8 @@
 
 <div class="bank-group">
   <div class="bank-list">
-      <span class="bank-name">{{ bank.name }}</span>
-      <span class="bank-name-completed"
+      <span class="bank-connect">{{ bank.name }}</span>
+      <span class="bank-connect-completed"
       v-if="bank.disabled">연결 완료</span>
       <RouterLink
       class="btn-primary"
@@ -33,6 +33,39 @@ export default {
       return this.bank.digits.reduce((acc, cur) => 
       acc + cur, 0)
     }
+  },
+  methods: {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+
+.bank-group {
+    @include column-flexbox();
+    width: 100%;
+    .bank-connect {
+      padding-right: 40px;
+    }
+    .bank-connect-completed {
+      @include text-style(14, $secondary);
+      margin-right: 14px;
+    }
+    .bank-list {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 300px;
+      line-height: 2.5;
+      border: 1px solid $border;
+      border-left: none;
+      border-right: none;
+      }
+    .btn-primary {
+      width: 70px;
+      height: 25px;
+      font-size: 14px;
+    }
+  }
+
+</style>
