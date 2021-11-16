@@ -13,7 +13,6 @@
       ,accountlength: digitLength } }" v-else>
       연결
       </RouterLink>
-
     </div>
 </div>
   
