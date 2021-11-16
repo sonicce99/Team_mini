@@ -123,6 +123,18 @@ export default {
           color: $blue
         }
       } 
+      &::-webkit-scrollbar {
+      height: 10px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: darken($border, 30%);;
+        border-radius: 10px;
+      }
+      &::-webkit-scrollbar-track {
+        background-color: $border;
+        border-radius: 10px;
+        box-shadow: inset 0px 0px 5px white;
+      } 
       .tag-box {
         user-select: none;
         height: 50%;
