@@ -3,6 +3,7 @@
   <div class="input-group">
     <i class="bx bx-search"></i>
     <input
+      @keyup.delete="onKeyReset(searchText)"
       @keyup.enter="onKeyup(searchText)"
       class="form-input"
       type="text"
@@ -24,7 +25,7 @@
   </div>
 
   <div v-if="isResult" class="items">
-    <div v-show="!data.legnth">검색 결과가 없습니다.</div>
+    <div v-show="!data.length">검색 결과가 없습니다.</div>
     <SearchResults :searchResults="searchResults" />
   </div>
 </template>
@@ -73,6 +74,10 @@ export default {
       this.searchText = ''
       this.isSearchInput = false
       this.isResult = false
+    },
+    onKeyReset(searchText) {
+      this.searchText = searchText
+      if (!this.searchText.length) this.resetQuery()
     },
   },
 }

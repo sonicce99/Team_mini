@@ -1,20 +1,24 @@
 <template>
   <h2>판매 내역</h2>
-    <ul>
-      <li v-for="item in allSellList" :key="item">{{ item }}</li>
-    </ul>
+  <ul>
+    <li v-for="item in salesDetails" :key="item">{{ item }}</li>
+  </ul>
 </template>
 
 <script>
 export default {
-  computed: {
-    allSellList() {
-      return this.$store.state.admin.allSellList
-    }
-  },
   created() {
-    this.$store.dispatch("admin/getAllSellList")
+    this.fetch()
   },
-  methods: {}
+  computed: {
+    salesDetails() {
+      return this.$store.state.admin.salesDetails
+    },
+  },
+  methods: {
+    async fetch() {
+      await this.$store.dispatch('admin/SHOW_SALESDETAILS')
+    },
+  },
 }
 </script>
