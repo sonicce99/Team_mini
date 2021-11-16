@@ -10,7 +10,7 @@
   <div class="form-group">
     <form @submit.prevent="register">
       <h1>{{ $route.params.bankname }} 계좌 연결</h1>
-      <label for="user-account-number">
+      <label for="user-account">
         계좌번호 {{$route.params.accountlength}}자리
         </label> 
       <input
@@ -68,33 +68,30 @@ export default {
 
 <style lang="scss" scoped>
 
-  .btn-list btn-anchor btn-16 {
-    position: absolute;
-    top: 40px;
-    margin-left: 40px;
-  }
   .form-group {
     @include column-flexbox();
     width: 100%;
 
-      h1 {
+   h1 {
       text-align: center;
       font-weight: 400;
       }
 
       label {
-      @include text-style(14, $primary);
+        @include text-style(14, $primary);
+        display: block;
       }
-      
+        
       .form-input {
-      width: 360px;
-      padding-left: 12px;
-      margin-bottom: 10px;
+        display: block;
+        width: 300px;
+        padding-left: 10px;
+        margin-bottom: 10px;
       }
+
       .btn-primary {
-      width: 100%;
-      }
-      
+        width: 100%;
+      }       
   }
    
 </style>
