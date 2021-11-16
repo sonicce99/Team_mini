@@ -1,6 +1,8 @@
 <template>
   <AccountListChangeCheck />
-  <RouterLink :to="{ name: 'AddAccount' }">계좌 연결하기</RouterLink>
+  <RouterLink
+  class="btn-secondary"
+  :to="{ name: 'AddAccount' }">계좌 연결</RouterLink>
 
 </template>
 
@@ -12,3 +14,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.btn-secondary{
+  height: 30px;
+}
+</style>
