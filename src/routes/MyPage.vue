@@ -1,51 +1,36 @@
 <template>
-  <div class="container">
-    <div class="info-card">
-      <div class="profile">
-        <div class="image">
-          <img
-            :src="currentUser.profileImg"
-            :alt="`${currentUser.displayName}`"
-          />
-        </div>
+  <div class="wrapper">
+    <div class="my-tab">
+      <div class="my-info">
+        <img
+          :src="
+            currentUser.profileImg
+              ? currentUser.profileImg
+              : 'https://via.placeholder.com/150'
+          "
+          :alt="`${currentUser.displayName}`"
+        />
         <strong>{{ currentUser.displayName }}</strong>
         <span>{{ currentUser.email }}</span>
       </div>
 
-      <div class="my-info">
-        <RouterLink
-          class="btn-list btn-anchor btn-16"
-          :to="{ name: 'PurchaseList' }"
-        >
-          구매 내역
-        </RouterLink>
-        <RouterLink
-          class="btn-list btn-anchor btn-16"
-          :to="{ name: 'MyAccount' }"
-        >
-          내 계좌
-        </RouterLink>
-        <RouterLink
-          class="btn-list btn-anchor btn-16"
-          :to="{
-            name: 'ChangeUserInfo',
-            query: {
-              name: currentUser.displayName,
-            },
-          }"
-        >
-          내 정보 수정
-        </RouterLink>
-      </div>
+      <MypageRouter :currentUser="currentUser" />
+      <RouterLink class="btn-primary btn-16 move-home" to="/">
+        홈으로
+      </RouterLink>
     </div>
 
     <RouterView />
-    <RouterLink class="btn-anchor btn-16 move-home" to="/"> 홈으로 </RouterLink>
   </div>
 </template>
 
 <script>
+import MypageRouter from '~/components/MypageRouter'
+
 export default {
+  components: {
+    MypageRouter,
+  },
   data() {
     return {
       isActive: 'active',
@@ -60,37 +45,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
-  @include flexbox(center, center);
-  width: 100%;
-  padding: 100px 40px 20px;
+.wrapper {
+  @include flexbox(start, center);
+  height: 90vh;
+  margin: 2rem 3.2rem;
 
-  .info-card {
+  .my-tab {
     @include column-flexbox(start, center);
+    width: 220px;
+    height: 90vh;
     position: relative;
-    width: 250px;
-    height: 380px;
     margin-right: 50px;
     padding: 20px 0;
     border-radius: 6px;
     border: 1px solid $border;
 
-    .btn-list {
-      display: block;
-      width: 140px;
-      border-left: none;
-      border-right: none;
-      border-radius: 0;
-      font-weight: 500;
-    }
-
-    .profile {
+    .my-info {
       @include column-flexbox();
-      margin-bottom: 50px;
+      height: 10rem;
+      margin-bottom: 1rem;
 
       strong {
         @include text-style(18, $dark);
-        margin-bottom: 4px;
+        margin-bottom: 0.2rem;
       }
 
       span {
@@ -98,37 +75,27 @@ export default {
       }
     }
 
-    .image {
-      @include flexbox();
-      width: 80px;
-      height: 80px;
-      margin-bottom: 14px;
-      padding: 6px 12px;
-      border: 1px solid $primary;
+    img {
+      width: 3rem;
+      height: 3rem;
+      padding: 0 !important;
+      margin-bottom: 1rem;
       border-radius: 50%;
-
-      img {
-        display: block;
-        width: 100%;
-        object-fit: contain;
-      }
+      padding-left: 0.7rem;
+      object-fit: cover;
     }
 
-    .my-info {
-      @include column-flexbox();
+    .move-home {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+    }
 
-      a {
-        @include flexbox();
-        padding: 0 6px;
-        font-size: 14px;
-      }
+    .btn-primary {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      border: 1px solid $blue;
     }
   }
-}
-
-.move-home {
-  position: absolute;
-  top: 40px;
-  left: 40px;
 }
 </style>

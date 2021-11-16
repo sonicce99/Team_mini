@@ -92,7 +92,10 @@ export default {
       commit('SET_SEARCHRESULTS', data)
       return data
     },
-
+    async searchByBrand({ commit }, payload) {
+      const { data } = await axiosPublicProduct.post('search', payload)
+      commit('SET_SEARCHRESULTS', data)
+    },
     // 구매 확정
     async CONFIRM_PURCHASE({ commit }, payload) {
       await axiosUserProduct.post('ok', payload)
