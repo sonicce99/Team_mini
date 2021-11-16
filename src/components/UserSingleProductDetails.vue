@@ -88,6 +88,7 @@ export default {
 $color: #999999;
 .wrap{
   position: relative;
+  margin-top: 100px;
   .inner {
     width: 1185px;
     margin: 0 auto;
