@@ -48,7 +48,7 @@ export default {
 .wrapper {
   @include flexbox(start, center);
   height: 90vh;
-  padding: 3rem 3.2rem;
+  margin: 2rem 3.2rem;
 
   .my-tab {
     @include column-flexbox(start, center);
