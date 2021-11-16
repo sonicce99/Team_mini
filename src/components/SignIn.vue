@@ -1,10 +1,7 @@
 <template>
   <div class="form-group">
     <h1>로그인</h1>
-    <form
-      class="input-group"
-      @submit="login(email, password)"
-    >
+    <form class="input-group" @submit="login(email, password)">
       <label for="user-email">이메일</label>
       <input
         class="form-input"
@@ -26,18 +23,15 @@
       <div class="buttons">
         <input
           class="btn-primary btn-16"
-          @click="login(email, password)"
+          @click="login"
           type="button"
           value="로그인"
-        >
-          <RouterLink
-            :to="{ name: 'SignUp' }"
-            class="btn-secondary btn-16"
-          >
-            회원가입
-            </RouterLink>
+        />
+        <RouterLink :to="{ name: 'SignUp' }" class="btn-secondary btn-16">
+          회원가입
+        </RouterLink>
       </div>
-      </form>
+    </form>
   </div>
 </template>
 
@@ -45,15 +39,18 @@
 export default {
   data() {
     return {
-      email: "",
-      password: ""
+      email: '',
+      password: '',
     }
   },
   methods: {
-    async login(email, password) {
-      await this.$store.dispatch("user/LOGIN", { email, password })
-    }
-  }
+    async login() {
+      await this.$store.dispatch('user/LOGIN', {
+        email: this.email,
+        password: this.password,
+      })
+    },
+  },
 }
 </script>
 
@@ -84,7 +81,7 @@ export default {
       margin-bottom: 12px;
     }
 
-    input[type="button"] {
+    input[type='button'] {
       width: 160px;
       margin-right: 20px;
     }
