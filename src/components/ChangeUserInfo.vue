@@ -16,7 +16,7 @@
         type="file"
         id="user-profile-picture"
         accept=".png, .jpg"
-        @change="selectfile"
+        @change="selectFile"
       />
       <label for="old-password">기존 비밀번호</label>
       <input
@@ -66,6 +66,16 @@ export default {
         profileImgBase64: this.profileImgBase64,
       })
     },
+    selectFile(event) {
+      const { files } = event.target 
+      for (const file of files) {
+        const reader = new FileReader()
+        reader.readAsDataURL(file) 
+        reader.addEventListener('load', () => {          
+          this.profileImgBase64 = reader.result
+        })
+      }
+    }
   },
 }
 </script>

@@ -6,12 +6,13 @@
       <p>{{ searchResult.description }}</p>
       <span v-for="tag in searchResult.tags" :key="tag"> {{ tag }}</span>
       <div>
-        <img
-          :src="`${searchResult.thumbnail}`"
-          :alt="`${searchResult.title}`"
-        />
+        <RouterLink class="detail" :to="{ name: 'UserSingleProductDetails', params: { id: searchResult.id }}">
+          <img
+            :src="`${searchResult.thumbnail}`"
+            :alt="`${searchResult.title}`"
+          />
+        </RouterLink>
       </div>
-      <RouterLink class="detail" :to="{ name: 'SingleProductDetails', params: { id: searchResult.id }}">단일 제품 상세 정보</RouterLink>
     </li>
   </ul>
 </template>

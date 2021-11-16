@@ -21,7 +21,7 @@
   </div>
 
   <div v-if="!isResult">
-    <KeywordList @onClickKeyword="onKeyup" />
+    <KeywordList @onClickKeyword="clickBrandLogo" />
   </div>
 
   <div v-if="isResult" class="items">
@@ -69,6 +69,12 @@ export default {
       this.data = await this.$store.dispatch('user/SHOW_SEARCHRESULTS', {
         searchText,
       })
+    },
+    clickBrandLogo(brand) {
+      this.isSearchInput = true
+      this.isResult = true
+      this.searchText = brand
+      this.$store.dispatch('user/searchByBrand', {"searchTags": [brand]})
     },
     resetQuery() {
       this.searchText = ''

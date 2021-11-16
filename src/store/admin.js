@@ -63,6 +63,6 @@ export default {
     async addProduct({ commit }, obj) {
       const { data } = await axiosAdminProduct.post('', obj)
       commit('addState', data)
-    }
+    },
   }
 }

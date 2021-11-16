@@ -1,32 +1,49 @@
 <template>
-  <div class="contents-box">
-    <div v-if="!purchaseList.length">구매 신청 내역이 없습니다</div>
-    <div v-else-if="isLoading">Loading...</div>
-    <div v-else>
-      <template v-if="now === '구매'">
-        <PurchaseItem
-          v-for="purchase in purchaseList"
-          :key="purchase.id"
-          :purchase="purchase"
-        />
-      </template>
-      <template v-if="now === '확정'">
-        <PurchaseItem
-          v-for="purchase in doneList"
-          :key="purchase.id"
-          :purchase="purchase"
-        />
-      </template>
-      <template v-if="now === '취소'">
-        <PurchaseItem
-          v-for="purchase in canceledList"
-          :key="purchase.id"
-          :purchase="purchase"
-        />
-      </template>
+  <div class="purchase">
+    <div class="select-btn">
+      <button class="btn-anchor btn-16" @click="now = '구매'">구매 내역</button>
+      <button class="btn-anchor btn-16" @click="now = '확정'">구매 확정 내역</button>
+      <button class="btn-anchor btn-16" @click="now = '취소'">취소 내역</button>
+    </div>
+    <div class="contents-box">
+      <div v-if="!purchaseList.length">구매 신청 내역이 없습니다</div>
+      <div v-else-if="isLoading">Loading...</div>
+      <div v-else>
+        <div v-show="now === '구매'">
+          <PurchaseItem
+            v-for="purchase in purchaseList"
+            :key="purchase.id"
+            :purchase="purchase"
+          />
+        </div>
+        <div v-show="now === '확정'">
+          <PurchaseItem
+            v-for="purchase in doneList"
+            :key="purchase.id"
+            :purchase="purchase"
+          />
+        </div>
+        <div v-show="now === '취소'">
+          <PurchaseItem
+            v-for="purchase in canceledList"
+            :key="purchase.id"
+            :purchase="purchase"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.purchase{
+  
+  .select-btn {
+  }
+  .contents-box {
+  }
+}
+</style>
 
 <script>
 import PurchaseItem from '~/components/PurchaseItem'

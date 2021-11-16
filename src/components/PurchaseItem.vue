@@ -2,7 +2,7 @@
 <!-- 최상위 RouterLink로 변경 가능 -->
   <div class="purchased-item">
     <!-- 단일 제품 상세 구매 내역 이동시 필요 -->
-    <div>{{ purchase.timePaid }}</div>
+    <div>{{ date }}</div>
     <div>{{ purchase.product.title }}</div>
     <div>{{ purchase.product.price }}</div>
     <button @click="confirmed">구매확인</button>
@@ -43,6 +43,12 @@ export default {
   components: {
     SingleProductDetailPurchaseList,
     PurchaseDetailModal
+  },
+  computed: {
+    date() {
+      const formatted = this.$dayjs(this.purchase.timePaid).format('YYYY-MM-DD HH:MM')
+      return formatted
+    } 
   },
   methods: {
     async cancle() {

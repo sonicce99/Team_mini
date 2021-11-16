@@ -16,7 +16,8 @@ import PurchaseList from '~/components/PurchaseList'
 import MyAccount from '~/components/MyAccount'
 import ChangeUserInfo from '~/components/ChangeUserInfo'
 import AccountListChangeCheck from '~/components/AccountListChangeCheck'
-import SingleProductDetails from '~/components/SingleProductDetails'
+import AdminSingleProductDetails from '~/components/AdminSingleProductDetails'
+import UserSingleProductDetails from '~/components/UserSingleProductDetails'
 
 export default createRouter({
   history: createWebHistory(),
@@ -53,6 +54,7 @@ export default createRouter({
       path: '/mypage',
       component: MyPage,
       props: true,
+      redirect: { name: 'PurchaseList' },
       children: [
         {
           name: 'PurchaseList',
@@ -90,6 +92,11 @@ export default createRouter({
       component: RegisterAccount,
     },
     {
+      name: 'UserSingleProductDetails',
+      path: '/usersingleProductDetails/:id',
+      component: UserSingleProductDetails,
+    },
+    {
       path: '/admin',
       component: DomainAdmin,
       redirect: { name: 'AllProducts' },
@@ -121,5 +128,10 @@ export default createRouter({
         },
       ],
     },
-  ],
+    {
+      name: 'AdminSingleProductDetails',
+      path: 'adminsingleProductDetails/:id',
+      component: AdminSingleProductDetails,
+    }
+  ]
 })
