@@ -25,13 +25,13 @@ export default createRouter({
     {
       name: 'Home',
       path: '/',
-      component: Home
+      component: Home,
     },
-    { 
+    {
       name: 'RequestPurchase',
       path: '/requestpurchase/:id',
       component: RequestPurchase,
-      props: true
+      props: true,
     },
     {
       path: '/certification',
@@ -40,23 +40,24 @@ export default createRouter({
         {
           name: 'SignIn',
           path: 'signin',
-          component: SignIn
+          component: SignIn,
         },
         {
           name: 'SignUp',
           path: 'newuser',
-          component: SignUp
-        }
-      ]
+          component: SignUp,
+        },
+      ],
     },
     {
       path: '/mypage',
       component: MyPage,
+      props: true,
       children: [
         {
           name: 'PurchaseList',
           path: 'purchaselist',
-          component: PurchaseList
+          component: PurchaseList,
         },
         {
           name: 'MyAccount',
@@ -66,58 +67,59 @@ export default createRouter({
             {
               name: 'AccountListChangeCheck',
               path: 'accountListChangeCheck',
-              component: AccountListChangeCheck              
-            }
-          ]
+              component: AccountListChangeCheck,
+            },
+          ],
         },
         {
           name: 'ChangeUserInfo',
           path: 'changeuserinfo',
-          component: ChangeUserInfo
-        }
-      ]
+          component: ChangeUserInfo,
+          props: true,
+        },
+      ],
     },
     {
       name: 'AddAccount',
       path: '/addaccount',
-      component: AddAccount
+      component: AddAccount,
     },
     {
       name: 'RegisterAccount',
       path: '/registeraccount',
-      component: RegisterAccount
+      component: RegisterAccount,
     },
     {
       path: '/admin',
       component: DomainAdmin,
-      redirect: { name : 'AllProducts' },
+      redirect: { name: 'AllProducts' },
       children: [
         {
           name: 'AllProducts',
           path: 'allproducts',
-          component: AllProducts
+          component: AllProducts,
         },
         {
           name: 'AddProduct',
           path: 'addproduct',
-          component: AddProduct
+          component: AddProduct,
         },
         {
           name: 'SalesDetails',
           path: 'salesdetails',
-          component: SalesDetails
+          component: SalesDetails,
         },
         {
           path: 'editproduct/:id',
           name: 'EditProduct',
-          component: EditProduct
+          component: EditProduct,
         },
         {
           name: 'SingleProductDetails',
           path: 'singleProductDetails/:id',
           component: SingleProductDetails,
-        }
-      ]
+        },
+      ],
     },
-  ]
+  ],
 })
