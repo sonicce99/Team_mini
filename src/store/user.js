@@ -79,15 +79,8 @@ export default {
       return data
     },
     async UPDATE_USERINFO({ commit }, payload) {
-      const { displayName, oldPassword, newPassword, profileImgBase64 } =
-        payload
-      const { data } = axiosAuth.put('user', {
-        displayName,
-        oldPassword,
-        newPassword,
-        profileImgBase64,
-      })
-      return data
+      await axiosAuth.put('user', payload)
+      router.go()
     },
     // 제품 검색 결과 보기
     async SHOW_SEARCHRESULTS({ commit }, payload) {
@@ -99,7 +92,10 @@ export default {
       commit('SET_SEARCHRESULTS', data)
       return data
     },
-
+    async searchByBrand({ commit }, payload) {
+      const { data } = await axiosPublicProduct.post('search', payload)
+      commit('SET_SEARCHRESULTS', data)
+    },
     // 구매 확정
     async CONFIRM_PURCHASE({ commit }, payload) {
       await axiosUserProduct.post('ok', payload)

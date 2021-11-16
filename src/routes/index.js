@@ -16,7 +16,8 @@ import PurchaseList from '~/components/PurchaseList'
 import MyAccount from '~/components/MyAccount'
 import ChangeUserInfo from '~/components/ChangeUserInfo'
 import AccountListChangeCheck from '~/components/AccountListChangeCheck'
-import SingleProductDetails from '~/components/SingleProductDetails'
+import AdminSingleProductDetails from '~/components/AdminSingleProductDetails'
+import UserSingleProductDetails from '~/components/UserSingleProductDetails'
 
 export default createRouter({
   history: createWebHistory(),
@@ -25,13 +26,13 @@ export default createRouter({
     {
       name: 'Home',
       path: '/',
-      component: Home
+      component: Home,
     },
-    { 
+    {
       name: 'RequestPurchase',
       path: '/requestpurchase/:id',
       component: RequestPurchase,
-      props: true
+      props: true,
     },
     {
       path: '/certification',
@@ -40,23 +41,25 @@ export default createRouter({
         {
           name: 'SignIn',
           path: 'signin',
-          component: SignIn
+          component: SignIn,
         },
         {
           name: 'SignUp',
           path: 'newuser',
-          component: SignUp
-        }
-      ]
+          component: SignUp,
+        },
+      ],
     },
     {
       path: '/mypage',
       component: MyPage,
+      props: true,
+      redirect: { name: 'PurchaseList' },
       children: [
         {
           name: 'PurchaseList',
           path: 'purchaselist',
-          component: PurchaseList
+          component: PurchaseList,
         },
         {
           name: 'MyAccount',
@@ -66,58 +69,64 @@ export default createRouter({
             {
               name: 'AccountListChangeCheck',
               path: 'accountListChangeCheck',
-              component: AccountListChangeCheck              
-            }
-          ]
+              component: AccountListChangeCheck,
+            },
+          ],
         },
         {
           name: 'ChangeUserInfo',
           path: 'changeuserinfo',
-          component: ChangeUserInfo
-        }
-      ]
+          component: ChangeUserInfo,
+          props: true,
+        },
+      ],
     },
     {
       name: 'AddAccount',
       path: '/addaccount',
-      component: AddAccount
+      component: AddAccount,
     },
     {
       name: 'RegisterAccount',
       path: '/registeraccount',
-      component: RegisterAccount
+      component: RegisterAccount,
+    },
+    {
+      name: 'UserSingleProductDetails',
+      path: '/usersingleProductDetails/:id',
+      component: UserSingleProductDetails,
     },
     {
       path: '/admin',
       component: DomainAdmin,
-      redirect: { name : 'AllProducts' },
+      redirect: { name: 'AllProducts' },
       children: [
         {
           name: 'AllProducts',
           path: 'allproducts',
-          component: AllProducts
+          component: AllProducts,
         },
         {
           name: 'AddProduct',
           path: 'addproduct',
-          component: AddProduct
+          component: AddProduct,
         },
         {
           name: 'SalesDetails',
           path: 'salesdetails',
-          component: SalesDetails
+          component: SalesDetails,
         },
         {
           path: 'editproduct/:id',
           name: 'EditProduct',
-          component: EditProduct
+          component: EditProduct,
         },
         {
-          name: 'SingleProductDetails',
-          path: 'singleProductDetails/:id',
-          component: SingleProductDetails,
+          name: 'AdminSingleProductDetails',
+          path: 'adminsingleProductDetails/:id',
+          component: AdminSingleProductDetails,
         }
-      ]
+      ],
     },
   ]
 })

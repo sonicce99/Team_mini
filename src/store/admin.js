@@ -10,6 +10,7 @@ export default {
     allProducts: [],
     seletedProducts: [],
     salesDetails: [],
+    selectedSales: []
   }),
   getters: {
     // 제품의 전체 태그 보여주기
@@ -17,6 +18,13 @@ export default {
       const tagsRaw = []
       state.allProducts.forEach(data => {
         tagsRaw.push(...data.tags)
+      })
+      return [... new Set(tagsRaw)]
+    },
+    salesTagSet(state) {
+      const tagsRaw = []
+      state.salesDetails.forEach(data => {
+        tagsRaw.push(...data.product.tags)
       })
       return [... new Set(tagsRaw)]
     },
@@ -30,16 +38,18 @@ export default {
     addState(state, payload) {
       state.allProducts.push(payload)
     },
-    SET_SALESDETAILS(state, salesDetails) {
-      state.salesDetails = salesDetails
-    },
   },
   actions: {
     // 받아온 salesDetails를 활용하여 판매 내역 보기
     async SHOW_SALESDETAILS({ commit }) {
       const { data } = await axiosAdminProduct.get('transactions/all')
-      commit('SET_SALESDETAILS', { salesDetails: data })
-      return data
+      commit('assignState', { salesDetails: data })
+    },
+    async GET_SELECTED_SALES({ commit }, tags = []) {
+      const { data } = await axiosAdminProduct.get('transactions/all')
+      const selectedSales = data.filter(item => item.product.tags.filter(tag => tags.includes(tag)).length)
+      console.log(selectedSales)
+      commit('assignState', { selectedSales })
     },
     async getAllProducts({ commit }) {
       const { data } = await axiosAdminProduct.get()
@@ -53,6 +63,6 @@ export default {
     async addProduct({ commit }, obj) {
       const { data } = await axiosAdminProduct.post('', obj)
       commit('addState', data)
-    }
+    },
   }
 }
