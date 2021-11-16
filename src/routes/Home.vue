@@ -1,32 +1,37 @@
 <template>
-  <HomeHeader />
-  <div class="input-group">
-    <i class="bx bx-search"></i>
-    <input
-      @keyup.delete="onKeyReset(searchText)"
-      @keyup.enter="onKeyup(searchText)"
-      class="form-input"
-      type="text"
-      placeholder="상품을 검색하세요"
-      v-model="searchText"
-    />
-    <button
-      @click.prevent="resetQuery"
-      type="reset"
-      class="btn-reset"
-      v-if="isSearchInput"
-    >
-      <i class="bx bxs-x-circle"></i>
-    </button>
-  </div>
+  <div class="wrapper">
+    <HomeHeader />
+    <div ref="position" class="inner">
+      <div class="input-group">
+        <i class="bx bx-search"></i>
+        <input
+          @keyup.delete="onKeyReset(searchText)"
+          @keyup.enter="onKeyup(searchText)"
+          class="form-input"
+          type="text"
+          placeholder="상품을 검색하세요"
+          v-model="searchText"
+          autofocus
+        />
+        <button
+          @click.prevent="resetQuery"
+          type="reset"
+          class="btn-reset"
+          v-if="searchText.length"
+        >
+          <i class="bx bxs-x-circle"></i>
+        </button>
+      </div>
 
-  <div v-if="!isResult">
-    <KeywordList @onClickKeyword="clickBrandLogo" />
-  </div>
+      <div v-if="!isResult">
+        <KeywordList @onClickKeyword="clickBrandLogo" />
+      </div>
 
-  <div v-if="isResult" class="items">
-    <div v-show="!data.length">검색 결과가 없습니다.</div>
-    <SearchResults :searchResults="searchResults" />
+      <div v-if="isResult" class="items">
+        <div class="no-result" v-show="!data.length">검색 결과가 없습니다.</div>
+        <SearchResults :searchResults="searchResults" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -43,7 +48,6 @@ export default {
   },
   data() {
     return {
-      isSearchInput: false,
       searchText: '',
       searchTags: [],
       isResult: false,
@@ -63,7 +67,7 @@ export default {
     },
     async onKeyup(searchText) {
       if (!searchText) return
-      this.isSearchInput = true
+      this.$refs.position.classList.add('on')
       this.isResult = true
       this.searchText = searchText
       this.data = await this.$store.dispatch('user/SHOW_SEARCHRESULTS', {
@@ -71,15 +75,14 @@ export default {
       })
     },
     clickBrandLogo(brand) {
-      this.isSearchInput = true
       this.isResult = true
       this.searchText = brand
-      this.$store.dispatch('user/searchByBrand', {"searchTags": [brand]})
+      this.$store.dispatch('user/searchByBrand', { searchTags: [brand] })
     },
     resetQuery() {
       this.searchText = ''
-      this.isSearchInput = false
       this.isResult = false
+      this.$refs.position.classList.remove('on')
     },
     onKeyReset(searchText) {
       this.searchText = searchText
@@ -90,30 +93,96 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.input-group {
-  width: 60%;
-  margin: 0 auto 60px;
+.wrapper {
+  width: 100vw;
+  height: 100vh;
 
-  .form-input {
-    padding-left: 40px;
-  }
+  .inner {
+    @include pos-center();
+    width: 70%;
+    animation: searchOff 800ms alternate;
 
-  .btn-reset {
-    position: absolute;
-    top: 10px;
-    right: 12px;
+    &.on {
+      top: 100px;
+      transform: translate(-50%, 0);
+      animation: searchOn 800ms alternate;
+    }
 
-    .bxs-x-circle {
-      font-size: 22px;
-      color: $blue;
+    .input-group {
+      width: 50%;
+      margin: 0 auto 40px;
+
+      .form-input {
+        padding-left: 40px;
+      }
+
+      .btn-reset {
+        position: absolute;
+        top: 10px;
+        right: 12px;
+
+        .bxs-x-circle {
+          font-size: 22px;
+          color: $blue;
+        }
+      }
+    }
+
+    .items {
+      @include flexbox(center, start);
+      height: 80vh;
+      border: 1px solid $dark;
+      border-radius: 6px;
+      padding: 1rem;
+      overflow: auto;
+
+      &::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: darken($border, 30%);
+        border-radius: 10px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background-color: $border;
+        border-radius: 10px;
+        box-shadow: inset 0px 0px 5px white;
+      }
+
+      .no-result {
+        @include text-style(24, $dark);
+        width: 100%;
+        font-weight: 400;
+        padding: 1em;
+        margin-bottom: 1em;
+        user-select: none;
+      }
     }
   }
 }
 
-.items {
-  height: 500px;
-  max-width: 700px;
-  margin: 0 auto;
-  border: 1px solid red;
+@keyframes searchOn {
+  to {
+    top: 100px;
+  }
+
+  from {
+    top: 50%;
+    opacity: 1;
+  }
+}
+
+@keyframes searchOff {
+  to {
+    top: 50%;
+    opacity: 1;
+  }
+
+  from {
+    top: 100px;
+    opacity: 0;
+  }
 }
 </style>
