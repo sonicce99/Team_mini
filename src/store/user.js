@@ -79,15 +79,8 @@ export default {
       return data
     },
     async UPDATE_USERINFO({ commit }, payload) {
-      const { displayName, oldPassword, newPassword, profileImgBase64 } =
-        payload
-      const { data } = axiosAuth.put('user', {
-        displayName,
-        oldPassword,
-        newPassword,
-        profileImgBase64,
-      })
-      return data
+      await axiosAuth.put('user', payload)
+      router.go()
     },
     // 제품 검색 결과 보기
     async SHOW_SEARCHRESULTS({ commit }, payload) {
