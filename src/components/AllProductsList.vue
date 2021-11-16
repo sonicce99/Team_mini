@@ -12,9 +12,7 @@
 
     <div class="link">
       <RouterLink class="edit" :to="{ name: 'EditProduct', params: { id: product.id }}">수정하기</RouterLink>
-      <RouterLink class="detail" :to="{ name: 'SingleProductDetails', params: { id: `${product.id}` }}">단일 제품 상세 정보</RouterLink>
-      <!-- 구매신청은 상세페이지 안에 있어야함. 지금은 그냥 테스트용으로 여기에 만듦. -->
-      <RouterLink :to="{ name: 'RequestPurchase', params: { id: product.id }, query: {title: product.title, price: product.price}}">구매하기</RouterLink>
+      <RouterLink class="detail" :to="{ name: 'SingleProductDetails', params: { id: product.id }}">단일 제품 상세 정보</RouterLink>
     </div>
   </div>
 </template>

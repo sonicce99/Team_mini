@@ -30,13 +30,25 @@ export default {
   data() {
     return {
       accounts: [],
-      selectedAccount: ''
+      selectedAccount: '',
+      token : sessionStorage.getItem('token')
     }
   },
-  async mounted() {
-    await this.getAccountInfo()    
+  mounted() {    
+    this.loginCheck()
   },
   methods: {
+    loginCheck(){
+      if(this.token) {
+        this.getAccountInfo()  
+      }else{
+        if(confirm('로그인이 필요한 서비스입니다. 로그인 하시겠습니까?')){
+          this.$router.push('/certification/signin')
+        }else{
+          this.$router.go(-1)
+        }
+      }   
+    },
     setSelectedAccount(e) { //selectedAccount변수에 선택한 계좌의 id를 넣는다.
       this.selectedAccount = e.target.value
     },
