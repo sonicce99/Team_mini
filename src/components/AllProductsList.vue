@@ -28,14 +28,14 @@
 
     <td>
       <RouterLink
-        class="detail btn-secondary btn-16"
-        :to="{ name: 'SingleProductDetails', params: { id: product.id } }"
+        class="detail btn-secondary"
+        :to="{ name: 'AdminSingleProductDetails', params: { id: product.id } }"
         >상세 정보</RouterLink
       >
     </td>
     <td>
       <RouterLink
-        class="edit btn-secondary btn-16"
+        class="edit btn-secondary"
         :to="{ name: 'EditProduct', params: { id: product.id } }"
         >제품 수정</RouterLink
       >
@@ -96,6 +96,12 @@ export default {
 
       .soldout {
         font-weight: 700;
+      }
+
+      .edit,
+      .detail {
+        @include text-style(14);
+        height: 36px;
       }
     }
   }

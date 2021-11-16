@@ -118,9 +118,10 @@ export default {
 <style lang="scss" scoped>
 // TODO 반응형 처리
 .product-searcher {
-  position: relative;
   @include column-flexbox(start, start);
+  position: relative;
   height: 90vh;
+  margin: 0;
   padding-left: 3.2rem;
 
   h1 {
@@ -132,15 +133,15 @@ export default {
   }
 
   .add-product {
-    display: block;
-    position: fixed;
-    top: 3.8rem;
-    right: 4rem;
-    line-height: 2.6;
+    @include inline-flexbox();
+    position: absolute;
+    top: 1.5rem;
+    right: 5rem;
   }
 
   .controller {
     @include column-flexbox(start, start);
+    width: 70vw;
 
     .tags {
       @include flexbox(start, center);
@@ -201,7 +202,7 @@ export default {
   }
 
   .contents-box {
-    width: 100%;
+    width: 70vw;
     overflow: auto;
     border: 1px solid $dark;
 
@@ -224,7 +225,6 @@ export default {
       width: 100%;
       position: sticky;
       top: 0;
-      flex-shrink: 0;
     }
   }
 }

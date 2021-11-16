@@ -122,16 +122,11 @@ export default createRouter({
           component: EditProduct,
         },
         {
-          name: 'SingleProductDetails',
-          path: 'singleProductDetails/:id',
-          component: SingleProductDetails,
-        },
+          name: 'AdminSingleProductDetails',
+          path: 'adminsingleProductDetails/:id',
+          component: AdminSingleProductDetails,
+        }
       ],
     },
-    {
-      name: 'AdminSingleProductDetails',
-      path: 'adminsingleProductDetails/:id',
-      component: AdminSingleProductDetails,
-    }
   ]
 })
