@@ -2,76 +2,99 @@
   <div class="wrapper">
     <div class="admin-tab">
       <div class="admin-info">
-        <img :src="user.profileImg? user.profileImg : 'https://via.placeholder.com/150'" alt="프로필">
-        <p>{{user.displayName}}</p>
-        <p>{{user.email}}</p>
+        <img
+          :src="
+            user.profileImg
+              ? user.profileImg
+              : 'https://via.placeholder.com/150'
+          "
+          alt="프로필"
+        />
+        <strong>{{ user.displayName }}</strong>
+        <span>{{ user.email }}</span>
       </div>
       <AdminHeader />
-      <RouterLink :to="{ name: 'Home' }">
+      <RouterLink class="btn-primary btn-16" :to="{ name: 'Home' }">
         홈으로
       </RouterLink>
     </div>
-    <RouterView />
+    <div class="content">
+      <RouterView />
+    </div>
   </div>
 </template>
-
 
 <script>
 import AdminHeader from '~/components/AdminHeader'
 
 export default {
   components: {
-    AdminHeader
+    AdminHeader,
   },
   computed: {
     user() {
       return this.$store.state.user.currentUser
-    }
-  }
+    },
+  },
 }
 </script>
 
 <style lang="scss" scoped>
 .wrapper {
+  @include flexbox(start, center);
   height: 90vh;
-  padding: 3rem 3.2rem;
-  box-sizing: border-box;
-  display: flex;
+  margin: 2rem 3.2rem;
+
   .admin-tab {
+    @include column-flexbox(start, center);
     width: 220px;
     height: 90vh;
-    border: 1px  solid $border;
     position: relative;
+    margin-right: 50px;
+    padding: 20px 0;
+    border-radius: 6px;
+    border: 1px solid $border;
+
     .admin-info {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      @include column-flexbox();
       height: 10rem;
+      margin-bottom: 1rem;
+
       img {
         width: 3rem;
         height: 3rem;
+        margin-bottom: 1rem;
         padding: 0 !important;
         border-radius: 50%;
         padding-left: 0.7rem;
+        object-fit: cover;
       }
-      p {
-        margin-top: 1rem;
+
+      strong {
+        @include text-style(18, $dark);
+        margin-bottom: 0.2rem;
+      }
+
+      span {
+        @include text-style(14, $primary);
       }
     }
+
     a {
-      display: block;
       position: absolute;
-      width: 100%;
       bottom: 0;
-      text-decoration: none;
-      text-align: center;
-      padding: 1rem;
-      border-top: 1px  solid $border;
-      &:hover {
-        color: $blue;
-      }
+      width: 100%;
+    }
+
+    .btn-primary {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      border: 1px solid $blue;
     }
   }
+}
+
+.content {
+  flex-grow: 1;
 }
 </style>
