@@ -11,6 +11,7 @@
           :alt="`${searchResult.title}`"
         />
       </div>
+      <RouterLink class="detail" :to="{ name: 'SingleProductDetails', params: { id: searchResult.id }}">단일 제품 상세 정보</RouterLink>
     </li>
   </ul>
 </template>
