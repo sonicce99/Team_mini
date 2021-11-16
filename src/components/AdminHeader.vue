@@ -12,13 +12,19 @@
 <style lang="scss" scoped>
 nav {
   width: 220px;
-  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   a {
+    width: 80%;
     display: block;
     text-decoration: none;
     text-align: center;
     padding: 1rem;
-    margin: 1rem 0;
+    border-bottom: 1px  solid $border;
+    &:hover {
+      color: $blue;
+    }
   }
 }
 </style>
