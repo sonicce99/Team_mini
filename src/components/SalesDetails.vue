@@ -6,7 +6,6 @@
 </template>
 
 <script>
-import { axiosAdminProduct } from '~/utils/productApiConfig'
 export default {
   created() {
     this.fetch()

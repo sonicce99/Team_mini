@@ -53,6 +53,7 @@ export default createRouter({
     {
       path: '/mypage',
       component: MyPage,
+      redirect: { name : 'PurchaseList' },
       children: [
         {
           name: 'PurchaseList',
