@@ -29,7 +29,7 @@
     <div v-else>
       <p>제품 사진</p>
       <img class= "detail" :src="dataObject.photo" alt="제품 사진" />   
-        <RouterLink  :to="{ name: 'RequestPurchase', params: { id: dataObject.id }, query: {title: dataObject.title, price: dataObject.price}}">
+        <RouterLink  :to="{ name: 'RequestPurchase', params: { id: dataObject.id }, query: {title: dataObject.title, price: dataObject.price, thumbnail: dataObject.thumbnail }}">
           <span class="purchase-btn"> 구매하기 </span>
         </RouterLink>    
     </div>
@@ -55,7 +55,7 @@ export default {
       try {
         const { data } = await axiosPublicProduct.get(`${this.$route.params.id}`)
         this.dataObject = data
-        // console.log(this.dataObject)
+        console.log(this.dataObject)
         this.ModalOpened = true
         
       } catch (error) {
