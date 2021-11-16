@@ -15,7 +15,7 @@
       <input
         type="text"
         v-model="description" />
-      <p>태그 <span>입력예) THE ROW, Bottega Veneta, CHRISTIAN LOUBOUTIN</span></p>
+      <p>태그 <span>입력예) THE ROW,Bottega Veneta,CHRISTIAN LOUBOUTIN</span></p>
       <input
         type="text"
         v-model="tags" />

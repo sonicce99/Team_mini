@@ -17,7 +17,6 @@ export default {
   namespaced: true,
   state: () => ({
     purchaseList: [],
-    salesDetails: [],
     keywordList: [
       {
         name: 'GUCCI',
@@ -58,9 +57,7 @@ export default {
   },
   // state에 있는 salesDetails에 data를 받아서 넣어줌
   mutations: {
-    SET_SALESDETAILS(state, salesDetails) {
-      state.salesDetails = salesDetails
-    },
+
     assignState(state, payload) {
       Object.keys(payload).forEach((key) => {
         state[key] = payload[key]
@@ -102,12 +99,7 @@ export default {
       commit('SET_SEARCHRESULTS', data)
       return data
     },
-    // 받아온 salesDetails를 활용하여 판매 내역 보기
-    async SHOW_SALESDETAILS({ commit }) {
-      const { data } = await axiosAdminProduct.get('transactions/all')
-      await commit('SET_SALESDETAILS')
-      return data
-    },
+
     // 구매 확정
     async CONFIRM_PURCHASE({ commit }, payload) {
       await axiosUserProduct.post('ok', payload)

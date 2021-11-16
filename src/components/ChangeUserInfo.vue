@@ -55,12 +55,11 @@ export default {
       oldPassword: '',
       newPassword: '',
       profileImgBase64: '',
-      data: {},
     }
   },
   methods: {
     async updateInfo() {
-      this.data = await this.$store.dispatch('user/UPDATE_USERINFO', {
+      await this.$store.dispatch('user/UPDATE_USERINFO', {
         displayName: this.displayName,
         oldPassword: this.oldPassword,
         newPassword: this.newPassword,

@@ -11,8 +11,8 @@
     </div>
 
     <div class="link">
-      <RouterLink class="edit" :to="{ name: 'EditProduct', params: { id: product.id }}">수정하기</RouterLink>
-      <RouterLink class="detail" :to="{ name: 'AdminSingleProductDetails', params: { id: product.id }}">단일 제품 상세 정보</RouterLink>
+      <RouterLink class="edit btn-anchor btn-16" :to="{ name: 'EditProduct', params: { id: product.id }}">수정하기</RouterLink>
+      <RouterLink class="detail btn-anchor btn-16" :to="{ name: 'AdminSingleProductDetails', params: { id: product.id }}">단일 제품 상세 정보</RouterLink>
     </div>
   </div>
 </template>
@@ -23,7 +23,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid red;
   .info-box {
     display: flex;
     img {
@@ -35,13 +34,13 @@
   }
   .edit {
     padding: 1rem;
-    border: 1px solid red;
-
+    border: 1px solid $border;
+    margin-right: 2rem;
   }
   .detail {
     padding: 1rem;
-    border: 1px solid red;
-
+    border: 1px solid $border;
+    margin-right: 1rem;
   }
 }
 </style>
