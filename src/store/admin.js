@@ -8,6 +8,7 @@ export default {
   namespaced: true,
   state: () => ({
     allProducts: [],
+    allSellList: [],
     seletedProducts: []
   }),
   getters:{
@@ -43,6 +44,10 @@ export default {
     async addProduct({commit}, obj) {
       const { data } = await axiosAdminProduct.post('', obj)
       commit('addState', data)
+    },
+    async getAllSellList({ commit }) {
+      const { data } = await axiosAdminProduct.get('transactions/all')
+      commit('assignState', { allSellList: data })
     }
   }
 }
