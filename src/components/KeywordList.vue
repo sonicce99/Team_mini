@@ -31,12 +31,12 @@ export default {
 <style lang="scss" scoped>
 .keyword-list {
   @include flexbox();
-  @include text-style(12, $dark);
+  @include text-style(14, $dark);
   font-weight: 500;
 
   li {
     @include column-flexbox();
-    width: 140px;
+    width: 160px;
     padding: 4px 0 2px;
     border-radius: 6px;
     cursor: pointer;
