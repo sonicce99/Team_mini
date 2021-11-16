@@ -1,6 +1,7 @@
 <template>
   <div class="product-info" v-if="ModalOpened === true">
     <h2>제품 상세 조회</h2>
+    <p>제품 아아디: {{ dataObject.id }}</p>
     <p>제품명: {{ dataObject.title }}</p>
     <p>제품 가격: {{ dataObject.price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")+" 원" }}</p>
     <p>제품 설명: {{ dataObject.description }}</p>
@@ -29,9 +30,6 @@
     <div v-else>
       <p>제품 사진</p>
       <img class= "detail" :src="dataObject.photo" alt="제품 사진" />   
-        <RouterLink  :to="{ name: 'RequestPurchase', params: { id: dataObject.id }, query: {title: dataObject.title, price: dataObject.price}}">
-          <span class="purchase-btn"> 구매하기 </span>
-        </RouterLink>    
     </div>
   </div>
 
@@ -42,7 +40,7 @@ import { axiosPublicProduct } from '~/utils/productApiConfig'
 
 export default {
   mounted() {
-    this.SingleProductDetails()
+    this.AdminSingleProductDetails()
   },
   data() {
     return {
@@ -51,7 +49,7 @@ export default {
     }
   },
   methods: {
-    async SingleProductDetails() {
+    async AdminSingleProductDetails() {
       try {
         const { data } = await axiosPublicProduct.get(`${this.$route.params.id}`)
         this.dataObject = data

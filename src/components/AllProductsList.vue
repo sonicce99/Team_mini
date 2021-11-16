@@ -12,7 +12,7 @@
 
     <div class="link">
       <RouterLink class="edit btn-anchor btn-16" :to="{ name: 'EditProduct', params: { id: product.id }}">수정하기</RouterLink>
-      <RouterLink class="detail btn-anchor btn-16" :to="{ name: 'SingleProductDetails', params: { id: product.id }}">단일 제품 상세 정보</RouterLink>
+      <RouterLink class="detail btn-anchor btn-16" :to="{ name: 'AdminSingleProductDetails', params: { id: product.id }}">단일 제품 상세 정보</RouterLink>
     </div>
   </div>
 </template>
