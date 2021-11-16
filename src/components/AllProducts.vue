@@ -1,16 +1,19 @@
 <template>
   <div class="product-searcher">
-    <h1>
-      Product Management Console
-    </h1>
-    <RouterLink  :to="{ name: 'AddProduct' }" class="add-product btn-anchor btn-16">
+    <h1>제품 조회</h1>
+    <RouterLink
+      :to="{ name: 'AddProduct' }"
+      class="add-product btn-primary btn-16"
+    >
       제품 추가
     </RouterLink>
     <div class="controller">
-      <button class="all-product btn-anchor btn-16" @click="getAllProducts">전체 제품 보기</button>
+      <button class="btn-secondary btn-16" @click="getAllProducts">
+        전체 제품 보기
+      </button>
       <div class="tags">
         <template v-for="tag in tags" :key="tag">
-          <input type="checkbox" :id="tag" @click="select">
+          <input type="checkbox" :id="tag" @click="select" />
           <div class="tag-box">
             <label class="tag" :for="tag">
               {{ tag }}
@@ -20,21 +23,43 @@
       </div>
     </div>
     <div class="contents-box">
-      <div v-if="!allProducts.length">전체 제품 관리 페이지 입니다</div>
+      <div class="no-sales" v-if="!allProducts.length">
+        제품 내역이 없습니다.
+      </div>
       <div v-else-if="isLoading">Loading...</div>
       <div v-else>
-        <div v-show="isAll">
-          <AllProductsList
-            v-for="product in allProducts"
-            :key="product.id"
-            :product="product" />
-        </div>
-        <div v-show="!isAll">
-          <AllProductsList
-            v-for="product in SelectedProducts"
-            :key="product.id"
-            :product="product" />
-        </div>         
+        <table>
+          <thead>
+            <tr>
+              <th>
+                <strong>상품 번호</strong>
+              </th>
+              <th>
+                <strong>상품 정보</strong>
+              </th>
+              <th>
+                <strong>상세 정보</strong>
+              </th>
+              <th>
+                <strong>제품 수정</strong>
+              </th>
+            </tr>
+          </thead>
+          <tbody v-show="isAll">
+            <AllProductsList
+              v-for="product in allProducts"
+              :key="product.id"
+              :product="product"
+            />
+          </tbody>
+          <tbody v-show="!isAll">
+            <AllProductsList
+              v-for="product in SelectedProducts"
+              :key="product.id"
+              :product="product"
+            />
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -51,118 +76,165 @@ export default {
     return {
       isLoading: false,
       isAll: true,
-      seletedTags: []
+      seletedTags: [],
     }
   },
   computed: {
-    allProducts () {
+    allProducts() {
       return this.$store.state.admin.allProducts
     },
-    SelectedProducts () {
+    SelectedProducts() {
       return this.$store.state.admin.seletedProducts
     },
-    tags () {
-      return this.$store.getters["admin/tagSet"]
-    }
+    tags() {
+      return this.$store.getters['admin/tagSet']
+    },
   },
   created() {
-    this.$store.dispatch("admin/getAllProducts")
+    this.$store.dispatch('admin/getAllProducts')
   },
   methods: {
     getAllProducts() {
-      this.$store.dispatch("admin/getAllProducts")
+      this.$store.dispatch('admin/getAllProducts')
       this.isAll = true
     },
     select(e) {
-      e.target.checked ? 
-      this.seletedTags.push(e.target.id) :
-      this.seletedTags = this.seletedTags.filter( tag => tag !== e.target.id)
+      e.target.checked
+        ? this.seletedTags.push(e.target.id)
+        : (this.seletedTags = this.seletedTags.filter(
+            (tag) => tag !== e.target.id
+          ))
       if (this.seletedTags.length) {
-        this.$store.dispatch("admin/getSelectedProducts",this.seletedTags)
+        this.$store.dispatch('admin/getSelectedProducts', this.seletedTags)
         this.isAll = false
       } else {
         this.isAll = true
       }
     },
-  }
+  },
 }
 </script>
 
 <style lang="scss" scoped>
+// TODO 반응형 처리
 .product-searcher {
-  padding-left: 3.2rem;
-  width: 100%;
-  height: 90vh;
-  display: flex;
-  flex-direction: column;
   position: relative;
+  @include column-flexbox(start, start);
+  height: 90vh;
+  padding-left: 3.2rem;
+
   h1 {
+    @include text-style(32, $dark);
     width: 100%;
+    font-weight: 300;
+    margin-bottom: 1em;
     user-select: none;
   }
-  .add-product{
+
+  .add-product {
     display: block;
-    position: absolute;
-    top: 2rem;
-    right: 2rem;
+    position: fixed;
+    top: 3.8rem;
+    right: 4rem;
     line-height: 2.6;
   }
+
   .controller {
-    .all-product {
-      display: block;
-      padding: 0.4rem
-    }
+    @include column-flexbox(start, start);
+
     .tags {
-      display: flex;
-      overflow-x: auto;
+      @include flexbox(start, center);
+      @include text-style(13, $primary);
+      width: 100%;
       height: 4rem;
-      align-items: center;
+      overflow: auto;
+
       input {
         display: none;
+
         &:checked + .tag-box {
-          color: $blue
+          background-color: $green;
+          color: $white;
         }
-      } 
-      &::-webkit-scrollbar {
-      height: 10px;
       }
+
+      &::-webkit-scrollbar {
+        height: 10px;
+      }
+
       &::-webkit-scrollbar-thumb {
-        background-color: darken($border, 30%);;
+        background-color: darken($border, 30%);
         border-radius: 10px;
       }
+
       &::-webkit-scrollbar-track {
         background-color: $border;
         border-radius: 10px;
         box-shadow: inset 0px 0px 5px white;
-      } 
+      }
+
       .tag-box {
-        user-select: none;
-        height: 50%;
-        line-height: 2;
-        padding: 0 1rem;
-        text-align: center;
-        border-radius: 1rem;
-        margin: 0.5rem 0.5rem;
+        @include flexbox();
         flex-shrink: 0;
+        height: 50%;
+        margin: 0.5rem 0.5rem;
+        border-radius: 0.5rem;
         border: 1px solid $border;
+        user-select: none;
+        transition: background-color 200ms ease-in-out;
+
+        &:first-of-type {
+          margin-left: 0;
+        }
+
+        &:hover {
+          background-color: $green;
+        }
+
+        label {
+          display: block;
+          padding: 0 1rem;
+          cursor: pointer;
+        }
       }
     }
   }
-  .contents-box{
+
+  .contents-box {
+    width: 100%;
     overflow: auto;
-    border: 1px solid $border;
+    border: 1px solid $dark;
+
     &::-webkit-scrollbar {
       width: 10px;
     }
+
     &::-webkit-scrollbar-thumb {
-      background-color: darken($border, 30%);;
+      background-color: darken($border, 30%);
       border-radius: 10px;
     }
+
     &::-webkit-scrollbar-track {
       background-color: $border;
       border-radius: 10px;
       box-shadow: inset 0px 0px 5px white;
-    } 
+    }
+
+    thead {
+      width: 100%;
+      position: sticky;
+      top: 0;
+      flex-shrink: 0;
+    }
   }
+}
+
+.no-sales {
+  @include text-style(24, $dark);
+  width: 100%;
+  font-weight: 400;
+  padding: 1em;
+  margin-bottom: 1em;
+  user-select: none;
 }
 </style>
