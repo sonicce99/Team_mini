@@ -25,7 +25,6 @@
 <script>
 import { axiosAccount } from '~/utils/accountApiConfig'
 import { axiosUserProduct } from '~/utils/productApiConfig'
-import router from '~/routes'
 
 export default {
   data() {
@@ -41,12 +40,12 @@ export default {
   methods: {
     loginCheck(){
       if(this.token) {
-      this.getAccountInfo()  
+        this.getAccountInfo()  
       }else{
         if(confirm('로그인이 필요한 서비스입니다. 로그인 하시겠습니까?')){
-          router.push('/certification/signin')
+          this.$router.push('/certification/signin')
         }else{
-          router.go(-1)
+          this.$router.go(-1)
         }
       }   
     },
