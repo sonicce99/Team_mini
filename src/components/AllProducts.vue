@@ -3,9 +3,11 @@
     <h1>
       Product Management Console
     </h1>
-    <RouterLink :to="{ name: 'AddProduct' }" class="add-product">제품 추가 하기</RouterLink>
+    <RouterLink  :to="{ name: 'AddProduct' }" class="add-product btn-anchor btn-16">
+      제품 추가
+    </RouterLink>
     <div class="controller">
-      <button class="all-product" @click="getAllProducts">전체 제품 보기</button>
+      <button class="all-product btn-anchor btn-16" @click="getAllProducts">전체 제품 보기</button>
       <div class="tags">
         <template v-for="tag in tags" :key="tag">
           <input type="checkbox" :id="tag" @click="select">
@@ -90,52 +92,65 @@ export default {
 .product-searcher {
   padding-left: 3.2rem;
   width: 100%;
-  border: 1px solid greenyellow;
   height: 90vh;
   display: flex;
   flex-direction: column;
   position: relative;
   h1 {
     width: 100%;
+    user-select: none;
   }
   .add-product{
     display: block;
     position: absolute;
     top: 2rem;
     right: 2rem;
-    border: 2px solid green;
+    line-height: 2.6;
   }
   .controller {
-    border: 1px solid darkgoldenrod;
     .all-product {
       display: block;
-      border: 2px solid olivedrab;
       padding: 0.4rem
-    }
-    .select-product {
-      display: block;
     }
     .tags {
       display: flex;
       overflow-x: auto;
+      height: 4rem;
+      align-items: center;
       input {
         display: none;
         &:checked + .tag-box {
-          background: chocolate;
+          color: $blue
         }
       } 
       .tag-box {
+        user-select: none;
+        height: 50%;
+        line-height: 2;
         padding: 0 1rem;
         text-align: center;
         border-radius: 1rem;
         margin: 0.5rem 0.5rem;
-        border: 2px solid red;
+        flex-shrink: 0;
+        border: 1px solid $border;
       }
     }
   }
   .contents-box{
     overflow: auto;
-    border: 1px solid darkgoldenrod;
+    border: 1px solid $border;
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: darken($border, 30%);;
+      border-radius: 10px;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: $border;
+      border-radius: 10px;
+      box-shadow: inset 0px 0px 5px white;
+    } 
   }
 }
 </style>

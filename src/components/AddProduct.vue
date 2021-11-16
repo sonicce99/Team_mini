@@ -2,7 +2,7 @@
   <div class="addproduct-from">
     <div class="add-form">제품 등록</div>
     <button @click="back">닫기</button>
-    <form @submit="addProduct" name="input">
+    <form @submit.prevent="addProduct" name="input">
       <p>제목</p>
       <input
         type="text"
@@ -15,7 +15,7 @@
       <input
         type="text"
         v-model="description" />
-      <p>태그 <span>입력예) THE ROW, Bottega Veneta, CHRISTIAN LOUBOUTIN</span></p>
+      <p>태그 <span>입력예) THE ROW,Bottega Veneta,CHRISTIAN LOUBOUTIN</span></p>
       <input
         type="text"
         v-model="tags" />
@@ -47,7 +47,7 @@ export default {
         title : this.title,
         price : this.price,
         description : this.description,
-        tags : this.tags.split(', '),
+        tags : this.tags.split(','),
         thumbnailBase64 : this.thumbnailBase64,
         photoBase64 : this.photoBase64
       }
