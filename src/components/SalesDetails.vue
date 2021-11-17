@@ -81,7 +81,7 @@ export default {
     }
   },
   created() {
-    this.fetch()
+    this.fetchSales()
   },
   computed: {
     salesDetails() {
