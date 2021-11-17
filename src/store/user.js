@@ -54,9 +54,6 @@ export default {
         state[key] = payload[key]
       })
     },
-    SET_SEARCHRESULTS(state, searchResults) {
-      state.searchResults = searchResults
-    },
   },
   actions: {
     // 로그인
@@ -73,12 +70,8 @@ export default {
     },
     // 제품 검색 결과 보기
     async SHOW_SEARCHRESULTS({ commit }, payload) {
-      const { data } = await axiosPublicProduct.post('search', payload)
-      commit('SET_SEARCHRESULTS', data)
-    },
-    async searchByBrand({ commit }, payload) {
-      const { data } = await axiosPublicProduct.post('search', payload)
-      commit('SET_SEARCHRESULTS', data)
+      const { data: searchResults } = await axiosPublicProduct.post('search', payload)
+      commit('assignState', { searchResults })
     },
     // 구매 확정
     async CONFIRM_PURCHASE({}, payload) {
@@ -93,9 +86,7 @@ export default {
       router.go()
     },
     async getPurchaseList({ commit }) {
-      const { data: purchaseList } = await axiosUserProduct.get(
-        'transactions/details'
-      )
+      const { data: purchaseList } = await axiosUserProduct.get('transactions/details')
       commit('assignState', { purchaseList })
     },
   },

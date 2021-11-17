@@ -71,9 +71,10 @@ export default {
       await this.$store.dispatch('user/SHOW_SEARCHRESULTS', { searchText: this.searchText })
     },
     clickBrandLogo(brand) {
+      this.$refs.position.classList.add('on')
       this.isResult = true
       this.searchText = brand
-      this.$store.dispatch('user/searchByBrand', { searchTags: [brand] })
+      this.$store.dispatch('user/SHOW_SEARCHRESULTS', { searchTags: [brand] })
     },
     resetQuery() {
       this.searchText = ''
