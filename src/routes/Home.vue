@@ -28,10 +28,13 @@
       </div>
 
       <div v-if="isResult" class="items">
-        <div class="no-result" v-show="!searchResults.length">검색 결과가 없습니다.</div>
+        <div class="no-result" v-if="!searchResults.length">
+          검색 결과가 없습니다.
+        </div>
         <SearchResults :searchResults="searchResults" />
       </div>
     </div>
+    <div v-if="isLoading"><Loader class="loader" /></div>
   </div>
 </template>
 
@@ -39,18 +42,21 @@
 import HomeHeader from '~/components/HomeHeader'
 import SearchResults from '~/components/SearchResults'
 import KeywordList from '~/components/KeywordList'
+import Loader from '~/components/Loader'
 
 export default {
   components: {
     HomeHeader,
     SearchResults,
     KeywordList,
+    Loader,
   },
   data() {
     return {
       searchText: '',
       searchTags: [],
       isResult: false,
+      isLoading: false,
     }
   },
   computed: {
@@ -67,18 +73,24 @@ export default {
     async onKeyup() {
       if (!this.searchText) return
       this.$refs.position.classList.add('on')
-      this.isResult = true
+      this.searchText = searchText
+      this.isLoading = true
       await this.$store.dispatch('user/SHOW_SEARCHRESULTS', { searchText: this.searchText })
+      this.isLoading = false
+      this.isResult = true
     },
-    clickBrandLogo(brand) {
+    async clickBrandLogo(brand) {
       this.$refs.position.classList.add('on')
       this.isResult = true
       this.searchText = brand
+      this.isLoading = true
       this.$store.dispatch('user/SHOW_SEARCHRESULTS', { searchTags: [brand] })
+      this.isLoading = false
     },
     resetQuery() {
       this.searchText = ''
       this.isResult = false
+      this.isLoading = false
       this.$refs.position.classList.remove('on')
     },
     onKeyReset() {
@@ -154,6 +166,10 @@ export default {
         padding: 1em;
         margin-bottom: 1em;
         user-select: none;
+      }
+
+      .loader {
+        @include pos-center();
       }
     }
   }

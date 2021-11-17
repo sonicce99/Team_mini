@@ -1,5 +1,5 @@
 <template>
-  <button @click="AccountRemove">해당 계좌 해지하기</button>
+  <button class="btn-cancel" @click="AccountRemove">해지하기</button>
 
   <div class="black-bg" v-if="removed === true">
     <div class="white-bg">
@@ -46,6 +46,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .btn-cancel {
+    @include text-style(14);
+    height: 36px;
+  }
   div {
     box-sizing: border-box;
   }
