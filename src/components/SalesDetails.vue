@@ -3,7 +3,7 @@
     <h1>판매 내역</h1>
 
     <div class="controller">
-      <button class="all-sales btn-secondary btn-16" @click="getAllsales">
+      <button class="all-sales btn-secondary btn-16" @click="fetchSales">
         전체 판매 내역
       </button>
       <div class="tags">
@@ -21,6 +21,7 @@
       <div class="no-sales" v-if="!salesDetails.length">
         판매 내역이 없습니다.
       </div>
+      <div v-else-if="isLoading"><Loader class="loader" /></div>
       <div v-else>
         <table>
           <thead>
@@ -76,6 +77,7 @@ export default {
     return {
       isAll: false,
       seletedTags: [],
+      isLoading: false,
     }
   },
   created() {
@@ -93,28 +95,30 @@ export default {
     },
   },
   mounted() {
-    this.fetch()
+    this.fetchSales()
   },
   methods: {
-    fetch() {
-      this.$store.dispatch('admin/SHOW_SALESDETAILS')
+    async fetchSales() {
+      this.isLoading = true
+      await this.$store.dispatch('admin/SHOW_SALESDETAILS')
+      this.isLoading = false
       this.isAll = true
     },
-    select(e) {
+    async select(e) {
       e.target.checked
         ? this.seletedTags.push(e.target.id)
         : (this.seletedTags = this.seletedTags.filter(
             (tag) => tag !== e.target.id
           ))
       if (this.seletedTags.length) {
-        console.log(this.seletedTags)
-        this.$store.dispatch('admin/GET_SELECTED_SALES', this.seletedTags)
+        this.isLoading = true
+        await this.$store.dispatch('admin/GET_SELECTED_SALES', this.seletedTags)
+        this.isLoading = false
         this.isAll = false
       } else {
         this.isAll = true
       }
     },
-    getAllsales() {},
   },
 }
 </script>
@@ -223,6 +227,9 @@ export default {
       width: 100%;
       position: sticky;
       top: 0;
+    }
+    .loader {
+      @include pos-center();
     }
   }
 }

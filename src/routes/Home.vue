@@ -28,10 +28,13 @@
       </div>
 
       <div v-if="isResult" class="items">
-        <div class="no-result" v-show="!data.length">검색 결과가 없습니다.</div>
+        <div class="no-result" v-if="!searchResults.length">
+          검색 결과가 없습니다.
+        </div>
         <SearchResults :searchResults="searchResults" />
       </div>
     </div>
+    <div v-if="isLoading"><Loader class="loader" /></div>
   </div>
 </template>
 
@@ -39,12 +42,14 @@
 import HomeHeader from '~/components/HomeHeader'
 import SearchResults from '~/components/SearchResults'
 import KeywordList from '~/components/KeywordList'
+import Loader from '~/components/Loader'
 
 export default {
   components: {
     HomeHeader,
     SearchResults,
     KeywordList,
+    Loader,
   },
   data() {
     return {
@@ -52,6 +57,7 @@ export default {
       searchTags: [],
       isResult: false,
       data: [],
+      isLoading: false,
     }
   },
   computed: {
@@ -68,20 +74,25 @@ export default {
     async onKeyup(searchText) {
       if (!searchText) return
       this.$refs.position.classList.add('on')
-      this.isResult = true
       this.searchText = searchText
+      this.isLoading = true
       this.data = await this.$store.dispatch('user/SHOW_SEARCHRESULTS', {
         searchText,
       })
+      this.isLoading = false
+      this.isResult = true
     },
-    clickBrandLogo(brand) {
+    async clickBrandLogo(brand) {
       this.isResult = true
       this.searchText = brand
-      this.$store.dispatch('user/searchByBrand', { searchTags: [brand] })
+      this.isLoading = true
+      await this.$store.dispatch('user/searchByBrand', { searchTags: [brand] })
+      this.isLoading = false
     },
     resetQuery() {
       this.searchText = ''
       this.isResult = false
+      this.isLoading = false
       this.$refs.position.classList.remove('on')
     },
     onKeyReset(searchText) {
@@ -158,6 +169,10 @@ export default {
         padding: 1em;
         margin-bottom: 1em;
         user-select: none;
+      }
+
+      .loader {
+        @include pos-center();
       }
     }
   }

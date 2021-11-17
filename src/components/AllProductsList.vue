@@ -97,13 +97,12 @@ export default {
       .soldout {
         font-weight: 700;
       }
-
-      .edit,
-      .detail {
-        @include text-style(14);
-        height: 36px;
-      }
     }
   }
+}
+
+.btn-secondary {
+  @include text-style(14);
+  height: 36px;
 }
 </style>

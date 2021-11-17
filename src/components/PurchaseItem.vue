@@ -30,7 +30,13 @@
       </PurchaseDetailModal>
     </td>
     <td>
-      <button class="btn-confirm" @click="confirmed">구매확인</button>
+      <button
+        class="btn-confirm"
+        @click="confirmed"
+        :disabled="purchase.isCanceled"
+      >
+        구매확인
+      </button>
     </td>
     <td>
       <button class="btn-cancel" @click="cancle" :disabled="purchase.done">
