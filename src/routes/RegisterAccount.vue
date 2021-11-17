@@ -1,12 +1,4 @@
 <template>
-
-  <RouterLink
-    class="btn-list btn-anchor btn-16"
-    :to="{ name: 'MyAccount' }"
-  >
-  내 계좌
-  </RouterLink>
-
   <div class="form-group">
     <form @submit.prevent="register">
       <h1>{{ $route.params.bankname }} 계좌 연결</h1>
@@ -33,7 +25,17 @@
         type="text"
         placeholder="서명을 입력하세요." />
 
-      <button class="btn-primary btn-16" type="submit">등록하기</button>
+      <div class="btn-wrapper">
+         <RouterLink RouterLink
+          class="btn-anchor btn-16"
+          :to="{ name: 'AddAccount' }">
+          돌아가기
+          </RouterLink>
+          <button class="btn-primary btn-16" type="submit">등록하기</button>
+      </div>
+      
+      
+     
     </form>
 
   </div>
@@ -65,12 +67,17 @@ export default {
 <style lang="scss" scoped>
 
   .form-group {
-    @include column-flexbox();
+    height: 82vh;
+    display: flex;
+    flex-direction: column;
     width: 100%;
+    justify-content: center;
+    align-items: center;
 
    h1 {
       text-align: center;
       font-weight: 400;
+      margin-bottom: 1.5em;
       }
 
       label {
@@ -86,8 +93,13 @@ export default {
       }
 
       .btn-primary {
-        width: 100%;
-      }       
+        width: 50%;
+      }
+
+      .btn-anchor {
+        width: 50%;
+      }
+
   }
    
 </style>
