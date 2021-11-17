@@ -1,23 +1,26 @@
 <template>
-  <div class="container">
-    <RouterLink class="btn-anchor btn-16" to="/"> Home </RouterLink>
-    <RouterLink
-      class="btn-anchor btn-16"
-      v-if="!currentUser"
-      to="/certification/signin"
-    >
-      로그인
-    </RouterLink>
-    <RouterLink class="btn-anchor btn-16" v-if="currentUser" to="/admin">
-      Admin
-    </RouterLink>
-    <div v-if="currentUser">
-      <RouterLink class="btn-anchor btn-16" to="/mypage/purchaselist">
-        마이페이지
-      </RouterLink>
-      <button class="btn-anchor btn-16" @click="logOut">로그아웃</button>
-    </div>
-  </div>
+  <header class="container">
+    <RouterLink class="logo" to="/">SinbalShop </RouterLink>
+    <nav>
+      <ul class="nav__links">
+        <li>
+          <RouterLink to="/"> Home </RouterLink>
+        </li>
+        <li v-if="!currentUser">
+          <RouterLink to="/certification/signin"> 로그인 </RouterLink>
+        </li>
+        <li v-if="currentUser">
+          <RouterLink to="/admin"> Admin </RouterLink>
+        </li>
+        <li v-if="currentUser">
+          <RouterLink to="/mypage/purchaselist"> 마이페이지 </RouterLink>
+        </li>
+        <li v-if="currentUser">
+          <button class="cta" @click="logOut">로그아웃</button>
+        </li>
+      </ul>
+    </nav>
+  </header>
 </template>
 
 <script>
@@ -38,15 +41,54 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  @include flexbox();
-  margin-bottom: 20px;
-}
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 300;
+  @include flexbox(end, center);
+  height: 60px;
+  padding: 10px 10%;
+  background-color: $primary;
 
-.btn-anchor {
-  margin-left: 5px;
-  text-decoration: none;
-}
-button {
-  margin-left: 5px;
+  .logo {
+    margin-right: auto;
+    @include text-style(24, $blue-light);
+    font-weight: 700;
+  }
+
+  .nav__links {
+    @include flexbox();
+
+    li {
+      a {
+        padding: 20px;
+        transition: all 300ms ease 0s;
+        &:hover {
+          color: #0088a9;
+        }
+      }
+    }
+  }
+
+  .nav__links a,
+  .cta {
+    font-weight: 500;
+    color: #edf0f1;
+    text-decoration: none;
+  }
+
+  .cta {
+    margin-left: 20px;
+    padding: 9px 25px;
+    background-color: $blue;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    &:hover {
+      background-color: $blue-dark;
+    }
+  }
 }
 </style>
