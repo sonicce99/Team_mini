@@ -15,7 +15,7 @@
 
           <!-- 구매하기 -->
           <RouterLink  :to="{ name: 'RequestPurchase', params: { id: dataObject.id }, query: {title: dataObject.title, price: dataObject.price, thumbnail: dataObject.thumbnail}}">
-            <span class="purchase-btn"> 구매하기 </span>
+            <span class="btn-primary btn-16"> 구매하기 </span>
           </RouterLink>   
 
           <div class="coupon">

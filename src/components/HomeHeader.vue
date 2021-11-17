@@ -1,7 +1,7 @@
 <template>
   <header class="container">
     <RouterLink class="logo" to="/"
-      ><img src="logo.png" alt="SinbalShop Logo" />
+      ><img src="/logo.png" alt="SinbalShop Logo" />
     </RouterLink>
     <nav>
       <ul class="nav__links">
