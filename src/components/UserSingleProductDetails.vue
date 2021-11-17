@@ -10,12 +10,12 @@
 
         <div class="product-details">
           <h2 class="title">{{ dataObject.title }}</h2>
-          <h4>{{ "₩" + dataObject.price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") }}</h4>
+          <h4>{{ dataObject.price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") }} 원</h4>
           <p class="pay">부가가치세 별도, 배송료 별도</p>
 
           <!-- 구매하기 -->
           <RouterLink  :to="{ name: 'RequestPurchase', params: { id: dataObject.id }, query: {title: dataObject.title, price: dataObject.price}}">
-            <span class="purchase-btn"> 구매하기 </span>
+            <span class="btn-primary btn-16"> 구매하기 </span>
           </RouterLink>   
 
           <div class="coupon">
@@ -36,11 +36,11 @@
           <p class="tags"><strong class="fontsize">제품 분류</strong>: {{ dataObject.tags.toString() }}</p>
 
           <!-- 재고 있는지 없는지 판별 -->
-          <p class="soldout" v-if="dataObject.isSoldOut === false"><strong class="fontsize">매진 여부</strong>: 재고 있음</p>
-          <p class="soldout" v-else><strong class="fontsize">매진 여부</strong>: 재고 없음</p>
+          <p class="soldout" v-if="dataObject.isSoldOut === false"><strong class="fontsize">매진 여부</strong>:  재고 있음</p>
+          <p class="soldout" v-else><strong class="fontsize">매진 여부</strong>:  재고 없음</p>
 
           <!-- 제품 예약 관련 -->
-          <div class="reservation" v-if="dataObject.reservations.length === 0"><strong class="fontsize">예약 판매 여부</strong>: 안함</div>
+          <div class="reservation" v-if="dataObject.reservations.length === 0"><strong class="fontsize">예약 판매 여부</strong>:  안함</div>
           <div class="reservation" v-else>
             <p>예약 시작 시간: {{ dataObject.reservations.reservation.start }}</p>
             <p>예약 종료 시간: {{ dataObject.reservations.reservation.end }}</p>
@@ -85,7 +85,6 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-$color: #999999;
 .wrap{
   position: relative;
   margin-top: 100px;
@@ -93,55 +92,47 @@ $color: #999999;
     width: 1185px;
     margin: 0 auto;
     .name {
-      position: absolute;
-      left: 50%;
-      margin-left: -113px;
+      @include pos-center-x();
+      top: -30px;
       font-size: 40px;
-      margin-top: 30px;
     }
     .product-info {
-      line-height: 1.6;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      @include flexbox(between, center);
+      @include text-style(14, $primary);
+      font-weight: 500;
       .photo {
         margin-left: 30px;
-        margin-top: 0;
-        width: 630px;
-        height: 630px;
+        margin-top: 80px;
+        padding: 30px;
+        width: 600px;
+        height: 600px;
       }
       .product-details {
-        margin-top: 80px;
-        margin-left: 60px;
+        margin-top: 120px;
+        margin-left: 120px;
         .title {
-          color: $color
+          @include text-style(32, $dark);
+          margin-bottom: 1rem;
+        }
+        h4 {
+          @include text-style(24, $blue);
         }
         .pay {
-          color: $color;
-          font-size: 12px;
+          @include text-style(12, $secondary);
           margin-bottom: 20px;
         }
-        .purchase-btn {
-          display: block;
-          width: 220px;
-          height: 30px;
-          text-align: center;
-          padding: 4px 0;
-          margin-bottom: 11px;
-          background-color: black;
-          color: #fff;
-          font-weight: 700;
-          font-size: 14px;
+        .btn-primary {
+          width: 38%;
+          margin-bottom: 0.5em;
         }
         .coupon {
-          font-size: 14px;
+          @include text-style(14);
           :last-child {
-            margin-bottom: 13px;
+            margin-bottom: 18px;
           }
         }
         .kacbae {
-          color: $color;
-          font-size: 14px;
+          @include text-style(14, $primary);
           margin-bottom: 25px;
         }
         .strong {
@@ -149,28 +140,26 @@ $color: #999999;
         }
         .shipping {
           display: flex;
+          margin-bottom: 4px;
         }
         .description {
+          @include text-style(16, $dark);
           margin-bottom: 8px;
         }
         .content {
-          font-size: 14px;
           margin-bottom: 15px;
         }
         .tags {
-          font-size: 14px;
           margin-bottom: 4px;
         }
         .soldout {
-          font-size: 14px;
           margin-bottom: 4px;
         }
         .reservation {
-          font-size: 14px;
           margin-bottom: 4px;
         }
         .fontsize {
-          font-size: 12px;
+          @include text-style(14, $dark);
         }
       }
     }
