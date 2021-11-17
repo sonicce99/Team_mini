@@ -14,7 +14,7 @@
           <p class="pay">부가가치세 별도, 배송료 별도</p>
 
           <!-- 구매하기 -->
-          <RouterLink  :to="{ name: 'RequestPurchase', params: { id: dataObject.id }, query: {title: dataObject.title, price: dataObject.price}}">
+          <RouterLink  :to="{ name: 'RequestPurchase', params: { id: dataObject.id }, query: {title: dataObject.title, price: dataObject.price, thumbnail: dataObject.thumbnail}}">
             <span class="purchase-btn"> 구매하기 </span>
           </RouterLink>   
 
