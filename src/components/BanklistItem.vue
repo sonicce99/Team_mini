@@ -2,8 +2,9 @@
 
 <div class="bank-group">
   <div class="bank-list">
-      <span class="bank-connect">{{ bank.name }}</span>
-      <span class="bank-connect-completed"
+      <div class="bank-connect">{{ bank.name }}</div>
+      <div class="bank-connect-result">
+        <span class="bank-connect-completed"
       v-if="bank.disabled">연결 완료</span>
       
       <RouterLink
@@ -14,6 +15,7 @@
       ,accountlength: digitLength } }" v-else>
       연결
       </RouterLink>
+      </div>
     </div>
 </div>
   
@@ -44,14 +46,8 @@ export default {
 .bank-group {
     @include column-flexbox();
     width: 100%;
-    .bank-connect {
-      padding-right: 40px;
-    }
-    .bank-connect-completed {
-      @include text-style(14, $secondary);
-      margin-right: 14px;
-    }
-    .bank-list {
+     .bank-list {
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -60,9 +56,17 @@ export default {
       border: 1px solid $border;
       border-left: none;
       border-right: none;
+      .bank-connect {
+      width: 50%;
+      padding-right: 40px;
+      text-align: center;
       }
+      .bank-connect-result {
+      @include text-style(14, $secondary);
+      }
+    }
     .btn-primary {
-      width: 70px;
+      width: 60px;
       height: 25px;
       font-size: 14px;
     }
