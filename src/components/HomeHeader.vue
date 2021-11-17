@@ -1,6 +1,8 @@
 <template>
   <header class="container">
-    <RouterLink class="logo" to="/">SinbalShop </RouterLink>
+    <RouterLink class="logo" to="/"
+      ><img src="logo.png" alt="SinbalShop Logo" />
+    </RouterLink>
     <nav>
       <ul class="nav__links">
         <li>
@@ -47,14 +49,22 @@ export default {
   right: 0;
   z-index: 300;
   @include flexbox(end, center);
-  height: 60px;
+  height: 80px;
   padding: 10px 10%;
   background-color: $primary;
 
   .logo {
-    margin-right: auto;
     @include text-style(24, $blue-light);
-    font-weight: 700;
+    // position: fixed;
+    // top: 0;
+    // left: 240px;
+    margin-right: auto;
+    margin-left: 3rem;
+
+    img {
+      display: block;
+      width: 80px;
+    }
   }
 
   .nav__links {
