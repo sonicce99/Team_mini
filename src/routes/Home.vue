@@ -5,8 +5,8 @@
       <div class="input-group">
         <i class="bx bx-search"></i>
         <input
-          @keyup.delete="onKeyReset(searchText)"
-          @keyup.enter="onKeyup(searchText)"
+          @keyup.delete="onKeyReset"
+          @keyup.enter="onKeyup"
           class="form-input"
           type="text"
           placeholder="상품을 검색하세요"
@@ -28,7 +28,7 @@
       </div>
 
       <div v-if="isResult" class="items">
-        <div class="no-result" v-show="!data.length">검색 결과가 없습니다.</div>
+        <div class="no-result" v-show="!searchResults.length">검색 결과가 없습니다.</div>
         <SearchResults :searchResults="searchResults" />
       </div>
     </div>
@@ -51,7 +51,6 @@ export default {
       searchText: '',
       searchTags: [],
       isResult: false,
-      data: [],
     }
   },
   computed: {
@@ -65,14 +64,11 @@ export default {
       this.$store.dispatch('user/logOut')
       this.$router.push('/')
     },
-    async onKeyup(searchText) {
-      if (!searchText) return
+    async onKeyup() {
+      if (!this.searchText) return
       this.$refs.position.classList.add('on')
       this.isResult = true
-      this.searchText = searchText
-      this.data = await this.$store.dispatch('user/SHOW_SEARCHRESULTS', {
-        searchText,
-      })
+      await this.$store.dispatch('user/SHOW_SEARCHRESULTS', { searchText: this.searchText })
     },
     clickBrandLogo(brand) {
       this.isResult = true
@@ -84,8 +80,7 @@ export default {
       this.isResult = false
       this.$refs.position.classList.remove('on')
     },
-    onKeyReset(searchText) {
-      this.searchText = searchText
+    onKeyReset() {
       if (!this.searchText.length) this.resetQuery()
     },
   },
