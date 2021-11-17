@@ -1,6 +1,13 @@
 <template>
 
-  <div>연결 가능한 은행 목록</div>
+  <RouterLink
+    class="btn-list btn-anchor btn-16"
+    :to="{ name: 'MyAccount' }"
+  >
+  내 계좌
+  </RouterLink>
+
+  <h1>계좌 간편 연결</h1>
 
   <BanklistItem  
     v-for="bank in banklist"
@@ -34,3 +41,11 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+ h1 {
+      text-align: center;
+      font-weight: 400;
+      margin-bottom: 1.2em;
+      }
+</style>
