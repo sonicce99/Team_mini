@@ -4,7 +4,7 @@
     class="btn-list btn-anchor btn-16"
     :to="{ name: 'MyAccount' }"
   >
-  내 계좌
+  내 계좌 목록으로 가기
   </RouterLink>
 
   <h1>계좌 간편 연결</h1>
@@ -47,5 +47,11 @@ export default {
       text-align: center;
       font-weight: 400;
       margin-bottom: 1.2em;
-      }
+    }
+.btn-list {
+  position: absolute;
+  left: 50%;
+  margin-left: -84px;
+  margin-top: 400px;
+}
 </style>

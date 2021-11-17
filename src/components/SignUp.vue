@@ -89,8 +89,8 @@ export default {
           displayName: this.displayName,
           profileImgBase64: this.profileImgBase64
         }
-        const data = await axiosAuthInit.post("signup", obj)
-        console.log(data.data)
+        await axiosAuthInit.post("signup", obj)
+        // console.log(data.data)
         this.$router.push("/") //router로 메인페이지로 이동됨
       } catch (error) {
         console.log(error.response.data)
@@ -125,6 +125,7 @@ export default {
       width: 360px;
       padding-left: 12px;
       margin-bottom: 12px;
+      cursor: pointer;
     }
 
     input[type="file"] {

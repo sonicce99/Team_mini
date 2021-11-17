@@ -5,8 +5,8 @@
       <div class="input-group">
         <i class="bx bx-search"></i>
         <input
-          @keyup.delete="onKeyReset(searchText)"
-          @keyup.enter="onKeyup(searchText)"
+          @keyup.delete="onKeyReset"
+          @keyup.enter="onKeyup"
           class="form-input"
           type="text"
           placeholder="상품을 검색하세요"
@@ -56,7 +56,6 @@ export default {
       searchText: '',
       searchTags: [],
       isResult: false,
-      data: [],
       isLoading: false,
     }
   },
@@ -71,22 +70,21 @@ export default {
       this.$store.dispatch('user/logOut')
       this.$router.push('/')
     },
-    async onKeyup(searchText) {
-      if (!searchText) return
+    async onKeyup() {
+      if (!this.searchText) return
       this.$refs.position.classList.add('on')
       this.searchText = searchText
       this.isLoading = true
-      this.data = await this.$store.dispatch('user/SHOW_SEARCHRESULTS', {
-        searchText,
-      })
+      await this.$store.dispatch('user/SHOW_SEARCHRESULTS', { searchText: this.searchText })
       this.isLoading = false
       this.isResult = true
     },
     async clickBrandLogo(brand) {
+      this.$refs.position.classList.add('on')
       this.isResult = true
       this.searchText = brand
       this.isLoading = true
-      await this.$store.dispatch('user/searchByBrand', { searchTags: [brand] })
+      this.$store.dispatch('user/SHOW_SEARCHRESULTS', { searchTags: [brand] })
       this.isLoading = false
     },
     resetQuery() {
@@ -95,8 +93,7 @@ export default {
       this.isLoading = false
       this.$refs.position.classList.remove('on')
     },
-    onKeyReset(searchText) {
-      this.searchText = searchText
+    onKeyReset() {
       if (!this.searchText.length) this.resetQuery()
     },
   },
