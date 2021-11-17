@@ -30,7 +30,7 @@
         <label for="tags">상품 태그: </label>
         <input type="text" id="tags" name="tags" v-model="tags" placeholder="태그가 여러 개일 경우 띄어쓰기로 구분해주세요.">
     </form>
-        <button class="btn-anchor btn-16" @click="editProduct">수정완료</button>
+        <button @click="editProduct">수정완료</button>
   </div>
 </template>
 
@@ -102,8 +102,7 @@ export default {
 <style lang="scss" scoped>
 
 .product-edit{
-  border: 1px solid $border;
-  border-radius: .5rem;
+  border: 2px solid red;
   width: 1000px;
   margin: 0 auto;
 
