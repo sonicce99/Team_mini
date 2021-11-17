@@ -1,69 +1,56 @@
 <template>
-  <button class="btn-cancel" @click="AccountRemove">해지하기</button>
-
-  <div class="black-bg" v-if="removed === true">
-    <div class="white-bg">
-      <button @click="closed">닫기</button>
-      <h4>해지되었습니다!</h4>
+  <slot name="activator"></slot>
+  <teleport to="body">
+    <template v-if="modelValue">
+    <div class="modal" @click="offModal"> 
+      <div class="modal-box" @click.stop>
+        <slot name="default"></slot>
+      </div>
     </div>
-  </div>
+    </template> 
+  </teleport>
 </template>
 
 <script>
-import { axiosAccount } from '~/utils/accountApiConfig'
 
 export default {
-  data() {
-    return {
-      removed : false
+  props: {
+    modelValue: { //모달창의 on/off 상태
+      type: Boolean,
+      default: false
+    },
+    persistent: {
+      type: Boolean,
+      default: false
     }
   },
-  props: {
-    id: String
-  },
+  emits: ['update:modelValue'],
   methods: {
-    async AccountRemove() {
-      try {
-        const obj = {
-          accountId: this.id,
-          signature: true
-        }
-        const deleteApi = await axiosAccount.delete('',{data: obj})
-        console.log(deleteApi)
-        this.removed = true
-
-      } catch (error) {
-        console.log(error.response.data)
-      }
-    },
-    // 닫기 버튼 클릭시 모달창 닫기
-    closed() {
-      this.removed = false
-      this.$router.go()
+    offModal() {
+      if(this.persistent) return
+      this.$emit('update:modelValue', false)
     }
   }  
 }
 </script>
 
 <style lang="scss" scoped>
-  .btn-cancel {
-    @include text-style(14);
-    height: 36px;
-  }
-  div {
-    box-sizing: border-box;
-  }
-  .black-bg {
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    position: fixed;
+ .modal{
+   position: fixed;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   background-color: rgba(#000, .3);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   .modal-box {
+    width: 400px;
     padding: 20px;
-  }
-  .white-bg {
-    width: 100%;  
-    padding: 20px;
-    background: white;
-    border-radius: 8px;      
-  }
+    background-color: #eee;
+    box-shadow: 3px 3px 3px 3px #999;
+
+   }
+ }
 </style>
