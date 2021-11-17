@@ -96,6 +96,11 @@ export default {
     async getBankList() {
       const { data } = await axiosAccount.get('banks')
       return data
-    }
+    },
+    async accountRemove({},payload) {
+      const { data } = await axiosAccount.delete('',payload)
+      console.log(data)
+      router.go()
+    },
   },
 }
