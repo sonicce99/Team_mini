@@ -9,7 +9,7 @@
       {{ purchase.product.title }}
     </td>
     <td class="price">
-      {{ purchase.product.price }}
+      {{ purchase.product.price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")+" 원" }}
     </td>
     <td>
       <PurchaseDetailModal v-model="isModalShow" persistent>
