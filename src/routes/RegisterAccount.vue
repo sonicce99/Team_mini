@@ -41,8 +41,6 @@
 </template>
 
 <script>
-import { axiosAccount } from '~/utils/accountApiConfig'
-
 export default {
   data() {
     return {
@@ -52,15 +50,13 @@ export default {
     }
   },
   methods: {
-    async register() {
-      const obj = {
+    register() {
+      this.$store.dispatch('user/register', {
         bankCode: this.$route.params.bankcode,
         accountNumber: this.accountNumber,
         phoneNumber: this.phoneNumber,
         signature: this.signature
-      }
-      const { data } = await axiosAccount.post('',obj)
-      console.log(data)
+      })
     }
   }
 }

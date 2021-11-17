@@ -1,6 +1,7 @@
 import { axiosAuthInit, axiosAuth } from '~/utils/authenticationApiConfig'
-import router from '~/routes'
 import { axiosUserProduct, axiosPublicProduct } from '~/utils/productApiConfig'
+import { axiosAccount } from '~/utils/accountApiConfig'
+import router from '~/routes'
 
 import { gucciImage } from '../utils/gucciImage'
 import { valentinoImage } from '../utils/valentinoImage'
@@ -89,5 +90,12 @@ export default {
       const { data: purchaseList } = await axiosUserProduct.get('transactions/details')
       commit('assignState', { purchaseList })
     },
+    async register({},payload) {
+      await axiosAccount.post('',payload)
+    },
+    async getBankList() {
+      const { data } = await axiosAccount.get('banks')
+      return data
+    }
   },
 }

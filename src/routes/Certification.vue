@@ -9,11 +9,6 @@
   </RouterLink>
 </template>
 
-<script>
-export default {
-}
-</script>
-
 <style lang="scss" scoped>
 a {
   position: absolute;
