@@ -10,7 +10,7 @@
       class="btn-list btn-anchor btn-16"
       :to="{ name: 'MyAccount' }"
     >
-    내 계좌 목록으로 가기
+    내 계좌 확인
     </RouterLink>
   </div>
 
@@ -53,7 +53,8 @@ export default {
     margin-bottom: 1.2em;
   }
   .btn-list {
-    margin-top: 2.2rem;
+    margin-top: 1rem;
+    width: 42vh;
   }
 }
 </style>
