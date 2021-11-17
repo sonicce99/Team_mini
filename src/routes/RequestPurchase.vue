@@ -106,8 +106,11 @@ export default {
     
     h1 {
       text-align: left;
-      margin: 50px 20px;
-      @include text-style(32, $dark)
+      margin: 50px 20px;     
+      @include text-style(32, $dark);
+      width: 100%;
+      font-weight: 300;
+      user-select: none;
     }
 
     .content-wrap{
@@ -148,6 +151,7 @@ export default {
         @include text-style(24, $dark);
         text-align: left;
         margin: 40px 20px;
+        font-weight: 300;
       }
 
       ul{
