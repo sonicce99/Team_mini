@@ -69,7 +69,7 @@ export default {
       },
       //서버에 수정사항 PUT
       async editProduct(){
-        const obj = {
+        await axiosAdminProduct.put(this.$route.params.id, {
           title : this.title,
           price : this.price,
           description: this.description,
@@ -77,8 +77,7 @@ export default {
           thumbnailBase64: this.thumbnailBase64,
           photoBase64: this.photoBase64,
           isSoldOut: this.isSoldOut
-        }
-        await axiosAdminProduct.put(this.$route.params.id, obj)
+        })
         this.getCurProduct() // 실제 동작때는 수정완료 후에 화면이 닫혀야함.
         this.$router.go(-1)
       },

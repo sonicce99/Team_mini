@@ -1,7 +1,7 @@
 <template>
   <div class="form-group">
     <h1>로그인</h1>
-    <form class="input-group" @submit="login(email, password)">
+    <form class="input-group" @submit="login">
       <label for="user-email">이메일</label>
       <input
         class="form-input"
@@ -44,8 +44,8 @@ export default {
     }
   },
   methods: {
-    async login() {
-      await this.$store.dispatch('user/LOGIN', {
+    login() {
+      this.$store.dispatch('user/LOGIN', {
         email: this.email,
         password: this.password,
       })
