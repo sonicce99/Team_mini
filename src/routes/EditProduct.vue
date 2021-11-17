@@ -1,36 +1,45 @@
 <template>
   <div class="product-edit">
-    <form>
-      <h1>상품 수정</h1>
+    <h1>상품 수정</h1>
+    <form class="edit-form">
+      <div>
         <label for="title">상품 이름: </label>
-        <input type="text" id="title" name="title" v-model="title">
-        <br>
+        <input class="form-input" type="text" id="title" name="title" v-model="title">
+      </div>
+      <div>
         <label for="price">상품 가격: </label>
         <!-- vmodel.number는 사용자 입력이 숫자로 형변환 된다. -->
-        <input type="text" id="price" name="price" v-model.number="price">
-        <br>
+        <input class="form-input" type="text" id="price" name="price" v-model.number="price">        
+      </div>
+      <div>
         <label for="description">상품 설명: </label>
-        <br>
-        <textarea id="description" name="description" v-model="description"/>
-        <br>
-        <label>재고 여부: </label>
+        <textarea class="form-input" id="description" name="description" v-model="description"/>      
+      </div>
+      <div>
+        <label> 재고 여부: </label>
         <label for="soldout">매진</label>
         <input type="radio" id="soldout" v-model="isSoldOut" :value="true">
         <label for="instock">재고 있음</label>
         <input type="radio" id="instock" v-model="isSoldOut" :value="false">
-        <br>
+      </div>
+      <div>
+        <label for="tags">상품 태그: </label>
+        <input class="form-input" type="text" id="tags" name="tags" v-model="tags" placeholder="태그가 여러 개일 경우 띄어쓰기로 구분해주세요.">
+      </div>
+      <div>
         <label for="thumbnail">상품 썸네일: </label>
         <div> <img class="thumb-view" :src="thumbnail" alt="thumbnail"></div>
         <input type="file" id="thumbnail" @change="selectFile">
-        <br>
+      </div>
+      <div>
         <label for="photo">상품 상세사진: </label>
         <div> <img class="photo-view" :src="photo" alt="photo"></div>
         <input type="file" id="photo" @change="selectFile">
-        <br>
-        <label for="tags">상품 태그: </label>
-        <input type="text" id="tags" name="tags" v-model="tags" placeholder="태그가 여러 개일 경우 띄어쓰기로 구분해주세요.">
+      </div> 
     </form>
-        <button @click="editProduct">수정완료</button>
+    <div class="edit-confirm">
+        <button class="btn-primary btn-16 edit-btn" @click.prevent="editProduct">수정완료</button>      
+    </div>        
   </div>
 </template>
 
@@ -78,7 +87,8 @@ export default {
           photoBase64: this.photoBase64,
           isSoldOut: this.isSoldOut
         })
-        this.getCurProduct() // 실제 동작때는 수정완료 후에 화면이 닫혀야함.
+        this.getCurProduct()
+        alert('수정완료 되었습니다.')
         this.$router.go(-1)
       },
       selectFile(event) {
@@ -102,30 +112,62 @@ export default {
 <style lang="scss" scoped>
 
 .product-edit{
-  border: 2px solid red;
-  width: 1000px;
-  margin: 0 auto;
+    max-width: 1200px;
+    min-width: 600px;
+    height: 90vh;
+    overflow: scroll !important;
+  
+    h1 {
+      text-align: left;     
+      @include text-style(32, $dark);
+      font-weight: 300;
+      user-select: none;
+    }
+    .edit-form{
+      width: 100%;
+      padding: 20px;
 
-  h1 {
-  font-size: 32px;
-  font-weight: 700;
-  }
+      label {
+      @include text-style(16, $primary);      
+      }
 
-  .edit-form{
-    margin-top: 30px;
-    margin: 0 auto;
-    padding: 20px;
-    width: 800px;
-    height: 300px;
-    border: 2px dashed #888;
+      input {
+        display: block;
+        width: 360px;
+        padding-left: 12px;
+        margin-bottom: 15px;
+        display: inline-block;
+        background-color: $white;
+      }
+      input[type='radio'] {
+        width:30px;
+        display: inline;
+      }
+      textarea{
+        width: 380px;
+        min-height:100px;
+        margin-left: 65px;
+        margin-bottom: 15px;
+        background-color: $white;
+      }
+      .thumb-view {
+      width: 100px;
+      height: 100px;
+      }
+      .photo-view {
+        width: 200px;
+        height: 250px;
+      }
+    }
+    .edit-confirm{
+      position: relative;
+      .edit-btn {
+        width: 100px;
+        position: absolute;
+        right: 100px;
+        
+
+      }
+    }
   }
-  .thumb-view {
-    width: 100px;
-    height: 100px;
-  }
-  .photo-view {
-    width: 200px;
-    height: 250px;
-  }
-}
-</style>
+  </style>
