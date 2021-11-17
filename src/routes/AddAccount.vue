@@ -17,7 +17,6 @@
 </template>
 
 <script>
-import { axiosAccount } from '~/utils/accountApiConfig'
 import BanklistItem from '~/components/BanklistItem'
 
 export default {
@@ -29,13 +28,12 @@ export default {
       banklist: []
     }
   },
-  async created() {
-    await this.getBanklist()
+  created() {
+    this.getBankList()
   },
   methods: {
-    async getBanklist() {
-      const { data } = await axiosAccount.get('banks')
-      console.log(data)
+    async getBankList() {
+      const  data = await this.$store.dispatch('user/getBankList')
       this.banklist = data
     }
   }
@@ -44,10 +42,10 @@ export default {
 
 <style lang="scss" scoped>
  h1 {
-      text-align: center;
-      font-weight: 400;
-      margin-bottom: 1.2em;
-    }
+  text-align: center;
+  font-weight: 400;
+  margin-bottom: 1.2em;
+}
 .btn-list {
   position: absolute;
   left: 50%;
