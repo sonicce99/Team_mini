@@ -29,6 +29,7 @@
     </div>
     <div class="contents-box">
       <div v-if="!purchaseList.length">구매 신청 내역이 없습니다</div>
+      <div v-else-if="isLoading"><Loader class="loader" /></div>
       <div v-else>
         <table>
           <thead>
@@ -106,7 +107,14 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('user/getPurchaseList')
+    this.getPurchaseList()
+  },
+  methods: {
+    async getPurchaseList() {
+      this.isLoading = true
+      await this.$store.dispatch('user/getPurchaseList')
+      this.isLoading = false
+    },
   },
 }
 </script>
@@ -149,6 +157,9 @@ export default {
       width: 100%;
       position: sticky;
       top: 0;
+    }
+    .loader {
+      @include pos-center();
     }
   }
 }

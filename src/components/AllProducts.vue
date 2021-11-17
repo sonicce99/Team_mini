@@ -26,7 +26,7 @@
       <div class="no-sales" v-if="!allProducts.length">
         제품 내역이 없습니다.
       </div>
-      <div v-else-if="isLoading">Loading...</div>
+      <div v-else-if="isLoading"><Loader class="loader" /></div>
       <div v-else>
         <table>
           <thead>
@@ -94,18 +94,25 @@ export default {
     this.$store.dispatch('admin/getAllProducts')
   },
   methods: {
-    getAllProducts() {
-      this.$store.dispatch('admin/getAllProducts')
+    async getAllProducts() {
+      this.loading = true
+      await this.$store.dispatch('admin/getAllProducts')
+      this.loading = false
       this.isAll = true
     },
-    select(e) {
+    async select(e) {
       e.target.checked
         ? this.seletedTags.push(e.target.id)
         : (this.seletedTags = this.seletedTags.filter(
             (tag) => tag !== e.target.id
           ))
       if (this.seletedTags.length) {
-        this.$store.dispatch('admin/getSelectedProducts', this.seletedTags)
+        this.loading = true
+        await this.$store.dispatch(
+          'admin/getSelectedProducts',
+          this.seletedTags
+        )
+        this.loading = false
         this.isAll = false
       } else {
         this.isAll = true
@@ -225,6 +232,9 @@ export default {
       width: 100%;
       position: sticky;
       top: 0;
+    }
+    .loader {
+      @include pos-center();
     }
   }
 }

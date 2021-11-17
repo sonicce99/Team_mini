@@ -1,8 +1,4 @@
-import { axiosAuthInit, axiosAuth } from '~/utils/authenticationApiConfig'
-import { axiosAccount } from '~/utils/accountApiConfig'
-import { axiosUserProduct, axiosAdminProduct, axiosPublicProduct } from '~/utils/productApiConfig'
-import router from '../routes'
-
+import { axiosAdminProduct } from '~/utils/productApiConfig'
 
 export default {
   namespaced: true,
@@ -48,7 +44,6 @@ export default {
     async GET_SELECTED_SALES({ commit }, tags = []) {
       const { data } = await axiosAdminProduct.get('transactions/all')
       const selectedSales = data.filter(item => item.product.tags.filter(tag => tags.includes(tag)).length)
-      console.log(selectedSales)
       commit('assignState', { selectedSales })
     },
     async getAllProducts({ commit }) {

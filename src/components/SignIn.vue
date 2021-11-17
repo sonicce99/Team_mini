@@ -79,6 +79,7 @@ export default {
       width: 360px;
       padding-left: 12px;
       margin-bottom: 12px;
+      cursor: pointer;
     }
 
     input[type='button'] {
