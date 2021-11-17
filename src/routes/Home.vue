@@ -73,9 +73,11 @@ export default {
     async onKeyup() {
       if (!this.searchText) return
       this.$refs.position.classList.add('on')
-      this.searchText = searchText
+      this.searchText = this.searchText
       this.isLoading = true
-      await this.$store.dispatch('user/SHOW_SEARCHRESULTS', { searchText: this.searchText })
+      await this.$store.dispatch('user/SHOW_SEARCHRESULTS', {
+        searchText: this.searchText,
+      })
       this.isLoading = false
       this.isResult = true
     },
