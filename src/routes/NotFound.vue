@@ -16,6 +16,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  p {
+    text-align: center;
+  }
   .link {
     text-align: center;
     margin-top: 2rem;
