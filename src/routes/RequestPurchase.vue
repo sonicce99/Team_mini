@@ -18,19 +18,20 @@
           </tr>
       </table>    
       <div class="account-info">
-        <h2>결제하실 계좌 선택</h2>
+        <h2>결제 계좌 선택</h2>
         <ul>
-          <li class="account" v-for="account in accounts" 
+          <li class="account" :id="`bg${account.bankCode}`" v-for="account in accounts" 
             :key="account.id">
-              <div class="bank-logo"></div>           
-              <span>{{ account.bankName }}</span>              
-              <span><strong>계좌번호</strong>{{ account.accountNumber }}</span>
-              <span>계좌 잔액: {{ account.balance }}</span>
+              <div class="bank-logo" :id="`bank${account.bankCode}`"></div>             
+              <span class="account-number">{{ account.accountNumber }}</span>
+              <span class="balance">잔액: {{ account.balance.toLocaleString('ko-KR') }} 원</span>
               <input class="select-radio" type="radio" @click="setSelectedAccount" name="account" :value="account.id">
           </li>
         </ul>
       </div>
-      <button @click="requestPurchase">구매 신청</button>
+      <div class="purchase-area">
+        <button class="btn-primary btn-16 purchase-btn" @click="requestPurchase">구매 신청</button>
+      </div>
     </div>
   </div>  
 </template>
@@ -97,6 +98,7 @@ export default {
 
 <style lang="scss" scoped>
   .request-area{ 
+    // font-family: $font-main;
     max-width: 1200px;
     margin: 0 auto; 
     text-align: center;
@@ -150,39 +152,102 @@ export default {
 
       ul{
         @include flexbox(around, center);
-        
+        flex-wrap: wrap;
+        margin:0 auto;
+        max-width: 1000px;      
         .account {
           @include flexbox(end, start);
-          flex-direction: column;         
-          width: 300px;
-          height: 180px; 
-          border: 1px solid lime;
-          background-color: #776c61;
+          flex-direction: column;          
+          width: 220px;              
+          height: 150px; 
+          border: 1px solid #bbb;
+          border-radius: 5px;
+          margin: 7px 0;
 
           .bank-logo{
-          background-image: url('https://gist.githubusercontent.com/iamidlek/978eb94e4e0c941b420a01269da9a824/raw/ab75c999255f5639e92354b2c222b482f3eaf662/bankName.png');
-                         
-          width: 207px;
-          height: 35px;
+          background-image: url('https://gist.githubusercontent.com/iamidlek/978eb94e4e0c941b420a01269da9a824/raw/ab75c999255f5639e92354b2c222b482f3eaf662/bankName.png');    
+          background-size: 384px 1020px;
+          width: 150px;
+          height: 26px;
+          margin-bottom: 10px;
+          margin-left: 20px;
           }
 
-          span {
-            flex-basis: 20%;
+          .account-number{
+            flex-basis: 15%;
+            padding-left: 20px;
+            @include text-style(18, $white);
+            text-shadow: 1px 1px 1px rgb(151, 151, 151);
           }
+          .balance{
+            flex-basis: 15%;
+            padding-left: 20px;
+            @include text-style(14, $white);
+            text-shadow: .8px .8px .8px rgb(90, 90, 90);
+          }       
+
           .select-radio{
-            margin: 5px auto;
+            margin: 10px auto 10px;
             width: 20px;
             height:20px;
           }
-
-          .kookmin{
-            background: url('https://gist.githubusercontent.com/iamidlek/978eb94e4e0c941b420a01269da9a824/raw/ab75c999255f5639e92354b2c222b482f3eaf662/bankName.png') no-repeat -30px -129px;
-	          width: 207px;
-	          height: 35px;
-          }
         }
       }  
-    }      
+    }
+    .purchase-area{
+      margin-top: 100px;
+      .purchase-btn{
+        width: 198px;
+        height: 56px;
+        font-weight: bold;
+      } 
+    }    
   }   
 }
+  // 은행 로고
+    #bank004 { //국민
+      background-position: -18px -77px; 
+    }
+    #bank088 { //신한
+      background-position: -18px -316px;  
+    }
+    #bank020 { //우리
+      background-position: -17px -257px;  
+    }
+    #bank081 { //하나
+      background-position: -206px -434px;  
+    }
+    #bank089 { //k뱅크
+      background-position: -18px -620px;  
+    }
+    #bank090 { //카카오
+      background-position: -213px -619px;  
+    }
+    #bank011 { //농협
+      background-position: -18px -198px;  
+    }
+
+  //은행 배경
+  #bg004 { //국민
+    background-color: #776c61;
+  }
+    #bg088 { //신한
+    background-color: #00a5e5;  
+  }
+    #bg020 { //우리
+    background-color: #4981c9;  
+  }
+    #bg081 { //하나
+    background-color: #5a9996;  
+  }
+    #bg089 { //k뱅크
+    background-color: #0e015e;  
+  }
+    #bg090 { //카카오
+    background-color: #f4db33;  
+  }
+    #bg011 { //농협
+    background-color: #6eb35e;  
+  }
+
 </style>
