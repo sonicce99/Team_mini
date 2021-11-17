@@ -1,32 +1,48 @@
 <template>
-  <div class="addproduct-from">
-    <h1 class="add-form">제품 등록</h1>
-    <div class="wrapper">
-    <button class="btn-secondary" @click="back">닫기</button>
-      <form @submit.prevent="addProduct" name="input">
-        <p>제목</p>
+  <div class="form-group">
+    <form @submit.prevent="addProduct" name="input">
+          <h1 class="add-form">제품 등록</h1>
+          <label for="title">
+            제품명
+          </label> 
         <input
+          class="form-input"
+          v-model="title" 
           type="text"
-          v-model="title" />
-        <p>가격</p>
-        <input
+          placeholder="제품명을 입력하세요." />
+      
+        <label for="price">가격</label> 
+        <input 
+          class="form-input"
+          v-model="price"
           type="Number"
-          v-model="price" />
-        <p>설명</p>
-        <input
+          placeholder="가격을 입력하세요." />
+        
+        <label for="description">설명</label> 
+        <input 
+          class="form-input"
+          v-model="description" 
           type="text"
-          v-model="description" />
-        <p>태그 <span>입력 예) THE ROW,Bottega Veneta,CHRISTIAN LOUBOUTIN</span></p>
-        <input
-          type="text"
-          v-model="tags" />
-        <p>썸네일</p>
-        <input type="file" id="thumbnail" @change="selectFile">
-        <p>상세 이미지</p>
-        <input type="file" id="photo" @change="selectFile">
-      <button type="submit" class="btn-secondary">추가하기</button>
-      </form>  
-    </div>
+          placeholder="설명을 입력하세요." />
+
+        <label for="thumbnail">썸네일</label> 
+        <input 
+          class="form-input"
+          type="file"
+          id="thumbnail"
+          @change="selectFile" />
+
+        <label for="photo">상세 이미지</label> 
+        <input 
+          class="form-input"
+          type="file"
+          id="photo"
+          @change="selectFile" />
+
+        <button class="btn-anchor btn-16" @click="back">닫기</button>
+        <button class="btn-primary btn-16" type="submit">등록하기</button>
+      
+      </form>    
   </div>
 </template>
 
@@ -77,34 +93,33 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.addproduct-from {
+
+  .form-group {
+    @include column-flexbox();
+    width: 100%;
+
    h1 {
-    @include text-style(32, $dark);
-    width: 100%;
-    font-weight: 300;
-    margin-bottom: 2em;
+      text-align: center;
+      font-weight: 400;
+      }
+
+      label {
+        @include text-style(14, $primary);
+        display: block;
+      }
+        
+      .form-input {
+        display: block;
+        padding-left: 10px;
+        margin-bottom: 10px;
+      }
+
+      .btn-primary {
+        width: 50%;
+      }
+
+      .btn-anchor {
+        width: 50%;
+      }
   }
-  .wrapper {
-    @include text-style(14, $dark);
-    width: 100%;
-    padding: 1rem;
-    margin-bottom: 15px;
-    border: 1px solid $border;
-    border-radius: .5rem;
-  }
-  p {
-    margin: 2px 0;
-  }
-  input {
-    display: block;
-    border: 1px solid $secondary;
-    border-radius: .2rem;
-  }
-  .btn-secondary {
-    padding: 0.5rem;
-    margin-top: .8rem;
-    border: 1px solid $border;
-    border-radius: .5em;
-  }
-}
 </style>

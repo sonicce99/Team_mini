@@ -5,6 +5,7 @@
       <span class="bank-connect">{{ bank.name }}</span>
       <span class="bank-connect-completed"
       v-if="bank.disabled">연결 완료</span>
+      
       <RouterLink
       class="btn-primary"
       :to="{ name: 'RegisterAccount', 
