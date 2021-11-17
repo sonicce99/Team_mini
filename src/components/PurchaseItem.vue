@@ -9,7 +9,7 @@
       {{ purchase.product.title }}
     </td>
     <td class="price">
-      {{ purchase.product.price }}
+      {{ purchase.product.price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")+" 원" }}
     </td>
     <td>
       <PurchaseDetailModal v-model="isModalShow" persistent>
@@ -30,7 +30,13 @@
       </PurchaseDetailModal>
     </td>
     <td>
-      <button class="btn-confirm" @click="confirmed">구매확인</button>
+      <button
+        class="btn-confirm"
+        @click="confirmed"
+        :disabled="purchase.isCanceled"
+      >
+        구매확인
+      </button>
     </td>
     <td>
       <button class="btn-cancel" @click="cancle" :disabled="purchase.done">

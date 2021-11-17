@@ -1,13 +1,21 @@
 <template>
-  <li>
-    <!-- 사용자 페이지라서 아이디 숨김 -->
-    <!-- <div>계좌 아이디: {{ accountInfo.id }}</div> -->
-    <div>은행명: {{ accountInfo.bankName }}</div>
-    <!-- <div>은행 코드명: {{ accountInfo.bankCode }}</div> -->
-    <div>계좌번호: {{ accountInfo.accountNumber }}</div>
-    <div>현재 금액: {{ accountInfo.balance }}</div>
-    <AccountRemove :id="accountInfo.id"/>
-  </li>
+  <tr>
+    <!-- 은행명 -->
+    <td class="bankName">
+      {{ accountInfo.bankName }}
+    </td>
+    <!-- 계좌번호 -->
+    <td class="font">
+      {{ accountInfo.accountNumber }}
+    </td>
+    <!-- 현재 잔액 -->
+    <td class="font">
+      {{ accountInfo.balance.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")+" 원" }}
+    </td>
+    <td>
+      <AccountRemove :id="accountInfo.id"/>
+    </td>    
+  </tr>
 </template>
 
 <script>
@@ -26,7 +34,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  li {
-    list-style-type: none;
+  .bankName {
+    @include text-style(14, $dark);
+    font-weight: 600;
+    white-space: normal;
+  }
+  .font {
+    @include text-style(13, $dark);
   }
 </style>

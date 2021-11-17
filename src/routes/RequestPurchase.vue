@@ -68,7 +68,7 @@ export default {
       this.selectedAccount = e.target.value
     },
     async getAccountInfo() { // 서버에서 계좌 불러오기
-      const { data } = await axiosAccount.get()
+      const { data } = await axiosAccount.get() 
       this.accounts = data.accounts  
     },
     goAfterRequestPurchase(){
@@ -84,10 +84,8 @@ export default {
         accountId : this.selectedAccount
       }
       try{
-        const { data } = await axiosUserProduct.post('buy', obj)
+        await axiosUserProduct.post('buy', obj)
         this.goAfterRequestPurchase()
-        console.log(data)        
-        return data
       } catch(error){
         alert(error.response.data)
       }      
