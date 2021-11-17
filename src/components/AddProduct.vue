@@ -39,8 +39,8 @@
           id="photo"
           @change="selectFile" />
 
-        <button class="btn-anchor btn-16" @click="back">닫기</button>
-        <button class="btn-primary btn-16" type="submit">등록하기</button>
+          <button class="btn-anchor btn-16" @click="back">닫기</button>
+          <button class="btn-primary btn-16" type="submit">등록하기</button>
       
       </form>    
   </div>
@@ -114,12 +114,14 @@ export default {
         margin-bottom: 10px;
       }
 
+      
+      .btn-anchor {
+        width: 50%;
+      }
+
       .btn-primary {
         width: 50%;
       }
 
-      .btn-anchor {
-        width: 50%;
-      }
   }
 </style>
